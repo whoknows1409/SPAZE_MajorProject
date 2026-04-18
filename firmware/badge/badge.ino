@@ -1,82 +1,95 @@
 /*
- * SecureZone Badge Firmware
+ * SecureZone Badge Firmware v1.0
  * ESP32-WROOM-32 BLE Advertiser
  * 
- * Broadcasts a rotating encrypted badge ID via BLE advertisements.
- * Includes deep-sleep optimization for battery life.
+ * Broadcasts BLE advertisements containing badge ID.
+ * The anchor node picks these up and measures RSSI.
+ * 
+ * Phase 1: Simple continuous advertising (no deep sleep yet).
  */
 
 #include <BLEDevice.h>
 #include <BLEUtils.h>
 #include <BLEAdvertising.h>
-#include <esp_sleep.h>
 
 // ===== Configuration =====
-#define BADGE_ID            "BADGE_001"         // Unique badge identifier
+#ifndef LED_BUILTIN
+#define LED_BUILTIN 2   // GPIO 2 = built-in LED on most ESP32 DevKits
+#endif
+#define DEVICE_NAME         "SZ-BADGE-001"
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
-#define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+#define BADGE_ID            "BADGE_001"
 
-#define ADVERTISE_DURATION_MS   100   // Time to advertise per cycle
-#define SLEEP_DURATION_MS       400   // Deep sleep between cycles
-#define NONCE_ROTATE_INTERVAL   30000 // Rotate nonce every 30 seconds
+// Advertising interval: lower = faster detection, higher = less power
+// 100ms (0x00A0) is a good balance for proximity detection
+#define ADV_INTERVAL_MIN    0x00A0   // 100ms in 0.625ms units
+#define ADV_INTERVAL_MAX    0x00A0   // 100ms
 
 // ===== Globals =====
 BLEAdvertising *pAdvertising;
-unsigned long lastNonceRotation = 0;
-uint32_t currentNonce = 0;
+uint32_t bootCount = 0;
 
 void setup() {
     Serial.begin(115200);
-    Serial.println("SecureZone Badge initializing...");
+    delay(1000);  // Give serial time to connect
+    
+    Serial.println("============================");
+    Serial.println("  SecureZone Badge v1.0");
+    Serial.println("============================");
+    Serial.printf("Badge ID: %s\n", BADGE_ID);
+    Serial.printf("Device Name: %s\n", DEVICE_NAME);
+    Serial.println();
     
     // Initialize BLE
-    BLEDevice::init("SZ-Badge");
+    BLEDevice::init(DEVICE_NAME);
     
-    BLEServer *pServer = BLEDevice::createServer();
-    BLEService *pService = pServer->createService(SERVICE_UUID);
-    
-    BLECharacteristic *pCharacteristic = pService->createCharacteristic(
-        CHARACTERISTIC_UUID,
-        BLECharacteristic::PROPERTY_READ
-    );
-    
-    // Set initial badge payload (badge_id + nonce)
-    rotateNonce();
-    String payload = String(BADGE_ID) + ":" + String(currentNonce);
-    pCharacteristic->setValue(payload.c_str());
-    
-    pService->start();
+    // Set transmit power (default ESP_PWR_LVL_P3 = +3dBm)
+    // Keep default for now — we'll calibrate in testing
+    esp_ble_tx_power_set(ESP_BLE_PWR_TYPE_ADV, ESP_PWR_LVL_P3);
     
     // Configure advertising
     pAdvertising = BLEDevice::getAdvertising();
-    pAdvertising->addServiceUUID(SERVICE_UUID);
-    pAdvertising->setScanResponse(true);
-    pAdvertising->setMinPreferred(0x06);
-    pAdvertising->setMinPreferred(0x12);
     
-    Serial.println("Badge ready. Broadcasting...");
+    // Add service UUID so the anchor can filter for our badges
+    pAdvertising->addServiceUUID(SERVICE_UUID);
+    
+    // Enable scan response to include device name
+    pAdvertising->setScanResponse(true);
+    
+    // Set advertising interval
+    pAdvertising->setMinPreferred(ADV_INTERVAL_MIN);
+    pAdvertising->setMaxPreferred(ADV_INTERVAL_MAX);
+    
+    // Include TX power in advertisement (helps with distance estimation)
+    BLEAdvertisementData advData;
+    advData.setFlags(ESP_BLE_ADV_FLAG_GEN_DISC | ESP_BLE_ADV_FLAG_BREDR_NOT_SPT);
+    advData.setCompleteServices(BLEUUID(SERVICE_UUID));
+    advData.setName(DEVICE_NAME);
+    pAdvertising->setAdvertisementData(advData);
+    
+    // Start advertising (runs continuously)
+    pAdvertising->start();
+    
+    Serial.println(">> BLE Advertising started!");
+    Serial.println(">> Anchor should now detect this badge.");
+    Serial.println(">> LED will blink every 2s to confirm running.");
+    Serial.println();
+    
+    // Use built-in LED as heartbeat indicator
+    pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
-    // Start advertising
-    pAdvertising->start();
-    delay(ADVERTISE_DURATION_MS);
-    pAdvertising->stop();
+    // Heartbeat blink — confirms badge is running
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(100);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(1900);
     
-    // Rotate nonce periodically
-    if (millis() - lastNonceRotation > NONCE_ROTATE_INTERVAL) {
-        rotateNonce();
+    // Print status every 10 seconds
+    bootCount++;
+    if (bootCount % 5 == 0) {
+        Serial.printf("[Badge] Running... uptime: %lus | Advertising: %s\n", 
+                      millis() / 1000, DEVICE_NAME);
     }
-    
-    // Deep sleep for battery conservation
-    // TODO: Replace delay with actual esp_deep_sleep for production
-    delay(SLEEP_DURATION_MS);
-}
-
-void rotateNonce() {
-    // Generate a pseudo-random nonce
-    // TODO: Replace with hardware RNG (esp_random()) and HMAC-based nonce
-    currentNonce = esp_random();
-    lastNonceRotation = millis();
-    Serial.printf("Nonce rotated: %u\n", currentNonce);
 }
