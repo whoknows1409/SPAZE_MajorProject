@@ -1,5 +1,5 @@
 """
-SecureZone Agent - Host Workstation Daemon
+SPAZE Agent - Host Workstation Daemon
 Manages BLE proximity detection, file encryption/decryption, and ephemeral keys.
 """
 
@@ -12,10 +12,10 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
-logger = logging.getLogger("securezone-agent")
+logger = logging.getLogger("spaze-agent")
 
 
-class SecureZoneAgent:
+class SPAZEAgent:
     """Main agent orchestrating BLE scanning, key management, and file protection."""
 
     def __init__(self):
@@ -26,7 +26,7 @@ class SecureZoneAgent:
     async def start(self):
         """Start the agent daemon."""
         self.running = True
-        logger.info("SecureZone Agent starting...")
+        logger.info("SPAZE Agent starting...")
         logger.info("Watching for authorized BLE badges...")
 
         # TODO: Initialize components
@@ -59,7 +59,7 @@ class SecureZoneAgent:
 
 
 def main():
-    agent = SecureZoneAgent()
+    agent = SPAZEAgent()
 
     def signal_handler(sig, frame):
         logger.info(f"Received signal {sig}, initiating shutdown...")

@@ -1,5 +1,5 @@
 """
-SecureZone - AES-256-GCM File Encryption/Decryption Module
+SPAZE - AES-256-GCM File Encryption/Decryption Module
 
 Handles transparent file encryption at rest and ephemeral decryption into memory.
 Uses AES-256-GCM for authenticated encryption (confidentiality + integrity).

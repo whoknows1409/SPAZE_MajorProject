@@ -1,5 +1,5 @@
 %% =============================================================
-%% SecureZone - Major Project Proposal
+%% SPAZE - Major Project Proposal
 %% Overleaf Compatible | IEEE Conference Style
 %% =============================================================
 \documentclass[conference]{IEEEtran}
@@ -31,7 +31,7 @@
 % =============================================================
 % TITLE
 % =============================================================
-\title{SecureZone: A Proximity-Based Zero-Trust Architecture for Continuous File Encryption and Physical Access Control}
+\title{SPAZE: A Proximity-Based Zero-Trust Architecture for Continuous File Encryption and Physical Access Control}
 
 % =============================================================
 % AUTHORS — Replace placeholders
@@ -66,7 +66,7 @@
 % ABSTRACT
 % =============================================================
 \begin{abstract}
-Insider threats and unauthorized data exfiltration pose significant risks to corporate networks. Traditional Data Loss Prevention (DLP) systems rely on perimeter defense or manual device confiscation, both of which are prone to human error and degrade user experience. This proposal presents \textbf{SecureZone}, a Zero-Trust physical-digital bridge system that utilizes wearable IoT badges based on ESP32 Bluetooth Low Energy (BLE) to continuously authenticate users based on physical proximity to a workstation. Protected files remain heavily encrypted using AES-256-GCM at rest and are only temporarily decrypted into volatile memory (RAM) when an authorized badge is detected within a defined 2-meter spatial radius. The system integrates Role-Based Access Control (RBAC), ephemeral cryptographic key management, and a fail-closed security architecture to ensure data remains mathematically unreadable when removed from the authorized physical premises or when the authorized user steps away from the terminal.
+Insider threats and unauthorized data exfiltration pose significant risks to corporate networks. Traditional Data Loss Prevention (DLP) systems rely on perimeter defense or manual device confiscation, both of which are prone to human error and degrade user experience. This proposal presents \textbf{SPAZE}, a Zero-Trust physical-digital bridge system that utilizes wearable IoT badges based on ESP32 Bluetooth Low Energy (BLE) to continuously authenticate users based on physical proximity to a workstation. Protected files remain heavily encrypted using AES-256-GCM at rest and are only temporarily decrypted into volatile memory (RAM) when an authorized badge is detected within a defined 2-meter spatial radius. The system integrates Role-Based Access Control (RBAC), ephemeral cryptographic key management, and a fail-closed security architecture to ensure data remains mathematically unreadable when removed from the authorized physical premises or when the authorized user steps away from the terminal.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -86,7 +86,7 @@ Traditional Data Loss Prevention (DLP) solutions operate at the network perimete
 There exists a critical gap between digital access control and physical security. A user who is authenticated once at login retains access for the entire session, regardless of whether they remain at their workstation. This ``authenticate once, access forever'' paradigm violates the core principles of Zero-Trust security, which mandate continuous verification \cite{nist_zerotrust}.
 
 \subsection{Proposed Solution}
-This project proposes \textbf{SecureZone}, a system that \textit{inextricably links} digital access rights to verifiable, continuous physical presence within a highly restricted area. Through the use of ESP32-based BLE wearable badges, AES-256-GCM file encryption, and ephemeral key management, SecureZone ensures that:
+This project proposes \textbf{SPAZE}, a system that \textit{inextricably links} digital access rights to verifiable, continuous physical presence within a highly restricted area. Through the use of ESP32-based BLE wearable badges, AES-256-GCM file encryption, and ephemeral key management, SPAZE ensures that:
 \begin{itemize}[noitemsep]
     \item Files are \textbf{always encrypted at rest} on the workstation.
     \item Decryption occurs \textbf{only in volatile memory} (RAM-backed tmpfs), never touching persistent storage.
@@ -109,7 +109,7 @@ Bluetooth Low Energy (BLE) has been widely adopted for indoor proximity estimati
 Full-disk encryption solutions such as BitLocker and LUKS protect data at rest but offer no file-level granularity or proximity-based access control \cite{fde_survey}. Application-layer encryption libraries such as the Python \texttt{cryptography} module provide AES-256-GCM, which offers both confidentiality and integrity through authenticated encryption \cite{aes_gcm_nist}.
 
 \subsection{Data Loss Prevention}
-Existing DLP systems rely on content inspection, device whitelisting, and network monitoring \cite{dlp_survey}. These systems cannot prevent an authorized user from copying encrypted files to removable media and later extracting them outside the monitored environment. SecureZone addresses this gap by ensuring that the decryption key is ephemeral and spatially bound.
+Existing DLP systems rely on content inspection, device whitelisting, and network monitoring \cite{dlp_survey}. These systems cannot prevent an authorized user from copying encrypted files to removable media and later extracting them outside the monitored environment. SPAZE addresses this gap by ensuring that the decryption key is ephemeral and spatially bound.
 
 % =============================================================
 % 3. RESEARCH OBJECTIVES
@@ -135,7 +135,7 @@ The primary objectives of this research are:
 % =============================================================
 \section{Proposed System Architecture}
 
-The SecureZone system consists of four primary components operating across three layers, as illustrated in Fig.~\ref{fig:architecture}.
+The SPAZE system consists of four primary components operating across three layers, as illustrated in Fig.~\ref{fig:architecture}.
 
 \begin{figure}[htbp]
     \centering
@@ -158,7 +158,7 @@ The SecureZone system consists of four primary components operating across three
         \draw[arrow, red!60!black] (agent) -- node[right, label] {HTTPS/TLS\\Key Request} (server);
         \draw[arrow, purple!60!black] (server) -- node[above, label] {WebSocket\\REST API} (dashboard);
     \end{tikzpicture}
-    \caption{High-level system architecture of SecureZone showing the four primary components and their communication protocols.}
+    \caption{High-level system architecture of SPAZE showing the four primary components and their communication protocols.}
     \label{fig:architecture}
 \end{figure}
 
@@ -311,7 +311,7 @@ The final deliverable will be a working prototype demonstrating a seamless Zero-
 % =============================================================
 \section{Conclusion}
 
-This proposal presents SecureZone, a novel proximity-based Zero-Trust system that addresses the critical gap between digital access control and physical security. By combining BLE-based continuous proximity authentication with AES-256-GCM file encryption and ephemeral key management, the system ensures that sensitive data is mathematically inaccessible outside the authorized physical zone. The fail-closed architecture guarantees security under all failure conditions, while the signal processing pipeline (EMA, Kalman filter, hysteresis) ensures reliable proximity detection despite inherent BLE RSSI noise. The proposed system has direct applicability in defense installations, financial institutions, healthcare facilities, and any environment where physical data exfiltration is a critical threat.
+This proposal presents SPAZE, a novel proximity-based Zero-Trust system that addresses the critical gap between digital access control and physical security. By combining BLE-based continuous proximity authentication with AES-256-GCM file encryption and ephemeral key management, the system ensures that sensitive data is mathematically inaccessible outside the authorized physical zone. The fail-closed architecture guarantees security under all failure conditions, while the signal processing pipeline (EMA, Kalman filter, hysteresis) ensures reliable proximity detection despite inherent BLE RSSI noise. The proposed system has direct applicability in defense installations, financial institutions, healthcare facilities, and any environment where physical data exfiltration is a critical threat.
 
 % =============================================================
 % REFERENCES

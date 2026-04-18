@@ -1,8 +1,8 @@
 /*
- * SecureZone Anchor Firmware v1.0
+ * SPAZE Anchor Firmware v1.0
  * ESP32-WROOM-32 BLE Scanner (Workstation Node)
  * 
- * Scans for SecureZone badges, measures RSSI,
+ * Scans for SPAZE badges, measures RSSI,
  * and outputs JSON over USB Serial for the Python agent.
  */
 
@@ -24,7 +24,7 @@ unsigned long scanCount = 0;
 
 class BadgeDetectionCallback : public BLEAdvertisedDeviceCallbacks {
     void onResult(BLEAdvertisedDevice advertisedDevice) {
-        // Only process SecureZone badges (filter by service UUID)
+        // Only process SPAZE badges (filter by service UUID)
         if (advertisedDevice.haveServiceUUID() && 
             advertisedDevice.isAdvertisingService(BLEUUID(SERVICE_UUID))) {
             
@@ -55,7 +55,7 @@ void setup() {
     delay(1000);
     
     Serial.println("============================");
-    Serial.println("  SecureZone Anchor v1.0");
+    Serial.println("  SPAZE Anchor v1.0");
     Serial.println("============================");
     Serial.printf("Anchor ID: %s\n", ANCHOR_ID);
     Serial.printf("Scan Duration: %ds\n", SCAN_DURATION);
@@ -71,7 +71,7 @@ void setup() {
     pBLEScan->setInterval(100);      // Scan interval in 0.625ms units
     pBLEScan->setWindow(99);         // Scan window (nearly continuous)
     
-    Serial.println(">> Scanning for SecureZone badges...");
+    Serial.println(">> Scanning for SPAZE badges...");
     Serial.println(">> LED blinks on each badge detection.");
     Serial.println();
 }

@@ -1,5 +1,5 @@
 """
-SecureZone Server - Ephemeral Key Management
+SPAZE Server - Ephemeral Key Management
 
 Generates, distributes, and revokes file encryption keys.
 Keys are short-lived (TTL) and cached in Redis.

@@ -1,5 +1,5 @@
 """
-SecureZone Server - FastAPI Backend
+SPAZE Server - FastAPI Backend
 Zero-Trust proximity-based access control server.
 """
 
@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
-    title="SecureZone Server",
+    title="SPAZE Server",
     description="Zero-Trust proximity-based file access control backend",
     version="0.1.0",
 )
@@ -23,7 +23,7 @@ app.add_middleware(
 
 @app.get("/health")
 async def health_check():
-    return {"status": "ok", "service": "securezone-server"}
+    return {"status": "ok", "service": "spaze-server"}
 
 
 # TODO: Include routers

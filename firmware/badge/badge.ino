@@ -1,5 +1,5 @@
 /*
- * SecureZone Badge Firmware v1.0
+ * SPAZE Badge Firmware v1.0
  * ESP32-WROOM-32 BLE Advertiser
  * 
  * Broadcasts BLE advertisements containing badge ID.
@@ -34,7 +34,7 @@ void setup() {
     delay(1000);  // Give serial time to connect
     
     Serial.println("============================");
-    Serial.println("  SecureZone Badge v1.0");
+    Serial.println("  SPAZE Badge v1.0");
     Serial.println("============================");
     Serial.printf("Badge ID: %s\n", BADGE_ID);
     Serial.printf("Device Name: %s\n", DEVICE_NAME);

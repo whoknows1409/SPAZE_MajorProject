@@ -1,5 +1,5 @@
 """
-SecureZone Database Models
+SPAZE Database Models
 SQLAlchemy ORM models for the Zero-Trust access control system.
 """
 
