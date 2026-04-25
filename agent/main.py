@@ -51,10 +51,14 @@ class SPAZEAgent:
         vault_dir: str,
         mount_point: str,
         config: Optional[FilterConfig] = None,
+        server_url: Optional[str] = None,
+        badge_mac: Optional[str] = None,
     ):
         self.running = False
         self.port = port
         self.baud = baud
+        self.server_url = server_url
+        self.badge_mac = badge_mac
 
         # Filter pipeline with calibrated thresholds
         self.pipeline = RSSIFilterPipeline(
@@ -73,6 +77,8 @@ class SPAZEAgent:
         self.engine = FileEncryptionEngine(
             vault_dir=vault_dir,
             mount_point=mount_point,
+            server_url=server_url,
+            badge_mac=badge_mac,
         )
 
         # Stats
@@ -179,8 +185,19 @@ class SPAZEAgent:
             count = self.engine.decrypt_vault()
             if count > 0:
                 logger.info(f"📂 {count} files now available at: {self.engine.vault.mount_point}")
-            else:
+            elif count == 0 and self.engine.is_unlocked:
                 logger.info("📂 Vault unlocked (no files or already decrypted)")
+            else:
+                logger.info("🚫 Vault unlock DENIED by server")
+                return
+
+            # Log unlock event to server
+            if self.engine.server_mode:
+                self.engine.key_manager.log_event(
+                    action="vault_unlock",
+                    details=f"Vault unlocked, {count} files decrypted",
+                    rssi_value=int(filtered_rssi),
+                )
 
             # Show mount info
             mount_info = self.engine.vault.get_mount_info()
@@ -261,6 +278,14 @@ def main():
         help="Enable verbose (DEBUG) logging",
     )
     parser.add_argument(
+        "--server", type=str, default=None,
+        help="SPAZE server URL (e.g. http://localhost:8000). Enables server mode.",
+    )
+    parser.add_argument(
+        "--badge-mac", type=str, default=None,
+        help="Badge MAC address for server authentication (e.g. 5c:01:3b:4b:e3:2a)",
+    )
+    parser.add_argument(
         "--list-ports", action="store_true",
         help="List available serial ports and exit",
     )
@@ -282,6 +307,11 @@ def main():
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
 
+    # Validate server mode args
+    if args.server and not args.badge_mac:
+        print("❌ --badge-mac is required when using --server")
+        sys.exit(1)
+
     # Build filter config
     config = FilterConfig(
         authorize_threshold=args.authorize,
@@ -296,6 +326,8 @@ def main():
         vault_dir=args.vault,
         mount_point=args.mount,
         config=config,
+        server_url=args.server,
+        badge_mac=args.badge_mac,
     )
 
     # Encrypt mode: encrypt a file and exit

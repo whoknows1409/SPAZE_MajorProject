@@ -74,11 +74,25 @@ class FileEncryptionEngine:
         self,
         vault_dir: str = os.path.expanduser("~/spaze-vault"),
         mount_point: str = os.path.expanduser("~/spaze"),
+        server_url: Optional[str] = None,
+        badge_mac: Optional[str] = None,
     ):
         self.vault = VaultManager(vault_dir=vault_dir, mount_point=mount_point)
-        self.key_manager = EphemeralKeyManager(
-            keystore_path=os.path.join(vault_dir, ".keys.json")
-        )
+        self.server_mode = bool(server_url and badge_mac)
+
+        if self.server_mode:
+            from ..key_manager.server_key_manager import ServerKeyManager
+            self.key_manager = ServerKeyManager(
+                server_url=server_url,
+                badge_mac=badge_mac,
+            )
+            logger.info("Key management: SERVER mode")
+        else:
+            self.key_manager = EphemeralKeyManager(
+                keystore_path=os.path.join(vault_dir, ".keys.json")
+            )
+            logger.info("Key management: LOCAL mode (.keys.json)")
+
         self._is_unlocked = False
         # SHA-256 hashes of decrypted files at time of decryption
         # Used to detect modifications before locking
@@ -149,6 +163,12 @@ class FileEncryptionEngine:
         if self._is_unlocked:
             logger.debug("Vault already unlocked")
             return 0
+
+        # Server mode: fetch keys from server first
+        if self.server_mode:
+            if not self.key_manager.fetch_keys():
+                logger.error("Server denied access — vault stays LOCKED")
+                return 0
 
         # Prepare the decryption zone
         if not self.vault.mount_tmpfs():
@@ -261,7 +281,9 @@ class FileEncryptionEngine:
                 logger.info(f"🗑️  Deleted file detected: {deleted_name}, removing .enc from vault...")
                 try:
                     enc_path.unlink()
-                    # Also remove the key
+                    # Remove key from server (if server mode) and memory
+                    if self.server_mode:
+                        self.key_manager.delete_key(enc_name)
                     self.key_manager.wipe_key(enc_name)
                     logger.info(f"  Removed {enc_name} and its key")
                 except Exception as e:
@@ -280,8 +302,11 @@ class FileEncryptionEngine:
             key = self.key_manager.get_key(enc_filename)
 
             if key is None:
-                # New file — generate a key
+                # New file — generate a key (auto-uploads to server in server mode)
                 key = self.key_manager.generate_key(enc_filename)
+            elif self.server_mode:
+                # Existing file re-encrypted — update key on server
+                self.key_manager.store_key(enc_filename, key)
 
             if content is None:
                 content = decrypted_path.read_bytes()
@@ -337,13 +362,20 @@ class FileEncryptionEngine:
         # Step 1: Re-encrypt any files the user modified + track deletes
         self._sync_modified_files()
 
-        # Step 2: Wipe decrypted files from RAM + unmount
+        # Step 2: Log vault lock event to server
+        if self.server_mode:
+            self.key_manager.log_event(
+                action="vault_lock",
+                details=f"Vault locked on {self.key_manager.device_hostname}",
+            )
+
+        # Step 3: Wipe decrypted files from RAM + unmount
         self.vault.unmount_tmpfs()
 
-        # Step 3: Wipe all keys from memory
+        # Step 4: Wipe all keys from memory
         self.key_manager.wipe_all_keys()
 
-        # Step 4: Clean up any leftover temp files in vault
+        # Step 5: Clean up any leftover temp files in vault
         self._clean_vault_temp_files()
 
         self._is_unlocked = False
