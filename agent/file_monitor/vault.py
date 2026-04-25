@@ -1,9 +1,18 @@
 """
-SPAZE - Vault Manager
+SPAZE - Vault Manager (Secure RAM Workspace)
 
 Manages the protected vault directory and tmpfs mount point.
 - Vault: directory where encrypted .enc files are stored on disk
 - tmpfs: RAM-backed mount where files are temporarily decrypted
+
+Security features:
+- Real tmpfs mount (files never touch disk)
+- Mount options: noexec, nosuid, nodev (hardened)
+- Permissions: mode=700 (owner-only access)
+- Swap disabled to prevent RAM leaks to disk
+- Stale mount cleanup on startup
+- Open file detection before unmount
+- Secure delete: files overwritten with random data before removal
 
 Encrypted files live on disk forever. Decrypted files exist ONLY in RAM
 while the badge is in range.
@@ -25,13 +34,15 @@ class VaultManager:
     def __init__(
         self,
         vault_dir: str = os.path.expanduser("~/spaze-vault"),
-        mount_point: str = "/tmp/spaze-mount",
-        tmpfs_size_mb: int = 64,
+        mount_point: str = os.path.expanduser("~/spaze"),
+        tmpfs_size_mb: int = 256,
     ):
         self.vault_dir = Path(vault_dir)
         self.mount_point = Path(mount_point)
         self.tmpfs_size_mb = tmpfs_size_mb
         self.is_mounted = False
+        self._using_real_tmpfs = False
+        self._swap_was_on = False
 
     def setup(self):
         """Create vault directory and mount point if they don't exist."""
@@ -43,36 +54,74 @@ class VaultManager:
         self.mount_point.mkdir(parents=True, exist_ok=True)
         logger.info(f"Decryption mount point: {self.mount_point}")
 
+        # Clean up stale mounts from previous crashes
+        self._cleanup_stale_mount()
+
+    # ===========================================================
+    # MOUNT / UNMOUNT
+    # ===========================================================
+
     def mount_tmpfs(self) -> bool:
         """
         Mount a tmpfs (RAM-backed filesystem) at the mount point.
         Decrypted files will be written here — they never touch the disk.
-        
-        Uses /tmp-based directory instead of actual tmpfs mount to avoid
-        needing root privileges. Files in /tmp are still in RAM on most
-        Linux systems (tmpfs-backed /tmp).
-        """
-        try:
-            # Clean any stale files from previous session
-            if self.mount_point.exists():
-                for f in self.mount_point.iterdir():
-                    if f.is_file():
-                        f.unlink()
 
-            self.is_mounted = True
-            logger.info(f"Decryption zone ready at {self.mount_point}")
+        Also disables swap to prevent RAM data leaking to disk.
+        """
+        # If already mounted, just clean stale files
+        if self.is_mounted:
+            self._clean_stale_files()
             return True
 
-        except Exception as e:
-            logger.error(f"Failed to prepare decryption zone: {e}")
-            return False
+        # Disable swap before decryption
+        self._disable_swap()
+
+        # Try real tmpfs mount
+        if self._mount_real_tmpfs():
+            self._using_real_tmpfs = True
+            self.is_mounted = True
+            logger.info(f"✅ Secure tmpfs mounted at {self.mount_point}")
+            logger.info(f"   Options: size={self.tmpfs_size_mb}m, noexec, nosuid, nodev, mode=700")
+            logger.info(f"   Swap: {'disabled ✅' if self._swap_was_on else 'already off ✅'}")
+            return True
+
+        # Fallback: use directory as-is (with warnings)
+        logger.warning("=" * 50)
+        logger.warning("⚠️  Could not mount real tmpfs!")
+        logger.warning("   Falling back to regular directory.")
+        logger.warning("   Files may not be purely RAM-backed.")
+        logger.warning("   Run: sudo bash scripts/setup_sudoers.sh")
+        logger.warning("=" * 50)
+
+        self._clean_stale_files()
+        self._using_real_tmpfs = False
+        self.is_mounted = True
+
+        # At minimum, set restrictive permissions on the directory
+        try:
+            os.chmod(str(self.mount_point), 0o700)
+        except Exception:
+            pass
+
+        return True
 
     def unmount_tmpfs(self) -> bool:
         """
         Unmount tmpfs and wipe all decrypted files.
         After this, no plaintext files exist anywhere on the system.
+
+        Checks for open files first and warns if any are found.
         """
         try:
+            # Check for processes using the mount point
+            open_procs = self._get_open_file_processes()
+            if open_procs:
+                logger.warning(f"⚠️  {len(open_procs)} process(es) still using files in mount:")
+                for pid, name, filepath in open_procs:
+                    logger.warning(f"   PID {pid} ({name}): {filepath}")
+                # Kill processes holding files open
+                self._kill_open_file_processes(open_procs)
+
             if self.mount_point.exists():
                 # Overwrite each file with random data before deleting
                 for f in self.mount_point.iterdir():
@@ -80,13 +129,240 @@ class VaultManager:
                         self._secure_delete_file(f)
                         logger.debug(f"Wiped decrypted file: {f.name}")
 
+            # Unmount real tmpfs if we mounted one
+            if self._using_real_tmpfs and self._is_tmpfs_mounted():
+                self._unmount_real_tmpfs()
+
+            # Re-enable swap
+            self._enable_swap()
+
             self.is_mounted = False
+            self._using_real_tmpfs = False
             logger.info("Decryption zone wiped — all plaintext files destroyed")
             return True
 
         except Exception as e:
             logger.error(f"Failed to wipe decryption zone: {e}")
+            # Always re-enable swap even on failure
+            self._enable_swap()
             return False
+
+    # ===========================================================
+    # SWAP MANAGEMENT
+    # ===========================================================
+
+    def _disable_swap(self):
+        """Disable swap to prevent decrypted data from leaking to disk."""
+        try:
+            # Check if swap is currently on
+            result = subprocess.run(
+                ["swapon", "--show", "--noheadings"],
+                capture_output=True, text=True, timeout=3,
+            )
+            if result.stdout.strip():
+                self._swap_was_on = True
+                subprocess.run(
+                    ["sudo", "-n", "swapoff", "-a"],
+                    capture_output=True, timeout=5,
+                )
+                logger.info("🔒 Swap disabled (preventing RAM→disk leaks)")
+            else:
+                self._swap_was_on = False
+                logger.debug("Swap already off")
+        except Exception as e:
+            logger.warning(f"Could not disable swap: {e}")
+            self._swap_was_on = False
+
+    def _enable_swap(self):
+        """Re-enable swap after vault is locked."""
+        if not self._swap_was_on:
+            return
+        try:
+            subprocess.run(
+                ["sudo", "-n", "swapon", "-a"],
+                capture_output=True, timeout=5,
+            )
+            logger.info("Swap re-enabled")
+            self._swap_was_on = False
+        except Exception as e:
+            logger.warning(f"Could not re-enable swap: {e}")
+
+    # ===========================================================
+    # OPEN FILE DETECTION
+    # ===========================================================
+
+    def _get_open_file_processes(self) -> list[tuple[int, str, str]]:
+        """
+        Check if any processes have files open in the mount point.
+        Returns list of (pid, process_name, filepath).
+        """
+        try:
+            result = subprocess.run(
+                ["lsof", "+D", str(self.mount_point)],
+                capture_output=True, text=True, timeout=5,
+            )
+            if result.returncode != 0 or not result.stdout.strip():
+                return []
+
+            procs = []
+            for line in result.stdout.strip().split("\n")[1:]:  # Skip header
+                parts = line.split()
+                if len(parts) >= 9:
+                    name = parts[0]
+                    pid = int(parts[1])
+                    filepath = parts[8] if len(parts) > 8 else "unknown"
+                    procs.append((pid, name, filepath))
+            return procs
+
+        except Exception as e:
+            logger.debug(f"lsof check failed: {e}")
+            return []
+
+    def _kill_open_file_processes(self, procs: list[tuple[int, str, str]]):
+        """Send SIGTERM to processes holding files open, then SIGKILL if needed."""
+        import signal
+        import time
+
+        pids = set(pid for pid, _, _ in procs)
+
+        # First try SIGTERM (graceful)
+        for pid in pids:
+            try:
+                os.kill(pid, signal.SIGTERM)
+                logger.info(f"   Sent SIGTERM to PID {pid}")
+            except ProcessLookupError:
+                pass
+            except PermissionError:
+                logger.warning(f"   Cannot kill PID {pid} (permission denied)")
+
+        # Wait briefly for processes to exit
+        time.sleep(1)
+
+        # Force kill any remaining
+        for pid in pids:
+            try:
+                os.kill(pid, 0)  # Check if still alive
+                os.kill(pid, signal.SIGKILL)
+                logger.warning(f"   Force-killed PID {pid}")
+            except ProcessLookupError:
+                pass  # Already dead
+            except PermissionError:
+                logger.warning(f"   Cannot force-kill PID {pid}")
+
+    # ===========================================================
+    # STALE MOUNT CLEANUP
+    # ===========================================================
+
+    def _cleanup_stale_mount(self):
+        """
+        Clean up leftover mounts from previous crashes.
+        Called during setup() to ensure a clean state on startup.
+        """
+        if self._is_tmpfs_mounted():
+            logger.warning("⚠️  Found stale tmpfs mount from previous session")
+
+            # Wipe any leftover files
+            if self.mount_point.exists():
+                for f in self.mount_point.iterdir():
+                    if f.is_file():
+                        self._secure_delete_file(f)
+
+            # Unmount the stale mount
+            self._unmount_real_tmpfs()
+            logger.info("✅ Cleaned up stale mount")
+
+    # ===========================================================
+    # TMPFS INTERNAL OPERATIONS
+    # ===========================================================
+
+    def _mount_real_tmpfs(self) -> bool:
+        """Attempt to mount a real tmpfs filesystem."""
+        uid = os.getuid()
+        mount_opts = (
+            f"size={self.tmpfs_size_mb}m,"
+            f"noexec,nosuid,nodev,"
+            f"mode=700,"
+            f"uid={uid}"
+        )
+
+        try:
+            # Check if already mounted
+            if self._is_tmpfs_mounted():
+                logger.debug("tmpfs already mounted")
+                return True
+
+            result = subprocess.run(
+                [
+                    "sudo", "-n",  # non-interactive (no password prompt)
+                    "mount", "-t", "tmpfs",
+                    "-o", mount_opts,
+                    "spaze-tmpfs",
+                    str(self.mount_point),
+                ],
+                capture_output=True,
+                text=True,
+                timeout=5,
+            )
+
+            if result.returncode == 0:
+                return True
+            else:
+                logger.debug(f"Mount failed: {result.stderr.strip()}")
+                return False
+
+        except (subprocess.TimeoutExpired, FileNotFoundError, Exception) as e:
+            logger.debug(f"Mount attempt failed: {e}")
+            return False
+
+    def _is_tmpfs_mounted(self) -> bool:
+        """Check if our tmpfs is currently mounted."""
+        try:
+            result = subprocess.run(
+                ["mountpoint", "-q", str(self.mount_point)],
+                capture_output=True,
+                timeout=3,
+            )
+            return result.returncode == 0
+        except Exception:
+            return False
+
+    def _unmount_real_tmpfs(self):
+        """Unmount the real tmpfs filesystem."""
+        try:
+            # First try normal umount
+            result = subprocess.run(
+                ["sudo", "-n", "umount", str(self.mount_point)],
+                capture_output=True,
+                text=True,
+                timeout=5,
+            )
+            if result.returncode == 0:
+                logger.info("tmpfs unmounted successfully")
+                return
+
+            # If busy, try lazy umount
+            logger.warning("Normal umount failed, trying lazy umount...")
+            subprocess.run(
+                ["sudo", "-n", "umount", "-l", str(self.mount_point)],
+                capture_output=True,
+                text=True,
+                timeout=5,
+            )
+            logger.info("tmpfs lazy-unmounted")
+
+        except Exception as e:
+            logger.error(f"Failed to unmount tmpfs: {e}")
+
+    def _clean_stale_files(self):
+        """Remove any stale files from previous sessions."""
+        if self.mount_point.exists():
+            for f in self.mount_point.iterdir():
+                if f.is_file():
+                    f.unlink()
+
+    # ===========================================================
+    # FILE HELPERS
+    # ===========================================================
 
     def get_encrypted_files(self) -> list[Path]:
         """List all .enc files in the vault."""
@@ -105,15 +381,27 @@ class VaultManager:
         decrypted_path = self.get_decrypted_path(encrypted_path)
         return decrypted_path.exists()
 
+    def get_mount_info(self) -> dict:
+        """Return mount status info for diagnostics."""
+        return {
+            "mount_point": str(self.mount_point),
+            "is_mounted": self.is_mounted,
+            "real_tmpfs": self._using_real_tmpfs,
+            "tmpfs_active": self._is_tmpfs_mounted(),
+            "size_mb": self.tmpfs_size_mb,
+            "swap_disabled": self._swap_was_on,
+        }
+
     @staticmethod
     def _secure_delete_file(filepath: Path):
         """Overwrite file with random bytes before deletion."""
         try:
             size = filepath.stat().st_size
-            with open(filepath, "wb") as f:
-                f.write(os.urandom(size))
-                f.flush()
-                os.fsync(f.fileno())
+            if size > 0:
+                with open(filepath, "wb") as f:
+                    f.write(os.urandom(size))
+                    f.flush()
+                    os.fsync(f.fileno())
             filepath.unlink()
         except Exception as e:
             # Fallback: just delete

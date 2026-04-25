@@ -6,7 +6,7 @@ Reads BLE proximity data from the ESP32 anchor node via USB serial,
 runs a 4-stage RSSI filter pipeline, and manages file encryption/decryption
 based on badge proximity.
 
-Phase 2: Full encrypt/decrypt/lock cycle integrated.
+v2.5: Secure tmpfs mount + Firejail sandbox integration.
 """
 
 import argparse
@@ -85,7 +85,7 @@ class SPAZEAgent:
         self.start_time = time.time()
 
         logger.info("=" * 50)
-        logger.info("  SPAZE Agent v2.0")
+        logger.info("  SPAZE Agent v2.5")
         logger.info("  Spatially Constrained Zero-Trust File Encryption")
         logger.info("=" * 50)
         logger.info(f"Serial port: {self.port}")
@@ -182,6 +182,13 @@ class SPAZEAgent:
             else:
                 logger.info("📂 Vault unlocked (no files or already decrypted)")
 
+            # Show mount info
+            mount_info = self.engine.vault.get_mount_info()
+            if mount_info['real_tmpfs']:
+                logger.info("🛡️  Secure tmpfs active (RAM-only, noexec, mode=700)")
+            else:
+                logger.info("⚠️  Using fallback directory (run setup_sudoers.sh for real tmpfs)")
+
         elif new_state == ProximityState.OUT_OF_RANGE:
             logger.info("=" * 50)
             logger.info("🔴 BADGE OUT OF RANGE — LOCKING VAULT")
@@ -230,8 +237,8 @@ def main():
         help="Vault directory for encrypted files (default: ~/spaze-vault)",
     )
     parser.add_argument(
-        "--mount", type=str, default="/tmp/spaze-mount",
-        help="Decryption mount point (default: /tmp/spaze-mount)",
+        "--mount", type=str, default=os.path.expanduser("~/spaze"),
+        help="Decryption mount point (default: ~/spaze)",
     )
     parser.add_argument(
         "--authorize", type=float, default=-75.0,
