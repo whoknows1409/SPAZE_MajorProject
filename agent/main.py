@@ -150,6 +150,15 @@ class SPAZEAgent:
         if rssi is None:
             return
 
+        # SECURITY: Only process the authorized badge
+        # Ignore any other badges the anchor picks up
+        if self.badge_mac and badge_mac.lower() != self.badge_mac.lower():
+            logger.debug(
+                f"Ignoring badge {badge_name} ({badge_mac}) — "
+                f"not the authorized badge ({self.badge_mac})"
+            )
+            return
+
         self.readings_count += 1
 
         # Run through the filter pipeline
