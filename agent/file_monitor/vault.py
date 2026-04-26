@@ -57,6 +57,13 @@ class VaultManager:
         # Clean up stale mounts from previous crashes
         self._cleanup_stale_mount()
 
+        # Remove any rogue files left in the bare directory
+        # (e.g., files saved while vault was locked and directory was accessible)
+        if not self._is_tmpfs_mounted():
+            self._clean_rogue_files()
+            # Lock the directory — no access until vault is unlocked
+            self._lock_mount_point()
+
     # ===========================================================
     # MOUNT / UNMOUNT
     # ===========================================================
@@ -75,6 +82,9 @@ class VaultManager:
 
         # Disable swap before decryption
         self._disable_swap()
+
+        # Unlock the directory so tmpfs can mount on it
+        self._unlock_mount_point()
 
         # Try real tmpfs mount
         if self._mount_real_tmpfs():
@@ -138,6 +148,11 @@ class VaultManager:
 
             self.is_mounted = False
             self._using_real_tmpfs = False
+
+            # SECURITY: Lock the directory so no files can be written
+            # to the bare disk directory while vault is locked
+            self._lock_mount_point()
+
             logger.info("Decryption zone wiped — all plaintext files destroyed")
             return True
 
@@ -145,6 +160,8 @@ class VaultManager:
             logger.error(f"Failed to wipe decryption zone: {e}")
             # Always re-enable swap even on failure
             self._enable_swap()
+            # Still try to lock the directory
+            self._lock_mount_point()
             return False
 
     # ===========================================================
@@ -195,28 +212,63 @@ class VaultManager:
         """
         Check if any processes have files open in the mount point.
         Returns list of (pid, process_name, filepath).
+        Uses lsof first, then fuser as fallback.
         """
+        procs = []
+
+        # Method 1: lsof (detailed — gives process name + file path)
         try:
             result = subprocess.run(
                 ["lsof", "+D", str(self.mount_point)],
-                capture_output=True, text=True, timeout=5,
+                capture_output=True, text=True, timeout=10,
             )
-            if result.returncode != 0 or not result.stdout.strip():
-                return []
+            # lsof returns exit code 1 even when it finds results (with warnings)
+            # so we check stdout content, NOT the exit code
+            if result.stdout.strip():
+                for line in result.stdout.strip().split("\n")[1:]:  # Skip header
+                    parts = line.split()
+                    if len(parts) >= 9:
+                        name = parts[0]
+                        try:
+                            pid = int(parts[1])
+                        except ValueError:
+                            continue
+                        filepath = parts[8] if len(parts) > 8 else "unknown"
+                        procs.append((pid, name, filepath))
 
-            procs = []
-            for line in result.stdout.strip().split("\n")[1:]:  # Skip header
-                parts = line.split()
-                if len(parts) >= 9:
-                    name = parts[0]
-                    pid = int(parts[1])
-                    filepath = parts[8] if len(parts) > 8 else "unknown"
-                    procs.append((pid, name, filepath))
-            return procs
+            if procs:
+                return procs
 
         except Exception as e:
             logger.debug(f"lsof check failed: {e}")
-            return []
+
+        # Method 2: fuser (simpler — just gives PIDs)
+        try:
+            result = subprocess.run(
+                ["fuser", "-m", str(self.mount_point)],
+                capture_output=True, text=True, timeout=5,
+            )
+            # fuser outputs PIDs to stderr
+            pid_str = result.stderr.strip() if result.stderr else result.stdout.strip()
+            if pid_str:
+                for token in pid_str.split():
+                    token = token.strip("abcdefghijklmnopqrstuvwxyz")  # strip mode suffixes
+                    try:
+                        pid = int(token)
+                        # Get process name from /proc
+                        try:
+                            with open(f"/proc/{pid}/comm") as f:
+                                name = f.read().strip()
+                        except Exception:
+                            name = "unknown"
+                        procs.append((pid, name, str(self.mount_point)))
+                    except ValueError:
+                        continue
+
+        except Exception as e:
+            logger.debug(f"fuser check failed: {e}")
+
+        return procs
 
     def _kill_open_file_processes(self, procs: list[tuple[int, str, str]]):
         """Send SIGTERM to processes holding files open, then SIGKILL if needed."""
@@ -224,6 +276,15 @@ class VaultManager:
         import time
 
         pids = set(pid for pid, _, _ in procs)
+        my_pid = os.getpid()
+
+        # Don't kill ourselves
+        pids.discard(my_pid)
+
+        if not pids:
+            return
+
+        logger.info(f"   Terminating {len(pids)} process(es) holding files open...")
 
         # First try SIGTERM (graceful)
         for pid in pids:
@@ -235,19 +296,26 @@ class VaultManager:
             except PermissionError:
                 logger.warning(f"   Cannot kill PID {pid} (permission denied)")
 
-        # Wait briefly for processes to exit
-        time.sleep(1)
+        # Wait for processes to exit gracefully (LibreOffice needs time)
+        time.sleep(3)
 
         # Force kill any remaining
+        killed = 0
         for pid in pids:
             try:
                 os.kill(pid, 0)  # Check if still alive
                 os.kill(pid, signal.SIGKILL)
+                killed += 1
                 logger.warning(f"   Force-killed PID {pid}")
             except ProcessLookupError:
                 pass  # Already dead
             except PermissionError:
                 logger.warning(f"   Cannot force-kill PID {pid}")
+
+        if killed:
+            time.sleep(1)  # Brief wait for SIGKILL to take effect
+
+        logger.info(f"   All file-holding processes terminated")
 
     # ===========================================================
     # STALE MOUNT CLEANUP
@@ -359,6 +427,59 @@ class VaultManager:
             for f in self.mount_point.iterdir():
                 if f.is_file():
                     f.unlink()
+
+    def _clean_rogue_files(self):
+        """
+        Remove any files that were saved to the bare mount point directory
+        while the vault was locked. These files sit on disk unencrypted —
+        a security risk.
+        """
+        if not self.mount_point.exists():
+            return
+        try:
+            # Temporarily make directory accessible to clean it
+            os.chmod(str(self.mount_point), 0o700)
+        except Exception:
+            pass
+
+        rogue_count = 0
+        for f in self.mount_point.iterdir():
+            if f.is_file():
+                logger.warning(f"⚠️  Rogue file found in locked mount: {f.name} — removing")
+                self._secure_delete_file(f)
+                rogue_count += 1
+        if rogue_count > 0:
+            logger.warning(
+                f"🗑️  Removed {rogue_count} rogue file(s) from mount point. "
+                f"These were saved while the vault was locked."
+            )
+
+    def _lock_mount_point(self):
+        """
+        Make the mount point directory completely inaccessible.
+        Prevents users/apps from saving plaintext files to the bare
+        directory when tmpfs is not mounted.
+        
+        chmod 000 = no read, no write, no execute for anyone.
+        """
+        try:
+            os.chmod(str(self.mount_point), 0o000)
+            logger.info(f"🔒 Mount point locked (chmod 000): {self.mount_point}")
+        except Exception as e:
+            logger.warning(f"Could not lock mount point: {e}")
+
+    def _unlock_mount_point(self):
+        """
+        Restore permissions on the mount point so tmpfs can be mounted
+        and the user can access decrypted files.
+        
+        chmod 700 = owner read+write+execute only.
+        """
+        try:
+            os.chmod(str(self.mount_point), 0o700)
+            logger.debug(f"Mount point unlocked (chmod 700): {self.mount_point}")
+        except Exception as e:
+            logger.warning(f"Could not unlock mount point: {e}")
 
     # ===========================================================
     # FILE HELPERS

@@ -19,7 +19,7 @@ from server.db.database import get_db
 from server.db.models import (
     Badge, Device, AccessPolicy, FileKey, BadgeStatus, AuditLog,
 )
-from server.cache import cache_keys, get_cached_keys
+from server.cache import get_cached_keys, cache_keys, invalidate_keys
 
 logger = logging.getLogger("spaze-server.keys")
 
@@ -206,6 +206,9 @@ async def store_key(
 
     await db.flush()
 
+    # Invalidate cache so next key request fetches fresh data from DB
+    await invalidate_keys(req.badge_mac, req.device_hostname)
+
     return {"message": "Key stored", "file_path": req.file_path}
 
 
@@ -236,6 +239,8 @@ async def delete_key(
 
     if file_key:
         await db.delete(file_key)
+        # Invalidate cache so deleted key is not served
+        await invalidate_keys(req.badge_mac, req.device_hostname)
         return {"message": "Key deleted", "file_path": req.file_path}
     else:
         return {"message": "Key not found", "file_path": req.file_path}

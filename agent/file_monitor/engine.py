@@ -359,17 +359,26 @@ class FileEncryptionEngine:
         """
         logger.info("LOCKING VAULT...")
 
-        # Step 1: Re-encrypt any files the user modified + track deletes
+        # Step 1: Kill any processes holding files open (e.g., LibreOffice)
+        # This MUST happen BEFORE sync to avoid reading locked files
+        open_procs = self.vault._get_open_file_processes()
+        if open_procs:
+            logger.warning(f"⚠️  {len(open_procs)} process(es) still using files in mount:")
+            for pid, name, filepath in open_procs:
+                logger.warning(f"   PID {pid} ({name}): {filepath}")
+            self.vault._kill_open_file_processes(open_procs)
+
+        # Step 2: Re-encrypt any files the user modified + track deletes
         self._sync_modified_files()
 
-        # Step 2: Log vault lock event to server
+        # Step 3: Log vault lock event to server
         if self.server_mode:
             self.key_manager.log_event(
                 action="vault_lock",
                 details=f"Vault locked on {self.key_manager.device_hostname}",
             )
 
-        # Step 3: Wipe decrypted files from RAM + unmount
+        # Step 4: Wipe decrypted files from RAM + unmount
         self.vault.unmount_tmpfs()
 
         # Step 4: Wipe all keys from memory
