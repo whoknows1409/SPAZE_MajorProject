@@ -92,7 +92,7 @@ export default function Dashboard() {
   };
 
   const formatTime = (ts) => {
-    const d = new Date(ts);
+    const d = new Date(ts.endsWith('Z') ? ts : ts + 'Z');
     return d.toLocaleString('en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
   };
 
