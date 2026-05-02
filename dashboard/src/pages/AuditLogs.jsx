@@ -35,6 +35,7 @@ export default function AuditLogs() {
   }, [autoRefresh, actionFilter, limit]);
 
   const getActionColor = (action) => {
+    if (action.includes('exfiltration')) return 'var(--danger)';
     if (action.includes('unlock')) return 'var(--success)';
     if (action.includes('lock') && !action.includes('unlock')) return 'var(--warning)';
     if (action.includes('denied')) return 'var(--danger)';
@@ -50,7 +51,7 @@ export default function AuditLogs() {
     });
   };
 
-  const actionTypes = ['vault_unlock', 'vault_lock', 'keys_delivered', 'key_stored', 'key_request_denied'];
+  const actionTypes = ['vault_unlock', 'vault_lock', 'keys_delivered', 'key_stored', 'key_request_denied', 'exfiltration_blocked', 'exfiltration_detected'];
 
   if (loading) return <div className="loading-spinner"><div className="spinner" /> Loading...</div>;
 

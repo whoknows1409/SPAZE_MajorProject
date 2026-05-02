@@ -22,6 +22,7 @@ from typing import Optional
 
 from .crypto import encrypt_file, decrypt_file_to_memory, secure_wipe_bytes
 from .vault import VaultManager
+from .exfil_watcher import ExfiltrationWatcher
 from ..key_manager.key_manager import EphemeralKeyManager
 
 logger = logging.getLogger("spaze-agent.engine")
@@ -99,6 +100,12 @@ class FileEncryptionEngine:
         self._file_hashes: dict[str, str] = {}
         # Track which files were decrypted (for delete detection)
         self._decrypted_filenames: set[str] = set()
+
+        # Exfiltration watcher (DLP)
+        self._exfil_watcher = ExfiltrationWatcher(
+            vault_mount=mount_point,
+            on_alert=self._on_exfil_alert,
+        )
 
     def setup(self):
         """Initialize vault directory and mount point."""
@@ -221,6 +228,10 @@ class FileEncryptionEngine:
         logger.info(
             f"Vault unlocked: {decrypted_count}/{len(encrypted_files)} files decrypted to RAM"
         )
+
+        # Start exfiltration watcher (DLP)
+        self._exfil_watcher.start()
+
         return decrypted_count
 
     def _sync_modified_files(self):
@@ -359,6 +370,9 @@ class FileEncryptionEngine:
         """
         logger.info("LOCKING VAULT...")
 
+        # Step 0: Stop exfiltration watcher
+        self._exfil_watcher.stop()
+
         # Step 1: Kill any processes holding files open (e.g., LibreOffice)
         # This MUST happen BEFORE sync to avoid reading locked files
         open_procs = self.vault._get_open_file_processes()
@@ -400,6 +414,24 @@ class FileEncryptionEngine:
                     logger.debug(f"Cleaned up temp file: {f.name}")
                 except Exception:
                     pass
+
+    def _on_exfil_alert(self, filename: str, dest_path: str, deleted: bool):
+        """Called by ExfiltrationWatcher when a file copy is detected."""
+        action = "exfiltration_blocked" if deleted else "exfiltration_detected"
+        details = (
+            f"File '{filename}' copied to {dest_path} — "
+            f"{'DELETED' if deleted else 'DELETION FAILED'}"
+        )
+
+        # Log to server audit trail
+        if self.server_mode:
+            try:
+                self.key_manager.log_event(
+                    action=action,
+                    details=details,
+                )
+            except Exception as e:
+                logger.error(f"Failed to log exfil event to server: {e}")
 
     @property
     def is_unlocked(self) -> bool:
