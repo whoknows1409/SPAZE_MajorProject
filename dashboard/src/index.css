@@ -218,6 +218,7 @@ a:hover { color: var(--accent-hover); }
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .sidebar-footer .avatar {
@@ -504,26 +505,32 @@ tr:last-child td { border-bottom: none; }
 /* ── Modal ── */
 .modal-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0,0,0,0.7);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  animation: fadeIn 0.15s var(--ease);
+  z-index: 10000;
+  padding: 24px;
 }
 
 .modal {
   background: var(--bg-elevated);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
-  width: 90%;
+  width: 100%;
   max-width: 460px;
-  max-height: 85vh;
+  max-height: calc(100vh - 48px);
   overflow-y: auto;
   animation: modalIn 0.2s var(--ease);
   box-shadow: var(--shadow-lg);
+  margin: auto;
 }
 
 .modal-header {
