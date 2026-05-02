@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Lock } from 'lucide-react';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -28,11 +27,8 @@ export default function Login() {
   return (
     <div className="login-page">
       <div className="login-card">
-        <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-          <Lock size={36} style={{ color: 'var(--primary)', marginBottom: '12px' }} />
-        </div>
         <h1>SPAZE</h1>
-        <p className="subtitle">Zero-Trust Admin Dashboard</p>
+        <p className="subtitle">Sign in to your admin account</p>
 
         {error && <div className="login-error">{error}</div>}
 
@@ -61,7 +57,7 @@ export default function Login() {
             />
           </div>
           <button className="btn btn-primary" type="submit" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Signing in...' : 'Continue'}
           </button>
         </form>
       </div>

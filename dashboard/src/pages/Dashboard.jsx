@@ -31,7 +31,7 @@ export default function Dashboard() {
     if (action.includes('lock')) return 'var(--warning)';
     if (action.includes('denied')) return 'var(--danger)';
     if (action.includes('delivered')) return 'var(--info)';
-    return 'var(--primary)';
+    return 'var(--text-tertiary)';
   };
 
   const formatTime = (ts) => {
@@ -40,38 +40,40 @@ export default function Dashboard() {
   };
 
   if (loading) {
-    return <div className="loading-spinner"><div className="spinner" /> Loading dashboard...</div>;
+    return <div className="loading-spinner"><div className="spinner" /> Loading...</div>;
   }
 
   return (
     <div className="fade-in">
       <div className="page-header">
         <div>
-          <h1>Dashboard</h1>
-          <p>SPAZE system overview</p>
+          <h1>Overview</h1>
+          <p>System metrics and recent activity</p>
         </div>
       </div>
 
       <div className="stats-grid">
-        <StatCard icon={CreditCard} value={stats?.total_badges || 0} label="Total Badges" color="primary" />
-        <StatCard icon={Users} value={stats?.total_users || 0} label="Total Users" color="success" />
-        <StatCard icon={Monitor} value={stats?.total_devices || 0} label="Total Devices" color="warning" />
-        <StatCard icon={ScrollText} value={stats?.total_audit_logs || 0} label="Audit Events" color="info" />
+        <StatCard icon={CreditCard} value={stats?.total_badges || 0} label="Badges" color="primary" />
+        <StatCard icon={Users} value={stats?.total_users || 0} label="Users" color="success" />
+        <StatCard icon={Monitor} value={stats?.total_devices || 0} label="Devices" color="warning" />
+        <StatCard icon={ScrollText} value={stats?.total_audit_logs || 0} label="Events" color="info" />
       </div>
 
       <div className="grid-2">
         <div className="card">
-          <h3 style={{ marginBottom: '16px', fontSize: '1rem', fontWeight: 600 }}>Recent Activity</h3>
+          <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Recent Activity
+          </div>
           <div className="activity-list">
             {recentLogs.length === 0 && (
-              <p className="text-muted text-sm">No recent activity</p>
+              <p style={{ color: 'var(--text-tertiary)', fontSize: '0.82rem' }}>No recent activity</p>
             )}
             {recentLogs.map((log) => (
               <div key={log.id} className="activity-item">
                 <span className="activity-dot" style={{ background: getActionColor(log.action) }} />
                 <span className="activity-text">
-                  <strong className={`action-${log.action}`}>{log.action.replace(/_/g, ' ')}</strong>
-                  {log.details && <span className="text-muted"> — {log.details}</span>}
+                  <strong>{log.action.replace(/_/g, ' ')}</strong>
+                  {log.details && <span> — {log.details}</span>}
                 </span>
                 <span className="activity-time">{formatTime(log.timestamp)}</span>
               </div>
@@ -80,24 +82,16 @@ export default function Dashboard() {
         </div>
 
         <div className="card">
-          <h3 style={{ marginBottom: '16px', fontSize: '1rem', fontWeight: 600 }}>System Status</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span className="text-muted text-sm">Server</span>
-              <span className="pill active"><span className="pill-dot"/>online</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span className="text-muted text-sm">Database</span>
-              <span className="pill active"><span className="pill-dot"/>connected</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span className="text-muted text-sm">Redis Cache</span>
-              <span className="pill active"><span className="pill-dot"/>active</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span className="text-muted text-sm">RBAC Engine</span>
-              <span className="pill active"><span className="pill-dot"/>enforcing</span>
-            </div>
+          <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            System Status
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {['Server', 'Database', 'Redis Cache', 'RBAC Engine'].map((name) => (
+              <div key={name} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ color: 'var(--text-secondary)', fontSize: '0.82rem' }}>{name}</span>
+                <span className="pill active"><span className="pill-dot"/>operational</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
