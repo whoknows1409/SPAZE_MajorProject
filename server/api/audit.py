@@ -195,3 +195,111 @@ async def get_stats(
         "total_devices": device_count.scalar(),
         "total_audit_logs": log_count.scalar(),
     }
+
+
+@router.get("/analytics")
+async def get_analytics(
+    days: int = Query(7, le=30),
+    db: AsyncSession = Depends(get_db),
+    admin: User = Depends(require_role(["admin"])),
+):
+    """Get analytics data for dashboard charts."""
+    from sqlalchemy import func, cast, Date
+    from datetime import timedelta
+
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+    # ── 1. Activity over time (events per day) ──
+    daily_query = (
+        select(
+            cast(AuditLog.timestamp, Date).label("date"),
+            AuditLog.action,
+            func.count().label("count"),
+        )
+        .where(AuditLog.timestamp >= cutoff)
+        .group_by(cast(AuditLog.timestamp, Date), AuditLog.action)
+        .order_by(cast(AuditLog.timestamp, Date))
+    )
+    daily_result = await db.execute(daily_query)
+    daily_rows = daily_result.all()
+
+    # Build day-by-day dict
+    activity_map = {}
+    for row in daily_rows:
+        day_str = row.date.isoformat() if hasattr(row.date, 'isoformat') else str(row.date)
+        if day_str not in activity_map:
+            activity_map[day_str] = {"date": day_str, "unlocks": 0, "locks": 0, "key_requests": 0, "denials": 0}
+        if "unlock" in row.action:
+            activity_map[day_str]["unlocks"] += row.count
+        elif "lock" in row.action:
+            activity_map[day_str]["locks"] += row.count
+        elif "delivered" in row.action or "stored" in row.action:
+            activity_map[day_str]["key_requests"] += row.count
+        elif "denied" in row.action:
+            activity_map[day_str]["denials"] += row.count
+
+    activity_timeline = list(activity_map.values())
+
+    # ── 2. Action breakdown (for pie chart) ──
+    action_query = (
+        select(AuditLog.action, func.count().label("count"))
+        .where(AuditLog.timestamp >= cutoff)
+        .group_by(AuditLog.action)
+    )
+    action_result = await db.execute(action_query)
+    action_breakdown = [
+        {"action": row.action.replace("_", " ").title(), "count": row.count}
+        for row in action_result.all()
+    ]
+
+    # ── 3. RSSI distribution (for bar chart) ──
+    rssi_query = (
+        select(AuditLog.rssi_value)
+        .where(AuditLog.rssi_value.isnot(None))
+        .where(AuditLog.timestamp >= cutoff)
+    )
+    rssi_result = await db.execute(rssi_query)
+    rssi_values = [row[0] for row in rssi_result.all()]
+
+    # Bucket into ranges
+    rssi_buckets = {
+        "Strong (> -50)": 0,
+        "Good (-50 to -65)": 0,
+        "Fair (-65 to -80)": 0,
+        "Weak (< -80)": 0,
+    }
+    for val in rssi_values:
+        if val > -50:
+            rssi_buckets["Strong (> -50)"] += 1
+        elif val > -65:
+            rssi_buckets["Good (-50 to -65)"] += 1
+        elif val > -80:
+            rssi_buckets["Fair (-65 to -80)"] += 1
+        else:
+            rssi_buckets["Weak (< -80)"] += 1
+
+    rssi_distribution = [{"range": k, "count": v} for k, v in rssi_buckets.items()]
+
+    # ── 4. Hourly pattern (for area chart) ──
+    hourly_query = (
+        select(
+            func.extract("hour", AuditLog.timestamp).label("hour"),
+            func.count().label("count"),
+        )
+        .where(AuditLog.timestamp >= cutoff)
+        .group_by(func.extract("hour", AuditLog.timestamp))
+        .order_by(func.extract("hour", AuditLog.timestamp))
+    )
+    hourly_result = await db.execute(hourly_query)
+    hourly_map = {int(row.hour): row.count for row in hourly_result.all()}
+    hourly_activity = [
+        {"hour": f"{h:02d}:00", "events": hourly_map.get(h, 0)}
+        for h in range(24)
+    ]
+
+    return {
+        "activity_timeline": activity_timeline,
+        "action_breakdown": action_breakdown,
+        "rssi_distribution": rssi_distribution,
+        "hourly_activity": hourly_activity,
+    }
