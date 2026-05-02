@@ -54,7 +54,8 @@ build/
 *.bin
 *.elf
 
-# Documentation & Diagrams (not for repo)
+# Markdown (keep only root README)
 *.md
+!/README.md
 docs/diagrams/
 docs/ppt/
