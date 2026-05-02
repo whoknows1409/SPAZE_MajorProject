@@ -66,6 +66,78 @@
   --mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
 }
 
+/* ── Light Theme ── */
+[data-theme="light"] {
+  --bg-base: #ffffff;
+  --bg-surface: #fafafa;
+  --bg-elevated: #f5f5f5;
+  --bg-hover: #eeeeee;
+  --bg-input: #ffffff;
+  --bg-subtle: #f0f0f0;
+
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.14);
+  --border-focus: rgba(0,0,0,0.35);
+
+  --accent: #0070f3;
+  --accent-hover: #0060df;
+  --accent-subtle: rgba(0,112,243,0.06);
+  --accent-glow: rgba(0,112,243,0.1);
+
+  --success: #12a150;
+  --success-subtle: rgba(18,161,80,0.08);
+  --warning: #d97706;
+  --warning-subtle: rgba(217,119,6,0.08);
+  --danger: #e5484d;
+  --danger-subtle: rgba(229,72,77,0.06);
+  --info: #0070f3;
+  --info-subtle: rgba(0,112,243,0.06);
+
+  --text-primary: #171717;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --text-link: #0070f3;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* Light theme overrides for specific components */
+[data-theme="light"] .login-page::before {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+}
+
+[data-theme="light"] .btn-primary {
+  background: #171717;
+  color: #ffffff;
+  border-color: #171717;
+}
+
+[data-theme="light"] .btn-primary:hover {
+  background: #000000;
+  border-color: #000000;
+}
+
+[data-theme="light"] .modal-overlay {
+  background: rgba(0,0,0,0.4);
+}
+
+[data-theme="light"] ::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.12);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.2);
+}
+
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -244,6 +316,13 @@ a:hover { color: var(--accent-hover); }
   display: flex; align-items: center;
 }
 .sidebar-footer .logout-btn:hover { color: var(--danger); background: var(--danger-subtle); }
+
+.sidebar-footer .theme-toggle-btn {
+  background: none; border: none; color: var(--text-tertiary); cursor: pointer;
+  padding: 6px; border-radius: var(--radius-sm); transition: all var(--duration) var(--ease);
+  display: flex; align-items: center;
+}
+.sidebar-footer .theme-toggle-btn:hover { color: var(--warning); background: var(--warning-subtle); }
 
 /* ── Cards ── */
 .card {

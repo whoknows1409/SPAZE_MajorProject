@@ -1,8 +1,9 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import {
   LayoutDashboard, CreditCard, Users, Monitor,
-  Shield, ScrollText, LogOut,
+  Shield, ScrollText, LogOut, Sun, Moon,
 } from 'lucide-react';
 
 const navItems = [
@@ -16,7 +17,7 @@ const navItems = [
 
 export default function Sidebar() {
   const { user, logout } = useAuth();
-  const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <aside className="sidebar">
@@ -47,8 +48,15 @@ export default function Sidebar() {
           <div className="user-name">{user?.name || 'Admin'}</div>
           <div className="user-role">{user?.role || 'admin'}</div>
         </div>
+        <button
+          className="theme-toggle-btn"
+          onClick={toggleTheme}
+          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+        </button>
         <button className="logout-btn" onClick={logout} title="Logout">
-          <LogOut size={16} />
+          <LogOut size={15} />
         </button>
       </div>
     </aside>
