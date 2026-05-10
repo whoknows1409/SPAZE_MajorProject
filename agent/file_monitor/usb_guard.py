@@ -4,12 +4,17 @@ SPAZE - USB Storage Guard
 Prevents data theft via USB storage devices by monitoring for new
 block devices while the vault is unlocked.
 
-When a USB drive/stick is plugged in during an active vault session:
-  1. Immediately unmounts the device
-  2. Logs a security alert to the server
-  3. Emits a local warning
+Detection strategy:
+  Rather than relying on the unreliable 'removable' flag, we monitor
+  for ANY new block device that appears in /sys/block/ after baseline.
+  If a new sd*, nvme*, or similar device appears → it's a USB/external
+  device that was just plugged in.
 
-Monitors /sys/block/ for new devices appearing (sdb, sdc, etc.).
+When a USB drive is plugged in during an active vault session:
+  1. Unmounts via udisksctl (no root needed on Ubuntu)
+  2. Powers off the USB port to prevent GNOME re-mount
+  3. Continuously enforces — re-unmounts if GNOME re-mounts
+  4. Logs a security alert to the server
 """
 
 import logging
@@ -22,12 +27,12 @@ from typing import Optional, Callable, Set
 
 logger = logging.getLogger("spaze-agent.usb-guard")
 
-# Block devices to ignore (system disks, loop devices, etc.)
+# Virtual/system block devices to always ignore
 IGNORED_PREFIXES = {"loop", "sr", "ram", "dm-", "zram", "nbd", "md"}
 
 
-def _get_removable_devices() -> Set[str]:
-    """Get currently connected removable block devices."""
+def _get_real_block_devices() -> Set[str]:
+    """Get all real (non-virtual) block devices currently in /sys/block/."""
     devices = set()
     sys_block = Path("/sys/block")
     if not sys_block.exists():
@@ -35,35 +40,16 @@ def _get_removable_devices() -> Set[str]:
 
     for dev in sys_block.iterdir():
         name = dev.name
-
-        # Skip non-physical devices
         if any(name.startswith(prefix) for prefix in IGNORED_PREFIXES):
             continue
-
-        # Check if device is removable
-        removable_path = dev / "removable"
-        try:
-            if removable_path.exists():
-                val = removable_path.read_text().strip()
-                if val == "1":
-                    devices.add(name)
-                    continue
-        except Exception:
-            pass
-
-        # Also catch USB devices via the device path
-        device_path = dev / "device"
-        if device_path.is_symlink():
-            real_path = str(device_path.resolve())
-            if "usb" in real_path.lower():
-                devices.add(name)
+        devices.add(name)
 
     return devices
 
 
 class USBStorageGuard:
     """
-    Monitors for new USB storage devices and unmounts them
+    Monitors for new block devices and unmounts/powers-off them
     while the vault is unlocked.
     """
 
@@ -77,6 +63,7 @@ class USBStorageGuard:
         self._running = False
         self._thread: Optional[threading.Thread] = None
         self._baseline_devices: Set[str] = set()
+        self._blocked_devices: Set[str] = set()
         self._blocked_count = 0
 
     def start(self):
@@ -84,19 +71,33 @@ class USBStorageGuard:
         if self._running:
             return
 
-        # Capture baseline: devices already plugged in are allowed
-        self._baseline_devices = _get_removable_devices()
+        # Baseline = only SYSTEM disks (non-removable, non-USB)
+        # Any removable/USB device already plugged in gets blocked immediately
+        all_devices = _get_real_block_devices()
+        self._baseline_devices = set()
+        self._blocked_devices = set()
+
+        for dev_name in all_devices:
+            if self._is_removable_or_usb(dev_name):
+                # This is a USB/removable device already plugged in — block it
+                logger.info(f"🔌 Found existing USB device: /dev/{dev_name}")
+            else:
+                # This is a system disk — add to baseline
+                self._baseline_devices.add(dev_name)
+
         self._running = True
         self._blocked_count = 0
         self._thread = threading.Thread(target=self._monitor_loop, daemon=True)
         self._thread.start()
 
-        if self._baseline_devices:
-            logger.info(
-                f"🔌 USB guard ACTIVE — baseline devices: {', '.join(self._baseline_devices)}"
-            )
-        else:
-            logger.info("🔌 USB guard ACTIVE — no removable devices present")
+        # Block any existing USB devices immediately
+        existing_usb = all_devices - self._baseline_devices
+        for dev_name in existing_usb:
+            self._handle_new_device(dev_name)
+
+        logger.info(
+            f"🔌 USB guard ACTIVE — system disks: {', '.join(sorted(self._baseline_devices))}"
+        )
 
     def stop(self):
         """Stop USB monitoring."""
@@ -110,37 +111,68 @@ class USBStorageGuard:
         else:
             logger.info("USB guard stopped")
 
+    def _is_removable_or_usb(self, dev_name: str) -> bool:
+        """Check if a block device is removable or connected via USB."""
+        dev_path = Path(f"/sys/block/{dev_name}")
+
+        # Check 'removable' flag
+        try:
+            removable = (dev_path / "removable").read_text().strip()
+            if removable == "1":
+                return True
+        except Exception:
+            pass
+
+        # Check if connected via USB bus
+        device_link = dev_path / "device"
+        if device_link.is_symlink():
+            real_path = str(device_link.resolve()).lower()
+            if "usb" in real_path:
+                return True
+
+        # Check transport type via /sys/block/*/device/transport (SATA vs USB)
+        try:
+            for parent in (dev_path / "device").resolve().parents:
+                transport = parent / "removable"
+                if transport.exists():
+                    if transport.read_text().strip() == "1":
+                        return True
+        except Exception:
+            pass
+
+        return False
+
     def _monitor_loop(self):
         """Main monitoring loop."""
         while self._running:
             try:
-                self._check_devices()
+                self._check_for_new_devices()
+                self._enforce_blocked_devices()
             except Exception as e:
                 logger.debug(f"USB guard scan error: {e}")
             time.sleep(self.poll_interval)
 
-    def _check_devices(self):
-        """Check for new USB devices that weren't in the baseline."""
-        current = _get_removable_devices()
-        new_devices = current - self._baseline_devices
+    def _check_for_new_devices(self):
+        """Detect any NEW block device that wasn't present at baseline."""
+        current = _get_real_block_devices()
+        new_devices = current - self._baseline_devices - self._blocked_devices
 
         for dev_name in new_devices:
             self._handle_new_device(dev_name)
-            # Add to baseline so we don't alert repeatedly
-            self._baseline_devices.add(dev_name)
 
     def _handle_new_device(self, dev_name: str):
-        """Handle a newly detected USB storage device."""
+        """Handle a newly detected storage device."""
         logger.warning("=" * 60)
-        logger.warning(f"🚨 USB STORAGE DEVICE BLOCKED!")
+        logger.warning(f"🚨 USB/EXTERNAL STORAGE BLOCKED!")
         logger.warning(f"   Device: /dev/{dev_name}")
-        logger.warning(f"   Action: Unmounting all partitions")
+        logger.warning(f"   Action: Unmounting + powering off")
         logger.warning("=" * 60)
 
         self._blocked_count += 1
+        self._blocked_devices.add(dev_name)
 
-        # Unmount all partitions of this device
-        self._unmount_device(dev_name)
+        # Unmount all partitions and power off
+        self._unmount_and_poweroff(dev_name)
 
         # Fire alert callback
         if self.on_alert:
@@ -149,43 +181,114 @@ class USBStorageGuard:
             except Exception:
                 pass
 
-    def _unmount_device(self, dev_name: str):
-        """Unmount all partitions of a block device."""
-        # Find all mount points for this device
+    def _enforce_blocked_devices(self):
+        """Re-unmount blocked devices if GNOME auto-remounted them."""
+        for dev_name in list(self._blocked_devices):
+            if not Path(f"/sys/block/{dev_name}").exists():
+                continue
+            if self._is_device_mounted(dev_name):
+                logger.warning(f"🔌 Re-unmounting /dev/{dev_name} (auto-remount detected)")
+                self._unmount_and_poweroff(dev_name)
+
+    def _is_device_mounted(self, dev_name: str) -> bool:
+        """Check if any partition of this device is currently mounted."""
+        try:
+            with open("/proc/mounts", "r") as f:
+                mounts = f.read()
+            if f"/dev/{dev_name} " in mounts or f"/dev/{dev_name}\t" in mounts:
+                return True
+            for i in range(1, 16):
+                part = f"/dev/{dev_name}{i}"
+                if f"{part} " in mounts or f"{part}\t" in mounts:
+                    return True
+        except Exception:
+            pass
+        return False
+
+    def _unmount_and_poweroff(self, dev_name: str):
+        """Unmount all partitions and power off the USB device."""
+        partitions = self._find_partitions(dev_name)
+        if not partitions:
+            partitions = [dev_name]
+
+        for part in partitions:
+            self._unmount_partition(part)
+
+        # Power off the drive to prevent GNOME from re-mounting
+        self._poweroff_device(dev_name)
+
+    def _find_partitions(self, dev_name: str) -> list:
+        """Find all partitions of a block device."""
+        partitions = []
+        # Check /sys/block/sdX/sdX1, sdX2, etc.
+        dev_dir = Path(f"/sys/block/{dev_name}")
+        if dev_dir.exists():
+            for child in dev_dir.iterdir():
+                if child.name.startswith(dev_name) and child.name != dev_name:
+                    partitions.append(child.name)
+        return sorted(partitions)
+
+    def _unmount_partition(self, part_name: str):
+        """Unmount a partition using multiple methods."""
+        dev_path = f"/dev/{part_name}"
+
+        # Method 1: udisksctl (works without root on Ubuntu desktop)
         try:
             result = subprocess.run(
-                ["findmnt", "-rn", "-o", "TARGET", "-S", f"/dev/{dev_name}"],
+                ["udisksctl", "unmount", "-b", dev_path, "--no-user-interaction"],
                 capture_output=True, text=True, timeout=5,
             )
-            mount_points = result.stdout.strip().split("\n") if result.stdout.strip() else []
+            if result.returncode == 0:
+                logger.warning(f"   Unmounted {dev_path}")
+                return
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            pass
 
-            # Also check partitions (sdb1, sdb2, etc.)
-            for i in range(1, 10):
-                part = f"/dev/{dev_name}{i}"
-                if os.path.exists(part):
-                    result = subprocess.run(
-                        ["findmnt", "-rn", "-o", "TARGET", "-S", part],
-                        capture_output=True, text=True, timeout=5,
-                    )
-                    if result.stdout.strip():
-                        mount_points.extend(result.stdout.strip().split("\n"))
+        # Method 2: umount (may need sudo)
+        try:
+            result = subprocess.run(
+                ["umount", "-f", dev_path],
+                capture_output=True, text=True, timeout=5,
+            )
+            if result.returncode == 0:
+                logger.warning(f"   Force-unmounted {dev_path}")
+                return
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            pass
 
-            # Unmount each mount point
-            for mp in mount_points:
-                mp = mp.strip()
-                if not mp:
-                    continue
-                try:
-                    subprocess.run(
-                        ["sudo", "-n", "umount", "-f", mp],
-                        capture_output=True, timeout=5,
-                    )
-                    logger.warning(f"   Unmounted: {mp}")
-                except Exception as e:
-                    logger.error(f"   Failed to unmount {mp}: {e}")
+        # Method 3: sudo umount
+        try:
+            result = subprocess.run(
+                ["sudo", "-n", "umount", "-f", dev_path],
+                capture_output=True, text=True, timeout=5,
+            )
+            if result.returncode == 0:
+                logger.warning(f"   Sudo-unmounted {dev_path}")
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            pass
 
-            if not mount_points:
-                logger.info(f"   Device /dev/{dev_name} not mounted (blocked before mount)")
+    def _poweroff_device(self, dev_name: str):
+        """Power off a USB drive to prevent re-mounting."""
+        dev_path = f"/dev/{dev_name}"
 
-        except Exception as e:
-            logger.error(f"   Error unmounting device: {e}")
+        # udisksctl power-off
+        try:
+            result = subprocess.run(
+                ["udisksctl", "power-off", "-b", dev_path, "--no-user-interaction"],
+                capture_output=True, text=True, timeout=5,
+            )
+            if result.returncode == 0:
+                logger.warning(f"   ⚡ Powered off {dev_path}")
+                return
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            pass
+
+        # Fallback: eject
+        try:
+            subprocess.run(
+                ["eject", dev_path],
+                capture_output=True, timeout=5,
+            )
+            logger.warning(f"   ⚡ Ejected {dev_path}")
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            pass
