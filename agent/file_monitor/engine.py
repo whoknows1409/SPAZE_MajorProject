@@ -23,6 +23,11 @@ from typing import Optional
 from .crypto import encrypt_file, decrypt_file_to_memory, secure_wipe_bytes
 from .vault import VaultManager
 from .exfil_watcher import ExfiltrationWatcher
+from .clipboard_guard import ClipboardGuard
+from .screen_guard import ScreenCaptureGuard
+from .sandbox_guard import AppSandboxGuard
+from .usb_guard import USBStorageGuard
+from .print_guard import PrintGuard
 from ..key_manager.key_manager import EphemeralKeyManager
 
 logger = logging.getLogger("spaze-agent.engine")
@@ -105,6 +110,33 @@ class FileEncryptionEngine:
         self._exfil_watcher = ExfiltrationWatcher(
             vault_mount=mount_point,
             on_alert=self._on_exfil_alert,
+        )
+
+        # Clipboard guard (DLP)
+        self._clipboard_guard = ClipboardGuard(
+            on_alert=self._on_clipboard_alert,
+        )
+
+        # Screen capture guard (DLP)
+        self._screen_guard = ScreenCaptureGuard(
+            on_alert=self._on_screen_capture_alert,
+        )
+
+        # Application sandbox guard (DLP)
+        self._sandbox_guard = AppSandboxGuard(
+            vault_mount=mount_point,
+            on_alert=self._on_sandbox_alert,
+        )
+
+        # USB storage guard (DLP)
+        self._usb_guard = USBStorageGuard(
+            on_alert=self._on_usb_alert,
+        )
+
+        # Print guard (DLP)
+        self._print_guard = PrintGuard(
+            vault_mount=mount_point,
+            on_alert=self._on_print_alert,
         )
 
     def setup(self):
@@ -229,8 +261,13 @@ class FileEncryptionEngine:
             f"Vault unlocked: {decrypted_count}/{len(encrypted_files)} files decrypted to RAM"
         )
 
-        # Start exfiltration watcher (DLP)
+        # Start DLP guards
         self._exfil_watcher.start()
+        self._clipboard_guard.start()
+        self._screen_guard.start()
+        self._sandbox_guard.start()
+        self._usb_guard.start()
+        self._print_guard.start()
 
         return decrypted_count
 
@@ -370,8 +407,13 @@ class FileEncryptionEngine:
         """
         logger.info("LOCKING VAULT...")
 
-        # Step 0: Stop exfiltration watcher
+        # Step 0: Stop all DLP guards
         self._exfil_watcher.stop()
+        self._clipboard_guard.stop()
+        self._screen_guard.stop()
+        self._sandbox_guard.stop()
+        self._usb_guard.stop()
+        self._print_guard.stop()
 
         # Step 1: Kill any processes holding files open (e.g., LibreOffice)
         # This MUST happen BEFORE sync to avoid reading locked files
@@ -432,6 +474,69 @@ class FileEncryptionEngine:
                 )
             except Exception as e:
                 logger.error(f"Failed to log exfil event to server: {e}")
+
+    def _on_clipboard_alert(self, chars_wiped: int, preview: str):
+        """Called by ClipboardGuard when clipboard content is wiped."""
+        details = f"Clipboard cleared — {chars_wiped} chars wiped"
+        if self.server_mode:
+            try:
+                self.key_manager.log_event(
+                    action="clipboard_cleared",
+                    details=details,
+                )
+            except Exception as e:
+                logger.error(f"Failed to log clipboard event: {e}")
+
+    def _on_screen_capture_alert(self, process_name: str, pid: int):
+        """Called by ScreenCaptureGuard when a capture tool is killed."""
+        details = f"Killed '{process_name}' (PID {pid}) — screenshot/recording blocked"
+        if self.server_mode:
+            try:
+                self.key_manager.log_event(
+                    action="screenshot_blocked",
+                    details=details,
+                )
+            except Exception as e:
+                logger.error(f"Failed to log screen capture event: {e}")
+
+    def _on_sandbox_alert(self, process_name: str, pid: int, filename: str, file_path: str):
+        """Called by AppSandboxGuard when a network app accesses vault files."""
+        details = (
+            f"Killed '{process_name}' (PID {pid}) — "
+            f"attempted to access '{filename}' via upload/transfer"
+        )
+        if self.server_mode:
+            try:
+                self.key_manager.log_event(
+                    action="upload_blocked",
+                    details=details,
+                )
+            except Exception as e:
+                logger.error(f"Failed to log sandbox event: {e}")
+
+    def _on_usb_alert(self, device_name: str):
+        """Called by USBStorageGuard when a USB device is blocked."""
+        details = f"USB storage device /dev/{device_name} blocked and unmounted"
+        if self.server_mode:
+            try:
+                self.key_manager.log_event(
+                    action="usb_blocked",
+                    details=details,
+                )
+            except Exception as e:
+                logger.error(f"Failed to log USB event: {e}")
+
+    def _on_print_alert(self, process_name: str, pid: int, filename: str):
+        """Called by PrintGuard when a print attempt is blocked."""
+        details = f"Print blocked — '{process_name}' tried to print '{filename}'"
+        if self.server_mode:
+            try:
+                self.key_manager.log_event(
+                    action="print_blocked",
+                    details=details,
+                )
+            except Exception as e:
+                logger.error(f"Failed to log print event: {e}")
 
     @property
     def is_unlocked(self) -> bool:

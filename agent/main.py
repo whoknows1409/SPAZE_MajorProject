@@ -225,6 +225,27 @@ class SPAZEAgent:
             self.engine.lock_vault()
             logger.info("🔒 All files locked. Plaintext destroyed. Keys wiped.")
 
+            # Lock the Linux session (screen lock)
+            self._lock_screen()
+
+    def _lock_screen(self):
+        """Lock the Linux desktop session when badge leaves range."""
+        import subprocess
+        methods = [
+            ["loginctl", "lock-session"],
+            ["gnome-screensaver-command", "-l"],
+            ["xdg-screensaver", "lock"],
+        ]
+        for cmd in methods:
+            try:
+                result = subprocess.run(cmd, capture_output=True, timeout=3)
+                if result.returncode == 0:
+                    logger.info("🖥️  Screen LOCKED — session secured")
+                    return
+            except Exception:
+                continue
+        logger.warning("Could not lock screen (no supported lock command found)")
+
     def encrypt_file(self, filepath: str) -> Optional[str]:
         """Encrypt a file and add it to the vault (CLI utility)."""
         return self.engine.encrypt_new_file(filepath)

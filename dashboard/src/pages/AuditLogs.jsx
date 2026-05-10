@@ -36,6 +36,11 @@ export default function AuditLogs() {
 
   const getActionColor = (action) => {
     if (action.includes('exfiltration')) return 'var(--danger)';
+    if (action.includes('clipboard')) return 'var(--warning)';
+    if (action.includes('screenshot')) return 'var(--danger)';
+    if (action.includes('upload')) return 'var(--danger)';
+    if (action.includes('usb')) return 'var(--danger)';
+    if (action.includes('print')) return 'var(--warning)';
     if (action.includes('unlock')) return 'var(--success)';
     if (action.includes('lock') && !action.includes('unlock')) return 'var(--warning)';
     if (action.includes('denied')) return 'var(--danger)';
@@ -51,7 +56,7 @@ export default function AuditLogs() {
     });
   };
 
-  const actionTypes = ['vault_unlock', 'vault_lock', 'keys_delivered', 'key_stored', 'key_request_denied', 'exfiltration_blocked', 'exfiltration_detected'];
+  const actionTypes = ['vault_unlock', 'vault_lock', 'keys_delivered', 'key_stored', 'key_request_denied', 'exfiltration_blocked', 'exfiltration_detected', 'clipboard_cleared', 'screenshot_blocked', 'upload_blocked', 'usb_blocked', 'print_blocked'];
 
   if (loading) return <div className="loading-spinner"><div className="spinner" /> Loading...</div>;
 
