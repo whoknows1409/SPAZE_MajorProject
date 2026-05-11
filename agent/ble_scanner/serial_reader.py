@@ -42,6 +42,14 @@ class SerialReader:
                 baudrate=self.baud_rate,
                 timeout=1,  # 1 second read timeout
             )
+
+            # Auto-reset ESP32 via DTR toggle (replaces manual EN button press)
+            self.serial_conn.dtr = False
+            time.sleep(0.1)
+            self.serial_conn.dtr = True
+            time.sleep(0.5)  # Wait for ESP32 to boot
+            self.serial_conn.reset_input_buffer()  # Flush stale boot messages
+
             self.running = True
             self._thread = threading.Thread(target=self._read_loop, daemon=True)
             self._thread.start()
@@ -97,6 +105,14 @@ class SerialReader:
                 baudrate=self.baud_rate,
                 timeout=1,
             )
+
+            # Auto-reset ESP32 on reconnect too
+            self.serial_conn.dtr = False
+            time.sleep(0.1)
+            self.serial_conn.dtr = True
+            time.sleep(0.5)
+            self.serial_conn.reset_input_buffer()
+
             logger.info(f"Reconnected to {self.port}")
         except serial.SerialException:
             logger.warning(f"Reconnect failed, will retry...")
