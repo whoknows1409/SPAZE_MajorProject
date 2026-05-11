@@ -21,8 +21,9 @@ Insider threats account for **60% of data breaches** in enterprise environments.
 - Copy sensitive files to a USB drive
 - Email documents from an unlocked workstation
 - Access data after physically leaving the secure area
+- Take screenshots, print files, or upload via browsers
 
-**SPAZE eliminates this gap** by enforcing *continuous physical authorization* — files are only readable when the authorized badge is physically within 2 meters of the workstation, and are instantly re-encrypted when the user walks away.
+**SPAZE eliminates this gap** by enforcing *continuous physical authorization* — files are only readable when the authorized badge is physically within 2 meters of the workstation, and are instantly re-encrypted when the user walks away. A full DLP guard suite prevents all exfiltration channels while the vault is active.
 
 ---
 
@@ -44,7 +45,13 @@ Insider threats account for **60% of data breaches** in enterprise environments.
                                               │  tmpfs Vault  │                    │  PostgreSQL  │
                                               │  (RAM-only)   │                    │  + Redis     │
                                               │  AES-256-GCM  │                    │              │
-                                              └──────────────┘                    └──────────────┘
+                                              └──────┬────────┘                    └──────────────┘
+                                                     │
+                                              ┌──────▼───────┐
+                                              │  DLP Guards   │
+                                              │  7 active     │
+                                              │  modules      │
+                                              └──────────────┘
 ```
 
 ### Flow
@@ -53,9 +60,10 @@ Insider threats account for **60% of data breaches** in enterprise environments.
 2. **Policy check** → Server validates badge MAC, device hostname, and RBAC policy
 3. **Key delivery** → Server sends per-file AES-256-GCM encryption keys (FEKs) over TLS
 4. **Vault unlock** → Files decrypted into RAM-backed `tmpfs` mount (never touches disk)
-5. **Continuous monitoring** → Agent polls RSSI every second; badge must stay in range
-6. **Badge leaves** → All processes killed, files synced back, re-encrypted, keys wiped from memory
-7. **Mount locked** → `tmpfs` unmounted, directory permissions set to `chmod 000`
+5. **DLP guards activate** → 7 guards start monitoring for data exfiltration attempts
+6. **Continuous monitoring** → Agent polls RSSI every second; badge must stay in range
+7. **Badge leaves** → DLP guards stopped, processes killed, files re-encrypted, keys wiped
+8. **Session locked** → `tmpfs` unmounted, `chmod 000`, screen locked via `loginctl`
 
 ---
 
@@ -66,9 +74,24 @@ Insider threats account for **60% of data breaches** in enterprise environments.
 - **Ephemeral keys** — never stored locally, fetched from server per session
 - **RAM-only decryption** via `tmpfs` — plaintext never touches persistent storage
 - **Fail-closed design** — any failure (network, badge, crash) locks the vault
-- **Process protection** — applications holding file handles (LibreOffice, etc.) force-killed before lock
+- **Process protection** — applications holding file handles force-killed before lock
 - **Shadow directory mitigation** — `chmod 000` on mount point when vault is locked
 - **Rogue file detection** — files created while vault is locked are automatically encrypted on next unlock
+- **Screen lock on departure** — `loginctl lock-session` when badge goes out of range
+
+### Data Loss Prevention (DLP) Guards
+
+All guards activate when the vault unlocks and terminate when it locks.
+
+| # | Guard | Threat | Method |
+|---|-------|--------|--------|
+| 1 | **Clipboard Guard** | Copy-paste exfiltration | Polls every 0.5s, clears clipboard if vault data detected |
+| 2 | **Screen Capture Guard** | Screenshot leakage | **Layer 1**: Kills screen capture processes (`gnome-screenshot`, OBS, Flameshot, etc.). **Layer 2**: Watches `~/Pictures/Screenshots/` for new files and deletes them instantly (catches GNOME Shell PrtSc) |
+| 3 | **App Sandbox Guard** | Browser upload / email attachment | Uses `inotify` for instant kernel-level detection when vault files are opened. Kills unauthorized browsers/network apps before upload completes. Whitelisted apps (LibreOffice, VS Code, editors) are allowed |
+| 4 | **Exfiltration Watcher** | File copy to external locations | Monitors system directories for copied plaintext vault files |
+| 5 | **USB Storage Guard** | Data theft via USB drive | Detects removable/USB block devices (baseline vs. current comparison). Unmounts via `udisksctl`, powers off USB port. Re-unmounts if GNOME auto-remounts. Blocks devices already plugged in at vault unlock |
+| 6 | **Print Guard** | Printing vault files | Scans `/proc` for print spooler processes with vault file descriptors. Kills `cupsd`/printer processes and cancels CUPS queue jobs |
+| 7 | **Screen Lock** | Unattended workstation | `loginctl lock-session` when badge RSSI drops below threshold |
 
 ### Access Control
 - **BLE proximity gating** — continuous RSSI monitoring, not just one-time auth
@@ -78,30 +101,33 @@ Insider threats account for **60% of data breaches** in enterprise environments.
 - **Badge lifecycle** — active, revoked, and lost status management
 
 ### Admin Dashboard
-- **7 management pages** — Dashboard, Badges, Users, Devices, Policies, Audit Logs
-- **Real-time audit logs** — color-coded event timeline with auto-refresh
+- **7 management pages** — Dashboard, Badges, Users, Devices, Policies, Audit Logs, Login
+- **Real-time audit logs** — color-coded event timeline with auto-refresh and DLP event types (`usb_blocked`, `print_blocked`, `clipboard_cleared`, `screenshot_blocked`, `app_blocked`)
 - **Dark/Light theme** — Vercel-inspired professional UI with theme persistence
 - **JWT authentication** — role-gated admin access
 
 ### Infrastructure
 - **Redis caching** — 5-minute TTL key cache with instant invalidation on changes
 - **PostgreSQL** — relational data with async SQLAlchemy
-- **Comprehensive audit trail** — every vault lock/unlock, key request, and policy change logged
+- **Comprehensive audit trail** — every vault lock/unlock, key request, DLP block, and policy change logged
+- **ESP32 auto-reset** — DTR toggle on serial connect eliminates manual EN button press
 
 ---
 
 ## Tech Stack
 
 | Layer | Technology | Purpose |
-|-------|-----------|---------|
+|-------|-----------|---------:|
 | **IoT Badge** | ESP32-WROOM-32 | BLE 5.0 advertisement |
-| **Agent** | Python 3.11+ | BLE scanning, file encryption, vault management |
+| **IoT Anchor** | ESP32-WROOM-32 | BLE scanner, USB-serial bridge to agent |
+| **Agent** | Python 3.11+ | BLE scanning, file encryption, DLP guards, vault management |
 | **Server** | FastAPI + Uvicorn | REST API, RBAC, key management |
 | **Database** | PostgreSQL 15 | Users, badges, policies, audit logs |
 | **Cache** | Redis 7 | FEK caching with TTL |
 | **Dashboard** | React 19 + Vite | Admin management UI |
 | **Crypto** | `cryptography` lib | AES-256-GCM encryption/decryption |
 | **Auth** | JWT (PyJWT) | Stateless token-based authentication |
+| **DLP** | `inotify` + `/proc` + `udisksctl` | Kernel-level file access monitoring & device control |
 
 ---
 
@@ -109,50 +135,63 @@ Insider threats account for **60% of data breaches** in enterprise environments.
 
 ```
 SPAZE/
-├── agent/                          # Workstation daemon
-│   ├── main.py                     # Entry point — serial listener, proximity engine
-│   ├── ble_scanner/                # BLE RSSI reader (serial port)
+├── agent/                              # Workstation daemon
+│   ├── main.py                         # Entry point — serial listener, proximity engine, screen lock
+│   ├── ble_scanner/
+│   │   └── serial_reader.py            # ESP32 USB-serial reader with DTR auto-reset
 │   ├── file_monitor/
-│   │   ├── engine.py               # Lock/unlock orchestrator
-│   │   ├── vault.py                # tmpfs mount, process killing, chmod
-│   │   ├── crypto.py               # AES-256-GCM encrypt/decrypt
-│   │   └── watcher.py              # Filesystem event watcher
-│   └── key_manager/                # Server-side key fetching
+│   │   ├── engine.py                   # Lock/unlock orchestrator, DLP guard lifecycle
+│   │   ├── vault.py                    # tmpfs mount, process killing, chmod
+│   │   ├── crypto.py                   # AES-256-GCM encrypt/decrypt
+│   │   ├── clipboard_guard.py          # Clipboard content clearing (0.5s poll)
+│   │   ├── screen_guard.py             # Screenshot process killer + file watcher
+│   │   ├── sandbox_guard.py            # inotify-based browser/app blocker
+│   │   ├── exfil_watcher.py            # File copy detection
+│   │   ├── usb_guard.py               # USB device unmount + power-off
+│   │   └── print_guard.py             # Print spooler killer + CUPS queue cancel
+│   └── key_manager/                    # Server-side key fetching
 │
-├── server/                         # Backend API
-│   ├── main.py                     # FastAPI app, CORS, middleware
-│   ├── config.py                   # Environment settings
-│   ├── cache.py                    # Redis key cache layer
+├── server/                             # Backend API
+│   ├── main.py                         # FastAPI app, CORS, middleware
+│   ├── config.py                       # Environment settings
+│   ├── cache.py                        # Redis key cache layer
 │   ├── api/
-│   │   ├── auth.py                 # Login, registration, JWT
-│   │   ├── keys.py                 # FEK store/retrieve/delete
-│   │   ├── badges.py               # Badge CRUD + status
-│   │   ├── users.py                # User management
-│   │   ├── devices.py              # Device registration
-│   │   ├── policies.py             # Access policy CRUD
-│   │   └── audit.py                # Audit log query + stats
-│   ├── auth/                       # JWT helpers, RBAC dependencies
-│   ├── crypto/                     # Server-side key generation
-│   ├── db/                         # SQLAlchemy models, migrations
-│   └── rbac/                       # Role-based access control
+│   │   ├── auth.py                     # Login, registration, JWT
+│   │   ├── keys.py                     # FEK store/retrieve/delete
+│   │   ├── badges.py                   # Badge CRUD + status
+│   │   ├── users.py                    # User management
+│   │   ├── devices.py                  # Device registration
+│   │   ├── policies.py                 # Access policy CRUD
+│   │   └── audit.py                    # Audit log query + stats
+│   ├── auth/                           # JWT helpers, RBAC dependencies
+│   ├── crypto/                         # Server-side key generation
+│   ├── db/                             # SQLAlchemy models, migrations
+│   └── rbac/                           # Role-based access control
 │
-├── dashboard/                      # React admin frontend
+├── dashboard/                          # React admin frontend
 │   └── src/
-│       ├── api/client.js           # Axios + JWT interceptor
+│       ├── api/client.js               # Axios + JWT interceptor
 │       ├── context/
-│       │   ├── AuthContext.jsx      # Login/logout state
-│       │   └── ThemeContext.jsx     # Dark/light theme
-│       ├── components/             # Layout, Sidebar, Modal, StatCard, StatusPill
-│       └── pages/                  # Login, Dashboard, Badges, Users, Devices, Policies, AuditLogs
+│       │   ├── AuthContext.jsx          # Login/logout state
+│       │   └── ThemeContext.jsx         # Dark/light theme
+│       ├── components/                 # Layout, Sidebar, Modal, StatCard, StatusPill
+│       └── pages/
+│           ├── Login.jsx               # JWT authentication page
+│           ├── Dashboard.jsx           # System stats, activity feed, service health
+│           ├── Badges.jsx              # Badge registration and management
+│           ├── Users.jsx               # User creation with role assignment
+│           ├── Devices.jsx             # Workstation registration
+│           ├── Policies.jsx            # Access policy management
+│           └── AuditLogs.jsx           # Color-coded DLP event timeline
 │
-├── firmware/                       # ESP32 firmware
-│   ├── badge/                      # BLE advertiser
-│   └── anchor/                     # Door/zone anchors
+├── firmware/                           # ESP32 firmware
+│   ├── badge/                          # BLE advertiser (wearable badge)
+│   └── anchor/                         # BLE scanner (workstation anchor)
 │
-├── scripts/                        # Utility scripts
-├── tests/                          # Test suite
-├── docs/                           # Research documentation
-└── config/                         # Environment configs
+├── scripts/                            # Utility scripts
+├── tests/                              # Test suite
+├── docs/                               # Research documentation
+└── config/                             # Environment configs
 ```
 
 ---
@@ -165,7 +204,9 @@ SPAZE/
 - Node.js 18+
 - PostgreSQL 15+
 - Redis 7+
-- ESP32 development board (for badge)
+- ESP32 development board × 2 (badge + anchor)
+- `udisksctl` (pre-installed on Ubuntu Desktop)
+- `xclip` (for clipboard guard: `sudo apt install xclip`)
 
 ### 1. Database Setup
 
@@ -206,7 +247,8 @@ npm run dev
 ### 4. Agent
 
 ```bash
-# Ensure badge is powered on and advertising
+# Ensure the ESP32 anchor node is plugged in via USB
+# The agent auto-resets the ESP32 on connect (no manual EN press needed)
 
 python -m agent.main \
   --port /dev/ttyACM0 \
@@ -263,8 +305,17 @@ JWT_SECRET=your-secret-key-change-in-production
 │  ├─ Keys wiped from memory on vault lock                      │
 │  └─ Mount point locked (chmod 000) when vault is sealed       │
 │                                                                │
-│  Layer 6: Audit Trail                                          │
-│  ├─ Every key request, lock/unlock, and denial logged         │
+│  Layer 6: Data Loss Prevention (7 Guards)                     │
+│  ├─ Clipboard clearing (0.5s poll)                            │
+│  ├─ Screenshot blocking (process kill + file deletion)        │
+│  ├─ Browser/app upload blocking (inotify + SIGKILL)           │
+│  ├─ USB storage blocking (unmount + power-off)                │
+│  ├─ Print blocking (spooler kill + CUPS cancel)               │
+│  ├─ File copy detection (exfiltration watcher)                │
+│  └─ Screen lock on badge departure (loginctl)                 │
+│                                                                │
+│  Layer 7: Audit Trail                                          │
+│  ├─ Every key request, lock/unlock, and DLP event logged      │
 │  └─ Tamper-evident audit log in PostgreSQL                    │
 │                                                                │
 └──────────────────────────────────────────────────────────────┘
@@ -275,12 +326,17 @@ JWT_SECRET=your-secret-key-change-in-production
 | Threat | Mitigation |
 |--------|------------|
 | Badge cloning | MAC filtering + server-side policy check |
-| USB exfiltration | Files only exist in RAM while badge is in range |
-| Unattended workstation | Auto-lock within seconds of badge departure |
+| USB exfiltration | USB guard detects, unmounts, and powers off removable drives |
+| Browser upload | inotify detects vault file access → kills browser before upload completes |
+| Screenshot capture | Process-level kill + GNOME Shell screenshot file deletion |
+| Clipboard leak | 0.5s polling clears clipboard contents |
+| Printing vault files | Kill print spoolers, cancel CUPS jobs |
+| Unattended workstation | Auto-lock screen + vault re-encryption within seconds of departure |
 | Shadow directory attack | `chmod 000` + rogue file wipe on re-unlock |
 | Process holding files | Force-kill via `lsof`/`fuser` before sync |
 | Stale key cache | Redis invalidation on every key store/delete |
 | Network failure | Fail-closed — vault stays locked without server |
+| Encrypted file sharing | Only decrypted vault (`~/spaze/`) files are blocked; encrypted blobs (`~/spaze-vault/`) can be freely transferred |
 
 ---
 
@@ -315,13 +371,13 @@ With the server running, visit:
 The admin dashboard provides a web-based management interface:
 
 | Page | Functionality |
-|------|--------------|
+|------|--------------:|
 | **Dashboard** | System stats, recent activity feed, service health |
 | **Badges** | Register, search, activate/revoke BLE badges |
 | **Users** | Create users with role assignment and badge binding |
 | **Devices** | Register workstations with location metadata |
 | **Policies** | Grant/revoke badge→device access with filters |
-| **Audit Logs** | Filterable event timeline with 5s auto-refresh |
+| **Audit Logs** | Filterable event timeline with 5s auto-refresh, DLP event color-coding |
 
 **Theme**: Dark/Light mode toggle with localStorage persistence.
 
@@ -331,7 +387,8 @@ The admin dashboard provides a web-based management interface:
 
 - **Type**: College Major Project (2026)
 - **Domain**: IoT Security, Zero-Trust Architecture, Data Loss Prevention
-- **Architecture**: Microservices (Agent + Server + Dashboard)
+- **Architecture**: Microservices (Agent + Server + Dashboard + IoT Firmware)
+- **OS Support**: Linux (Ubuntu 24.04 LTS — tested)
 
 ## License
 
