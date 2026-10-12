@@ -1,0 +1,17 @@
+{
+  "user": "YOUR_LINUX_USER",
+  "mount_point": "/home/YOUR_LINUX_USER/spaze",
+  "socket": "/run/spaze-guardian.sock",
+  "enforce": true,
+  "strict": true,
+  "lock_screen": true,
+  "heartbeat_timeout_s": 3.0,
+  "log_csv": "/var/log/spaze-guardian.csv",
+  "allowed_executables": [
+    "/snap/libreoffice/*/lib/libreoffice/program/soffice.bin",
+    "/usr/lib/libreoffice/program/soffice.bin",
+    "/usr/bin/evince",
+    "/usr/bin/eog",
+    "/usr/bin/gnome-text-editor"
+  ]
+}

@@ -17,6 +17,7 @@ import hashlib
 import logging
 import os
 import tempfile
+import threading
 from pathlib import Path
 from typing import Optional
 
@@ -29,6 +30,7 @@ from .sandbox_guard import AppSandboxGuard
 from .usb_guard import USBStorageGuard
 from .print_guard import PrintGuard
 from ..key_manager.key_manager import EphemeralKeyManager
+from .. import trace
 
 logger = logging.getLogger("spaze-agent.engine")
 
@@ -82,8 +84,14 @@ class FileEncryptionEngine:
         mount_point: str = os.path.expanduser("~/spaze"),
         server_url: Optional[str] = None,
         badge_mac: Optional[str] = None,
+        security_mode: str = "baseline",
+        device_key: Optional[bytes] = None,
+        ca_cert: Optional[str] = None,
+        guardian=None,
     ):
         self.vault = VaultManager(vault_dir=vault_dir, mount_point=mount_point)
+        # Optional privileged guardian (dead-man wipe + kernel access gate)
+        self.guardian = guardian
         self.server_mode = bool(server_url and badge_mac)
 
         if self.server_mode:
@@ -91,8 +99,11 @@ class FileEncryptionEngine:
             self.key_manager = ServerKeyManager(
                 server_url=server_url,
                 badge_mac=badge_mac,
+                security_mode=security_mode,
+                device_key=device_key,
+                ca_cert=ca_cert,
             )
-            logger.info("Key management: SERVER mode")
+            logger.info(f"Key management: SERVER mode (security={security_mode})")
         else:
             self.key_manager = EphemeralKeyManager(
                 keystore_path=os.path.join(vault_dir, ".keys.json")
@@ -203,14 +214,25 @@ class FileEncryptionEngine:
             logger.debug("Vault already unlocked")
             return 0
 
+        trace.event("unlock_start")
+
         # Server mode: fetch keys from server first
         if self.server_mode:
             if not self.key_manager.fetch_keys():
                 logger.error("Server denied access — vault stays LOCKED")
+                trace.event("unlock_denied")
                 return 0
+            trace.event("keys_received", n=self.key_manager.key_count)
 
         # Prepare the decryption zone
         if not self.vault.mount_tmpfs():
+            return 0
+
+        # With a guardian, no plaintext is written until the kernel gate is on
+        if self.guardian is not None and not self.guardian.unlocked(str(self.vault.mount_point)):
+            logger.error("Vault guardian refused the unlock — vault stays LOCKED")
+            self.vault.unmount_tmpfs()
+            trace.event("unlock_denied", reason="guardian")
             return 0
 
         encrypted_files = self.vault.get_encrypted_files()
@@ -260,6 +282,7 @@ class FileEncryptionEngine:
         logger.info(
             f"Vault unlocked: {decrypted_count}/{len(encrypted_files)} files decrypted to RAM"
         )
+        trace.event("files_decrypted", n=decrypted_count, total=len(encrypted_files))
 
         # Start DLP guards
         self._exfil_watcher.start()
@@ -268,6 +291,7 @@ class FileEncryptionEngine:
         self._sandbox_guard.start()
         self._usb_guard.start()
         self._print_guard.start()
+        trace.event("unlock_done", n=decrypted_count)
 
         return decrypted_count
 
@@ -406,14 +430,13 @@ class FileEncryptionEngine:
         After this, files are ONLY available as .enc ciphertext on disk.
         """
         logger.info("LOCKING VAULT...")
+        trace.event("lock_start")
 
-        # Step 0: Stop all DLP guards
-        self._exfil_watcher.stop()
-        self._clipboard_guard.stop()
-        self._screen_guard.stop()
-        self._sandbox_guard.stop()
-        self._usb_guard.stop()
-        self._print_guard.stop()
+        # Step 0: Tell every DLP guard to stop. Their threads are joined
+        # after the wipe (step 6); waiting for each poll loop here used to
+        # delay the wipe by 3-5 s.
+        for g in self._guards():
+            g._running = False
 
         # Step 1: Kill any processes holding files open (e.g., LibreOffice)
         # This MUST happen BEFORE sync to avoid reading locked files
@@ -427,25 +450,47 @@ class FileEncryptionEngine:
         # Step 2: Re-encrypt any files the user modified + track deletes
         self._sync_modified_files()
 
-        # Step 3: Log vault lock event to server
-        if self.server_mode:
-            self.key_manager.log_event(
-                action="vault_lock",
-                details=f"Vault locked on {self.key_manager.device_hostname}",
-            )
-
-        # Step 4: Wipe decrypted files from RAM + unmount
+        # Step 3: Wipe decrypted files from RAM + unmount
         self.vault.unmount_tmpfs()
+
+        if self.guardian is not None:
+            self.guardian.locked()
 
         # Step 4: Wipe all keys from memory
         self.key_manager.wipe_all_keys()
+        if hasattr(self.key_manager, "end_lease"):
+            self.key_manager.end_lease()
 
         # Step 5: Clean up any leftover temp files in vault
         self._clean_vault_temp_files()
 
         self._is_unlocked = False
         logger.info("Vault LOCKED — all plaintext destroyed, all keys wiped")
+        trace.event("lock_done")
+
+        # Step 6: Shut the guards down, in parallel
+        self._stop_guards()
+
+        # Step 7: Log vault lock event to server (after the wipe, so an
+        # unreachable server can never delay locking)
+        if self.server_mode:
+            self.key_manager.log_event(
+                action="vault_lock",
+                details=f"Vault locked on {self.key_manager.device_hostname}",
+            )
         return True
+
+    def _guards(self):
+        return [self._exfil_watcher, self._clipboard_guard, self._screen_guard,
+                self._sandbox_guard, self._usb_guard, self._print_guard]
+
+    def _stop_guards(self):
+        threads = [threading.Thread(target=g.stop, daemon=True) for g in self._guards()]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join(timeout=10)
+        trace.event("guards_stopped")
 
     def _clean_vault_temp_files(self):
         """Remove any temporary .spaze_tmp_ files left in vault from crashed writes."""
@@ -460,6 +505,7 @@ class FileEncryptionEngine:
     def _on_exfil_alert(self, filename: str, dest_path: str, deleted: bool):
         """Called by ExfiltrationWatcher when a file copy is detected."""
         action = "exfiltration_blocked" if deleted else "exfiltration_detected"
+        trace.event("dlp", guard="exfil", action=action, file=filename, dest=dest_path)
         details = (
             f"File '{filename}' copied to {dest_path} — "
             f"{'DELETED' if deleted else 'DELETION FAILED'}"
@@ -478,6 +524,7 @@ class FileEncryptionEngine:
     def _on_clipboard_alert(self, chars_wiped: int, preview: str):
         """Called by ClipboardGuard when clipboard content is wiped."""
         details = f"Clipboard cleared — {chars_wiped} chars wiped"
+        trace.event("dlp", guard="clipboard", chars=chars_wiped)
         if self.server_mode:
             try:
                 self.key_manager.log_event(
@@ -490,6 +537,7 @@ class FileEncryptionEngine:
     def _on_screen_capture_alert(self, process_name: str, pid: int):
         """Called by ScreenCaptureGuard when a capture tool is killed."""
         details = f"Killed '{process_name}' (PID {pid}) — screenshot/recording blocked"
+        trace.event("dlp", guard="screen", process=process_name, pid=pid)
         if self.server_mode:
             try:
                 self.key_manager.log_event(
@@ -505,6 +553,7 @@ class FileEncryptionEngine:
             f"Killed '{process_name}' (PID {pid}) — "
             f"attempted to access '{filename}' via upload/transfer"
         )
+        trace.event("dlp", guard="sandbox", process=process_name, pid=pid, file=filename)
         if self.server_mode:
             try:
                 self.key_manager.log_event(
@@ -517,6 +566,7 @@ class FileEncryptionEngine:
     def _on_usb_alert(self, device_name: str):
         """Called by USBStorageGuard when a USB device is blocked."""
         details = f"USB storage device /dev/{device_name} blocked and unmounted"
+        trace.event("dlp", guard="usb", device=device_name)
         if self.server_mode:
             try:
                 self.key_manager.log_event(
@@ -529,6 +579,7 @@ class FileEncryptionEngine:
     def _on_print_alert(self, process_name: str, pid: int, filename: str):
         """Called by PrintGuard when a print attempt is blocked."""
         details = f"Print blocked — '{process_name}' tried to print '{filename}'"
+        trace.event("dlp", guard="print", process=process_name, file=filename)
         if self.server_mode:
             try:
                 self.key_manager.log_event(

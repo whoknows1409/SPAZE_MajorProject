@@ -15,6 +15,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from server.db.database import get_db
 from server.db.models import AuditLog, Badge, Device, User, GeofenceEvent, GeofenceEventType
 from server.auth.dependencies import require_role
+from server.security.deps import require_device_signature
 
 router = APIRouter()
 
@@ -62,8 +63,11 @@ class GeofenceEventCreate(BaseModel):
 async def create_audit_log(
     req: AuditLogCreate,
     db: AsyncSession = Depends(get_db),
+    signed_device: Optional[Device] = Depends(require_device_signature),
 ):
-    """Agent reports an audit event."""
+    """Agent reports an audit event (signed in PAKL mode)."""
+    if signed_device is not None and signed_device.hostname != req.device_hostname:
+        raise HTTPException(status_code=403, detail="Device mismatch")
     # Resolve badge
     badge_id = None
     badge_result = await db.execute(

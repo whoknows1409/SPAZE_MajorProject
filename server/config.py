@@ -31,6 +31,22 @@ class Settings(BaseSettings):
     APP_NAME: str = "SPAZE Server"
     APP_VERSION: str = "1.0.0"
 
+    # Security mode: "baseline" (original design) or "pakl"
+    # (presence-attested key leasing: signed agent requests,
+    #  rolling badge tokens, short key leases)
+    SECURITY_MODE: str = "baseline"
+    MASTER_KEY: str = ""            # 64 hex chars; wraps FEKs at rest when set
+    LEASE_TTL_S: float = 10.0       # key lease lifetime
+    TOKEN_SLACK_S: float = 8.0      # tolerated presence-token lag
+    TOKEN_MAX_REUSE_S: float = 5.0  # how long one token counter may be reused
+    SIG_MAX_SKEW_S: float = 30.0    # agent request timestamp tolerance
+
+    # PAKL-CR: server-issued challenges answered by the badge over a BLE
+    # connection and timed + attested by the anchor (relay detection)
+    CR_REQUIRED: bool = False
+    CR_MAX_RTT_US: int = 50000      # calibrate from the legitimate RTT distribution
+    CHALLENGE_TTL_S: float = 10.0
+
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
 
 

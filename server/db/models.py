@@ -8,7 +8,7 @@ from datetime import datetime
 
 from sqlalchemy import (
     Column, Integer, String, Text, DateTime, ForeignKey,
-    Enum, LargeBinary, Boolean,
+    Enum, LargeBinary, Boolean, BigInteger, Float,
 )
 from sqlalchemy.orm import declarative_base, relationship
 
@@ -42,9 +42,15 @@ class Badge(Base):
     id = Column(Integer, primary_key=True, index=True)
     mac_address = Column(String(17), unique=True, nullable=False)
     badge_name = Column(String(100), nullable=True)
-    hmac_secret = Column(String(64), nullable=True)  # Phase 3: HMAC-SHA256 shared secret
+    hmac_secret = Column(String(128), nullable=True)  # badge HMAC key (wrapped under MASTER_KEY in PAKL)
     status = Column(Enum(BadgeStatus), default=BadgeStatus.ACTIVE, nullable=False)
     registered_at = Column(DateTime, default=datetime.utcnow)
+
+    # PAKL anti-replay state for rolling presence tokens
+    tok_last_counter = Column(BigInteger, nullable=True)
+    tok_offset_ref = Column(Float, nullable=True)
+    tok_ref_time = Column(Float, nullable=True)
+    tok_last_counter_time = Column(Float, nullable=True)
 
     user = relationship("User", back_populates="badge", uselist=False)
     access_policies = relationship("AccessPolicy", back_populates="badge")
@@ -78,6 +84,8 @@ class Device(Base):
     location = Column(String(255), nullable=True)
     is_active = Column(Boolean, default=True, nullable=False)
     registered_at = Column(DateTime, default=datetime.utcnow)
+    api_secret = Column(String(128), nullable=True)     # PAKL: agent request key (wrapped)
+    anchor_secret = Column(String(128), nullable=True)  # PAKL-CR: anchor attestation key (wrapped)
 
     access_policies = relationship("AccessPolicy", back_populates="device")
     file_keys = relationship("FileKey", back_populates="device")

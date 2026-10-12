@@ -1,0 +1,12 @@
+[Unit]
+Description=SPAZE Vault Guardian (dead-man wipe + fanotify access gate)
+After=local-fs.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/spaze/guardian/spaze_guardian.py --config /etc/spaze/guardian.json
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

@@ -26,10 +26,13 @@ class SerialReader:
         port: str = "/dev/ttyACM0",
         baud_rate: int = 115200,
         on_badge_detected: Optional[Callable] = None,
+        on_cr_result: Optional[Callable] = None,
     ):
         self.port = port
         self.baud_rate = baud_rate
         self.on_badge_detected = on_badge_detected
+        self.on_cr_result = on_cr_result
+        self._write_lock = threading.Lock()
         self.serial_conn: Optional[serial.Serial] = None
         self.running = False
         self._thread: Optional[threading.Thread] = None
@@ -78,6 +81,12 @@ class SerialReader:
                     logger.debug(f"Non-JSON line: {line}")
                     continue
 
+                # Challenge-response result from the anchor (PAKL-CR)
+                if "cr" in data:
+                    if self.on_cr_result:
+                        self.on_cr_result(data)
+                    continue
+
                 # Validate required fields
                 if "rssi" in data and "badge_mac" in data:
                     if self.on_badge_detected:
@@ -116,6 +125,18 @@ class SerialReader:
             logger.info(f"Reconnected to {self.port}")
         except serial.SerialException:
             logger.warning(f"Reconnect failed, will retry...")
+
+    def write_line(self, line: str) -> bool:
+        """Send one command line to the anchor (e.g. a challenge)."""
+        with self._write_lock:
+            try:
+                if self.serial_conn and self.serial_conn.is_open:
+                    self.serial_conn.write((line.strip() + "\n").encode())
+                    self.serial_conn.flush()
+                    return True
+            except serial.SerialException as e:
+                logger.error(f"Serial write failed: {e}")
+        return False
 
     def stop(self):
         """Stop the reader and close the serial connection."""

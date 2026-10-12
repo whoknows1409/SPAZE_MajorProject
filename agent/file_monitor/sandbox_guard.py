@@ -200,6 +200,9 @@ class AppSandboxGuard:
         Called instantly when a vault file is opened.
         Check if a whitelisted process opened it. If not, kill browsers.
         """
+        if not self._running:
+            return  # stop requested: the agent itself is wiping the vault
+
         # Check if any whitelisted process has this file open right now
         if self._whitelisted_process_has_file(filepath):
             return  # A whitelisted app (LibreOffice, etc.) opened it — OK
