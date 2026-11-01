@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-E5 (manual part) - timestamp USB block-device events from udev, so the time
+E6 (manual part) - timestamp USB block-device events from udev, so the time
 from plugging a USB drive to the guard blocking it can be measured
 (the guard's own 'dlp usb' events are in the agent trace).
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-E8 - Challenge-response round-trip times and emulated relays (agent must be stopped).
+E5 - Challenge-response round-trip times and emulated relays (agent must be stopped).
 
 Sends challenges straight to the anchor over serial, with scanning paused,
 in random order: legitimate ones (delay 0) and ones where the badge is asked

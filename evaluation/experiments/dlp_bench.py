@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-E5 - Scripted DLP guard tests. Run while the vault is UNLOCKED (badge at desk).
+E6 - Scripted DLP guard tests. Run while the vault is UNLOCKED (badge at desk).
 
 CLOSE YOUR WEB BROWSERS FIRST: the sandbox guard kills every browser /
 network tool when an unauthorised process opens a vault file.

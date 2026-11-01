@@ -11,13 +11,14 @@ presence-attested key leasing (PAKL), anchor-attested challenge–response and t
 | E2 walk-away and return | `marker.py`, agent `--trace-csv` | `e2_walk/markers_*.csv`, `trace_baseline.csv`, `trace_pakl.csv` |
 | E3 seated work | `marker.py` | `e2_walk/markers_seated.csv`, `trace_pakl.csv` |
 | E4 attacks, revocation, outage | `attack_bench.py`, `revoke_bench.py`, `outage_bench.py`, `server_admin.py` | `e4_security/` (`*_v2.csv`: after the agent fixes) |
-| E5 exfiltration attempts | `dlp_bench.py`, `fs_watch.py`, `usb_watch.py`, `note.py` | `e5_dlp/`, `manual_results.csv` |
-| E6 overhead | `crypto_bench.py`, `resource_monitor.py` | `e6_overhead/` |
+| E5 relay detection | `cr_bench.py` | `e8_relay/cr_bench.csv` (single exchange), `cr_bench_k3.csv` (fastest of three) |
+| E6 exfiltration attempts | `dlp_bench.py`, `fs_watch.py`, `usb_watch.py`, `note.py` | `e5_dlp/`, `manual_results.csv` |
 | E7 killing the agent | `kill_bench.py` | `e7_guardian/` |
-| E8 relay detection | `cr_bench.py` | `e8_relay/cr_bench.csv` (single exchange), `cr_bench_k3.csv` (fastest of three) |
+| E8 overhead | `crypto_bench.py`, `resource_monitor.py` | `e6_overhead/` |
 | Field logs | `export_audit_logs.py` | `field_logs/audit_logs.csv` |
 
-`data/environment.txt` describes the room and setup. `common.py` holds helpers shared by the
+Experiment numbers follow the paper; the data folder names keep the numbering of the original
+experiment plan. `data/environment.txt` describes the room and setup. `common.py` holds helpers shared by the
 scripts. Placeholders in the data: badge address `AA:BB:CC:DD:EE:FF`, home directory
 `/home/user`, host name `HOST`.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-E5 (manual part) - log when files appear in / disappear from a directory.
+E6 (manual part) - log when files appear in / disappear from a directory.
 Used for screenshots: press PrtSc while the vault is unlocked and see how
 long the screenshot file survives.
 

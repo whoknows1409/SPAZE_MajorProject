@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-E6 - Agent CPU and memory sampling (1 Hz) from /proc.
+E8 - Agent CPU and memory sampling (1 Hz) from /proc.
 
   python evaluation/experiments/resource_monitor.py --label pakl_unlocked --seconds 600
 """

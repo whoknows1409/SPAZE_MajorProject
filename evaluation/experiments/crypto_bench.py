@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-E6 - Micro-benchmarks on the workstation CPU:
+E8 - Micro-benchmarks on the workstation CPU:
   * AES-256-GCM encrypt/decrypt throughput vs file size (agent crypto path)
   * presence-token verification and request-signature cost (server path)
   * FEK wrap/unwrap cost
