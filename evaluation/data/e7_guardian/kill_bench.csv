@@ -1,0 +1,8 @@
+t_kill,config,wipe_ms,files_before,files_after_3s,readable_after_3s,still_mounted,guardian_detail
+1791823754.107314,guardian,82.6,12,0,0,0,reason=agent_lost(pid=20918) killed=1 files=12 ms=75.9
+1791823822.868721,guardian,81.0,11,0,0,0,reason=agent_lost(pid=22323) killed=0 files=11 ms=72.7
+1791823853.098853,guardian,77.0,11,0,0,0,reason=agent_lost(pid=22489) killed=0 files=11 ms=68.8
+1791823883.116833,guardian,73.9,11,0,0,0,reason=agent_lost(pid=22657) killed=0 files=11 ms=64.8
+1791823913.002034,guardian,70.7,11,0,0,0,reason=agent_lost(pid=22796) killed=0 files=11 ms=66.3
+1791825659.662023,no_guardian,,11,11,1,1,
+1791825727.037431,no_guardian,,11,11,1,1,

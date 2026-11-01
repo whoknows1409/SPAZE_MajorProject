@@ -1,0 +1,15 @@
+t,test,outcome,details
+1791649942.090957,config,pakl+cr+guardian,
+1791729931.865999,screenshot,blocked,"5 screenshots, each deleted after 75-990 ms"
+1791730194.176253,usb,blocked,"3 plug-ins, unmounted and powered off within 0.75-1.6 s each time; a second hub device was also blocked"
+1791730621.404116,print,not_blocked,LibreOffice Print to File created a readable PDF in another folder; no guard reacted; LibreOffice kept running
+1791730671.809299,libreoffice_edit,works,"opened, edited, saved and closed normally"
+1791733308.501264,print_after_fix_v1,not_blocked,mount mark did not cover snap LibreOffice's mount namespace; saves went through
+1791733308.523842,print_after_fix,blocked,Print to File PDF quarantined on write (2 attempts)
+1791733308.546174,saveas_after_fix,blocked,Save As temp file quarantined; demo_copy.odt never created
+1791824037.152084,relay_e2e,denied,cr_rtt_exceeded shown in agent log
+1791824359.890922,ota_replay,stayed_locked,"phone broadcast old token, vault stayed locked"
+1791824798.257918,ota_replay_v31,stayed_locked,"anchor v3.1: phone (nRF Connect) broadcast old token 22:28-22:29 with badge unplugged; 2 unlock attempts denied (missing_presence_token, agent drops older counter; CR connect to phone failed). After phone off + badge back: CR connect failed for 16 attempts over 2 min (cr_missing) until anchor reset - phone had taken over the anchor's CR target and left the BLE client stuck. Fixed in anchor v3.2."
+1791825165.237070,ota_replay_badge_present,stayed_unlocked,"anchor v3.2: phone broadcast old token next to anchor, renewals continued"
+1791825165.259432,ota_replay,stayed_locked,"anchor v3.2: badge unplugged, phone broadcast old token 60 s, vault stayed locked"
+1791825165.282006,ota_replay_recovery,unlocked,"anchor v3.2: badge back after replay, unlocked without restart"

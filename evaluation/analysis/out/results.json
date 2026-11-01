@@ -1,0 +1,1880 @@
+{
+  "data_dir": "evaluation/data",
+  "sections": {
+    "field_logs": {
+      "rows": 472,
+      "first": "2026-04-25 12:53:57.220025",
+      "last": "2026-09-08 03:39:37.171032",
+      "unlocks": 78,
+      "locks": 75,
+      "active_days": 13,
+      "session_s": {
+        "n": 76,
+        "mean": 158.55104946052634,
+        "sd": 197.27367934281597,
+        "median": 65.96044850000001,
+        "p25": 32.176496,
+        "p75": 192.89083525,
+        "p95": 602.47198875,
+        "min": 6.707467,
+        "max": 907.289277
+      },
+      "sessions_over_6h_excluded": 2,
+      "keys_to_unlock_ms": {
+        "n": 78,
+        "mean": 66.67741025641025,
+        "sd": 32.93232068657673,
+        "median": 54.3345,
+        "p25": 47.79475,
+        "p75": 87.20125,
+        "p95": 120.32929999999999,
+        "min": 19.181,
+        "max": 228.765
+      },
+      "unlock_rssi_dbm": {
+        "n": 78,
+        "mean": -57.07692307692308,
+        "sd": 11.210812534438245,
+        "median": -60.0,
+        "p25": -66.0,
+        "p75": -49.25,
+        "p95": -38.0,
+        "min": -73.0,
+        "max": -37.0
+      },
+      "dlp_event_counts": {
+        "clipboard_cleared": 103,
+        "upload_blocked": 63,
+        "exfiltration_blocked": 24,
+        "screenshot_blocked": 7,
+        "usb_blocked": 3
+      },
+      "denied_requests": 1,
+      "status": "ok"
+    },
+    "e1_rssi": {
+      "labels": {
+        "d0.5_front": {
+          "n": 54,
+          "mean": -67.48148148148148,
+          "sd": 6.694804351956176,
+          "median": -68.0,
+          "p25": -72.0,
+          "p75": -62.0,
+          "p95": -59.30000000000001,
+          "min": -84.0,
+          "max": -54.0,
+          "sample_interval_s": 1.0123178958892822
+        },
+        "d1.0_back": {
+          "n": 55,
+          "mean": -84.43636363636364,
+          "sd": 2.2994656091235828,
+          "median": -84.0,
+          "p25": -86.0,
+          "p75": -83.0,
+          "p95": -81.0,
+          "min": -91.0,
+          "max": -79.0,
+          "sample_interval_s": 1.0158119201660156
+        },
+        "d1.0_front": {
+          "n": 56,
+          "mean": -80.48214285714286,
+          "sd": 6.1407463906080855,
+          "median": -78.0,
+          "p25": -83.5,
+          "p75": -77.0,
+          "p95": -74.75,
+          "min": -101.0,
+          "max": -71.0,
+          "sample_interval_s": 1.0116658210754395
+        },
+        "d1.5_front": {
+          "n": 56,
+          "mean": -77.125,
+          "sd": 3.80460247594936,
+          "median": -76.0,
+          "p25": -80.0,
+          "p75": -75.0,
+          "p95": -72.0,
+          "min": -87.0,
+          "max": -70.0,
+          "sample_interval_s": 1.0120739936828613
+        },
+        "d2.0_back": {
+          "n": 50,
+          "mean": -87.06,
+          "sd": 2.393954972041719,
+          "median": -87.0,
+          "p25": -89.0,
+          "p75": -85.0,
+          "p95": -84.0,
+          "min": -95.0,
+          "max": -83.0,
+          "sample_interval_s": 1.1479310989379883
+        },
+        "d2.0_front": {
+          "n": 53,
+          "mean": -84.26415094339623,
+          "sd": 5.537115825868701,
+          "median": -84.0,
+          "p25": -88.0,
+          "p75": -81.0,
+          "p95": -75.6,
+          "min": -95.0,
+          "max": -71.0,
+          "sample_interval_s": 1.0125095844268799
+        },
+        "d2.5_front": {
+          "n": 52,
+          "mean": -82.0,
+          "sd": 5.137329740511611,
+          "median": -81.0,
+          "p25": -85.25,
+          "p75": -78.0,
+          "p95": -75.55000000000001,
+          "min": -93.0,
+          "max": -75.0,
+          "sample_interval_s": 1.0895559787750244
+        },
+        "d3.0_back": {
+          "n": 50,
+          "mean": -90.72,
+          "sd": 2.7777541949112305,
+          "median": -91.0,
+          "p25": -93.0,
+          "p75": -89.0,
+          "p95": -86.45,
+          "min": -98.0,
+          "max": -85.0,
+          "sample_interval_s": 1.1081461906433105
+        },
+        "d3.0_front": {
+          "n": 55,
+          "mean": -84.0909090909091,
+          "sd": 2.70303483262745,
+          "median": -83.0,
+          "p25": -86.0,
+          "p75": -82.0,
+          "p95": -80.7,
+          "min": -91.0,
+          "max": -79.0,
+          "sample_interval_s": 1.0574876070022583
+        },
+        "d4.0_front": {
+          "n": 53,
+          "mean": -86.32075471698113,
+          "sd": 2.128321701623681,
+          "median": -87.0,
+          "p25": -88.0,
+          "p75": -85.0,
+          "p95": -83.0,
+          "min": -90.0,
+          "max": -82.0,
+          "sample_interval_s": 1.0530904531478882
+        },
+        "d5.0_front": {
+          "n": 42,
+          "mean": -91.21428571428571,
+          "sd": 3.4254123076429672,
+          "median": -91.0,
+          "p25": -93.75,
+          "p75": -89.0,
+          "p95": -87.0,
+          "min": -99.0,
+          "max": -84.0,
+          "sample_interval_s": 1.253617763519287
+        },
+        "d6.0_front": {
+          "n": 54,
+          "mean": -83.20370370370371,
+          "sd": 3.7836771055223446,
+          "median": -84.0,
+          "p25": -86.0,
+          "p75": -80.25,
+          "p95": -77.0,
+          "min": -90.0,
+          "max": -75.0,
+          "sample_interval_s": 1.09403395652771
+        },
+        "desk_seated": {
+          "n": 54,
+          "mean": -63.74074074074074,
+          "sd": 5.559914432574853,
+          "median": -63.0,
+          "p25": -68.75,
+          "p75": -60.25,
+          "p95": -55.0,
+          "min": -75.0,
+          "max": -54.0,
+          "sample_interval_s": 1.1069350242614746
+        }
+      },
+      "fit": {
+        "rssi_1m": -76.14217117288938,
+        "path_loss_exp": 1.5999857413548142,
+        "resid_sd": 5.609319057121392,
+        "d_at_authorize": 0.8484254071471692,
+        "d_at_deauthorize": 2.3233656510851985
+      },
+      "n_samples": 684,
+      "status": "ok"
+    },
+    "e2_live": {
+      "pakl": {
+        "trials_leave": 10,
+        "trials_approach": 10,
+        "excluded_trials": 0,
+        "missed_lock": 0,
+        "missed_unlock": 0,
+        "leave_decision_s": {
+          "n": 10,
+          "mean": 16.43976984024048,
+          "sd": 1.9123601023103687,
+          "median": 16.260846495628357,
+          "p25": 15.33716595172882,
+          "p75": 17.554075181484222,
+          "p95": 19.281888151168822,
+          "min": 13.7395179271698,
+          "max": 19.919720888137817
+        },
+        "leave_total_s": {
+          "n": 10,
+          "mean": 17.035177779197692,
+          "sd": 1.9149220585325877,
+          "median": 16.85752761363983,
+          "p25": 15.937813878059387,
+          "p75": 18.147103130817413,
+          "p95": 19.880712270736694,
+          "min": 14.328531980514526,
+          "max": 20.524390935897827
+        },
+        "lock_procedure_s": {
+          "n": 10,
+          "mean": 0.594938325881958,
+          "sd": 0.005630202847318604,
+          "median": 0.5947246551513672,
+          "p25": 0.591465413570404,
+          "p75": 0.5992587208747864,
+          "p95": 0.6025179624557495,
+          "min": 0.5862059593200684,
+          "max": 0.604254961013794
+        },
+        "lock_trigger": {
+          "proximity": 10
+        },
+        "approach_decision_s": {
+          "n": 10,
+          "mean": 17.39208915233612,
+          "sd": 1.5268468726145683,
+          "median": 16.89398205280304,
+          "p25": 16.750604331493378,
+          "p75": 17.893624007701874,
+          "p95": 19.8213605761528,
+          "min": 15.771371126174927,
+          "max": 21.12943410873413
+        },
+        "approach_total_s": {
+          "n": 10,
+          "mean": 18.23129012584686,
+          "sd": 1.381882538810198,
+          "median": 17.92858898639679,
+          "p25": 17.687672197818756,
+          "p75": 18.570353090763092,
+          "p95": 20.468034482002256,
+          "min": 16.77663016319275,
+          "max": 21.568212032318115
+        },
+        "keyfetch_ms": {
+          "n": 10,
+          "mean": 780.4146766662598,
+          "sd": 215.50574082079214,
+          "median": 792.538046836853,
+          "p25": 651.4735221862793,
+          "p75": 947.4334120750427,
+          "p95": 1026.7900705337524,
+          "min": 379.9140453338623,
+          "max": 1038.5589599609375
+        },
+        "decrypt_ms": {
+          "n": 10,
+          "mean": 58.4705114364624,
+          "sd": 2.0009584556019044,
+          "median": 57.95145034790039,
+          "p25": 57.534098625183105,
+          "p75": 58.98207426071167,
+          "p95": 61.703383922576904,
+          "min": 55.83810806274414,
+          "max": 63.21883201599121
+        },
+        "cr_ms": {
+          "n": 10,
+          "mean": 773.6872673034668,
+          "sd": 215.49144993874384,
+          "median": 785.759449005127,
+          "p25": 644.8719501495361,
+          "p75": 940.880298614502,
+          "p95": 1019.7226405143738,
+          "min": 373.0320930480957,
+          "max": 1032.202959060669
+        },
+        "request_ms": {
+          "n": 10,
+          "mean": 6.727409362792969,
+          "sd": 0.7681281243741899,
+          "median": 6.550073623657227,
+          "p25": 6.380438804626465,
+          "p75": 6.827950477600098,
+          "p95": 8.012878894805908,
+          "min": 5.482196807861328,
+          "max": 8.07499885559082
+        },
+        "lease_rtt_ms": {
+          "n": 111,
+          "mean": 5.769009009009009,
+          "sd": 0.4793707143081248,
+          "median": 5.73,
+          "p25": 5.404999999999999,
+          "p75": 6.025,
+          "p95": 6.775,
+          "min": 4.77,
+          "max": 7.08
+        },
+        "lease_renewals_ok": 111,
+        "lease_renewals_failed": 0,
+        "lease_cr_retries": 0
+      },
+      "baseline": {
+        "trials_leave": 10,
+        "trials_approach": 10,
+        "excluded_trials": 0,
+        "missed_lock": 0,
+        "missed_unlock": 0,
+        "leave_decision_s": {
+          "n": 10,
+          "mean": 17.318823385238648,
+          "sd": 2.286500343677719,
+          "median": 16.523144960403442,
+          "p25": 15.913623034954071,
+          "p75": 18.707417368888855,
+          "p95": 20.978161430358885,
+          "min": 14.408189058303833,
+          "max": 21.68454885482788
+        },
+        "leave_total_s": {
+          "n": 10,
+          "mean": 17.90852246284485,
+          "sd": 2.2848926201176334,
+          "median": 17.113417387008667,
+          "p25": 16.502450942993164,
+          "p75": 19.296328365802765,
+          "p95": 21.5648069024086,
+          "min": 14.993999004364014,
+          "max": 22.275017976760864
+        },
+        "lock_procedure_s": {
+          "n": 10,
+          "mean": 0.5893208980560303,
+          "sd": 0.006103676199456472,
+          "median": 0.5884000062942505,
+          "p25": 0.585125744342804,
+          "p75": 0.5930327773094177,
+          "p95": 0.5985774755477905,
+          "min": 0.5816991329193115,
+          "max": 0.6017229557037354
+        },
+        "lock_trigger": {
+          "proximity": 10
+        },
+        "approach_decision_s": {
+          "n": 10,
+          "mean": 15.741638994216919,
+          "sd": 2.10003758279939,
+          "median": 15.979605913162231,
+          "p25": 14.136893928050995,
+          "p75": 17.587286055088043,
+          "p95": 18.103162777423858,
+          "min": 12.42379117012024,
+          "max": 18.444458961486816
+        },
+        "approach_total_s": {
+          "n": 10,
+          "mean": 15.806013894081115,
+          "sd": 2.101495196021851,
+          "median": 16.044381499290466,
+          "p25": 14.19775390625,
+          "p75": 17.650572538375854,
+          "p95": 18.170090830326078,
+          "min": 12.48460602760315,
+          "max": 18.51242685317993
+        },
+        "keyfetch_ms": {
+          "n": 10,
+          "mean": 6.315302848815918,
+          "sd": 0.6547944613900222,
+          "median": 6.058931350708008,
+          "p25": 5.886256694793701,
+          "p75": 6.7438483238220215,
+          "p95": 7.283687591552734,
+          "min": 5.379199981689453,
+          "max": 7.421016693115234
+        },
+        "decrypt_ms": {
+          "n": 10,
+          "mean": 57.749271392822266,
+          "sd": 2.628912818587925,
+          "median": 57.349443435668945,
+          "p25": 55.83375692367554,
+          "p75": 60.16862392425537,
+          "p95": 60.99972724914551,
+          "min": 53.7109375,
+          "max": 61.09285354614258
+        },
+        "cr_ms": {
+          "n": 0
+        },
+        "request_ms": {
+          "n": 10,
+          "mean": 6.315302848815918,
+          "sd": 0.6547944613900222,
+          "median": 6.058931350708008,
+          "p25": 5.886256694793701,
+          "p75": 6.7438483238220215,
+          "p95": 7.283687591552734,
+          "min": 5.379199981689453,
+          "max": 7.421016693115234
+        },
+        "lease_rtt_ms": {
+          "n": 0
+        },
+        "lease_renewals_ok": 0,
+        "lease_renewals_failed": 0,
+        "lease_cr_retries": 0
+      },
+      "status": "ok"
+    },
+    "ablation": {
+      "variants": [
+        {
+          "name": "raw threshold",
+          "departure_s": {
+            "n": 20,
+            "mean": 4.019172036647797,
+            "sd": 1.5561604225440122,
+            "median": 3.7075154781341553,
+            "p25": 2.9840664863586426,
+            "p75": 4.960611999034882,
+            "p95": 6.249031114578248,
+            "min": 1.4006619453430176,
+            "max": 7.4119298458099365
+          },
+          "departure_censored_median": 3.7075154781341553,
+          "missed_departures": 0,
+          "pre_locked": 0,
+          "arrival_s": {
+            "n": 19,
+            "mean": 3.735005215594643,
+            "sd": 1.0728317164442391,
+            "median": 3.323647975921631,
+            "p25": 2.9609735012054443,
+            "p75": 4.210090517997742,
+            "p95": 5.500171613693235,
+            "min": 2.5896050930023193,
+            "max": 6.685450077056885
+          },
+          "missed_arrivals": 0,
+          "premature_unlock": 1,
+          "false_unlocks_away": 17,
+          "false_locks": 2,
+          "false_locks_per_h": 2.768388582755072,
+          "seated_h": 0.722441933353742,
+          "variant": {
+            "name": "raw threshold",
+            "use_ema": false,
+            "alpha": 0.3,
+            "use_kalman": false,
+            "q": 1.0,
+            "r": 5.0,
+            "authorize": -78.5,
+            "deauthorize": -78.5,
+            "grace": 1,
+            "timeout": 5.0
+          }
+        },
+        {
+          "name": "EMA only",
+          "departure_s": {
+            "n": 20,
+            "mean": 13.826724040508271,
+            "sd": 2.9169180975536335,
+            "median": 13.267804503440857,
+            "p25": 11.772342264652252,
+            "p75": 15.314851105213165,
+            "p95": 18.871368622779848,
+            "min": 9.97590708732605,
+            "max": 19.682111978530884
+          },
+          "departure_censored_median": 13.267804503440857,
+          "missed_departures": 0,
+          "pre_locked": 0,
+          "arrival_s": {
+            "n": 20,
+            "mean": 14.646717512607575,
+            "sd": 2.348140353300401,
+            "median": 14.091134428977966,
+            "p25": 12.892619669437408,
+            "p75": 16.01002550125122,
+            "p95": 18.472722542285922,
+            "min": 11.30868911743164,
+            "max": 20.25810408592224
+          },
+          "missed_arrivals": 0,
+          "premature_unlock": 0,
+          "false_unlocks_away": 0,
+          "false_locks": 0,
+          "false_locks_per_h": 0.0,
+          "seated_h": 0.722441933353742,
+          "variant": {
+            "name": "EMA only",
+            "use_ema": true,
+            "alpha": 0.3,
+            "use_kalman": false,
+            "q": 1.0,
+            "r": 5.0,
+            "authorize": -75.0,
+            "deauthorize": -82.0,
+            "grace": 5,
+            "timeout": 5.0
+          }
+        },
+        {
+          "name": "Kalman only",
+          "departure_s": {
+            "n": 20,
+            "mean": 12.95824749469757,
+            "sd": 2.6530537099607336,
+            "median": 12.665749073028564,
+            "p25": 10.913655757904053,
+            "p75": 14.919679403305054,
+            "p95": 16.614226925373078,
+            "min": 9.369350910186768,
+            "max": 18.46774983406067
+          },
+          "departure_censored_median": 12.665749073028564,
+          "missed_departures": 0,
+          "pre_locked": 0,
+          "arrival_s": {
+            "n": 20,
+            "mean": 14.405170381069183,
+            "sd": 2.4733847691950843,
+            "median": 13.704802513122559,
+            "p25": 12.60713928937912,
+            "p75": 16.01002550125122,
+            "p95": 18.472722542285922,
+            "min": 11.30868911743164,
+            "max": 20.25810408592224
+          },
+          "missed_arrivals": 0,
+          "premature_unlock": 0,
+          "false_unlocks_away": 0,
+          "false_locks": 0,
+          "false_locks_per_h": 0.0,
+          "seated_h": 0.722441933353742,
+          "variant": {
+            "name": "Kalman only",
+            "use_ema": false,
+            "alpha": 0.3,
+            "use_kalman": true,
+            "q": 1.0,
+            "r": 5.0,
+            "authorize": -75.0,
+            "deauthorize": -82.0,
+            "grace": 5,
+            "timeout": 5.0
+          }
+        },
+        {
+          "name": "no hysteresis",
+          "departure_s": {
+            "n": 20,
+            "mean": 13.90586222410202,
+            "sd": 2.3643654424580562,
+            "median": 13.57756793498993,
+            "p25": 12.051208019256592,
+            "p75": 15.672692656517029,
+            "p95": 18.06823377609253,
+            "min": 10.716378927230835,
+            "max": 19.682111978530884
+          },
+          "departure_censored_median": 13.57756793498993,
+          "missed_departures": 0,
+          "pre_locked": 0,
+          "arrival_s": {
+            "n": 20,
+            "mean": 14.19840247631073,
+            "sd": 1.584885341829165,
+            "median": 13.870592474937439,
+            "p25": 13.41428679227829,
+            "p75": 14.889557421207428,
+            "p95": 16.435323035717012,
+            "min": 11.30868911743164,
+            "max": 18.37875509262085
+          },
+          "missed_arrivals": 0,
+          "premature_unlock": 0,
+          "false_unlocks_away": 0,
+          "false_locks": 0,
+          "false_locks_per_h": 0.0,
+          "seated_h": 0.722441933353742,
+          "variant": {
+            "name": "no hysteresis",
+            "use_ema": true,
+            "alpha": 0.3,
+            "use_kalman": true,
+            "q": 1.0,
+            "r": 5.0,
+            "authorize": -78.5,
+            "deauthorize": -78.5,
+            "grace": 5,
+            "timeout": 5.0
+          }
+        },
+        {
+          "name": "grace 1",
+          "departure_s": {
+            "n": 20,
+            "mean": 11.70926500558853,
+            "sd": 2.1338446769495447,
+            "median": 11.818609476089478,
+            "p25": 10.26979511976242,
+            "p75": 12.775452673435211,
+            "p95": 13.979339730739596,
+            "min": 8.39940094947815,
+            "max": 17.207019805908203
+          },
+          "departure_censored_median": 11.818609476089478,
+          "missed_departures": 0,
+          "pre_locked": 0,
+          "arrival_s": {
+            "n": 20,
+            "mean": 12.024684357643128,
+            "sd": 1.9384310178408415,
+            "median": 12.425814032554626,
+            "p25": 10.996868073940277,
+            "p75": 13.191739797592163,
+            "p95": 14.603744101524354,
+            "min": 8.312480211257935,
+            "max": 16.155132055282593
+          },
+          "missed_arrivals": 0,
+          "premature_unlock": 0,
+          "false_unlocks_away": 0,
+          "false_locks": 0,
+          "false_locks_per_h": 0.0,
+          "seated_h": 0.722441933353742,
+          "variant": {
+            "name": "grace 1",
+            "use_ema": true,
+            "alpha": 0.3,
+            "use_kalman": true,
+            "q": 1.0,
+            "r": 5.0,
+            "authorize": -75.0,
+            "deauthorize": -82.0,
+            "grace": 1,
+            "timeout": 5.0
+          }
+        },
+        {
+          "name": "grace 3",
+          "departure_s": {
+            "n": 20,
+            "mean": 14.307547044754028,
+            "sd": 2.190027936018645,
+            "median": 14.370434045791626,
+            "p25": 13.056621134281158,
+            "p75": 15.031274020671844,
+            "p95": 18.06823377609253,
+            "min": 10.716378927230835,
+            "max": 19.682111978530884
+          },
+          "departure_censored_median": 14.370434045791626,
+          "missed_departures": 0,
+          "pre_locked": 0,
+          "arrival_s": {
+            "n": 20,
+            "mean": 14.438233268260955,
+            "sd": 1.815905516351685,
+            "median": 14.746761441230774,
+            "p25": 13.544420897960663,
+            "p75": 15.35436236858368,
+            "p95": 16.406597697734835,
+            "min": 10.310275077819824,
+            "max": 18.37875509262085
+          },
+          "missed_arrivals": 0,
+          "premature_unlock": 0,
+          "false_unlocks_away": 0,
+          "false_locks": 0,
+          "false_locks_per_h": 0.0,
+          "seated_h": 0.722441933353742,
+          "variant": {
+            "name": "grace 3",
+            "use_ema": true,
+            "alpha": 0.3,
+            "use_kalman": true,
+            "q": 1.0,
+            "r": 5.0,
+            "authorize": -75.0,
+            "deauthorize": -82.0,
+            "grace": 3,
+            "timeout": 5.0
+          }
+        },
+        {
+          "name": "deployed",
+          "departure_s": {
+            "n": 20,
+            "mean": 16.87943801879883,
+            "sd": 2.100506560806949,
+            "median": 16.498706579208374,
+            "p25": 15.57766455411911,
+            "p75": 17.962671875953674,
+            "p95": 20.193359065055848,
+            "min": 13.739593029022217,
+            "max": 21.68464994430542
+          },
+          "departure_censored_median": 16.498706579208374,
+          "missed_departures": 0,
+          "pre_locked": 0,
+          "arrival_s": {
+            "n": 20,
+            "mean": 16.566945874691008,
+            "sd": 1.9774074528865189,
+            "median": 16.841380953788757,
+            "p25": 15.839590311050415,
+            "p75": 17.659188985824585,
+            "p95": 18.578780126571658,
+            "min": 12.423862218856812,
+            "max": 21.129496097564697
+          },
+          "missed_arrivals": 0,
+          "premature_unlock": 0,
+          "false_unlocks_away": 0,
+          "false_locks": 0,
+          "false_locks_per_h": 0.0,
+          "seated_h": 0.722441933353742,
+          "variant": {
+            "name": "deployed",
+            "use_ema": true,
+            "alpha": 0.3,
+            "use_kalman": true,
+            "q": 1.0,
+            "r": 5.0,
+            "authorize": -75.0,
+            "deauthorize": -82.0,
+            "grace": 5,
+            "timeout": 5.0
+          }
+        },
+        {
+          "name": "grace 7",
+          "departure_s": {
+            "n": 20,
+            "mean": 20.08503791093826,
+            "sd": 2.516869489637388,
+            "median": 19.770146012306213,
+            "p25": 17.943364083766937,
+            "p75": 21.85870271921158,
+            "p95": 23.505347800254825,
+            "min": 16.64666509628296,
+            "max": 25.789260864257812
+          },
+          "departure_censored_median": 19.770146012306213,
+          "missed_departures": 0,
+          "pre_locked": 0,
+          "arrival_s": {
+            "n": 20,
+            "mean": 19.608141231536866,
+            "sd": 3.895345577526687,
+            "median": 19.374016046524048,
+            "p25": 18.228448629379272,
+            "p75": 20.230323374271393,
+            "p95": 23.650256621837624,
+            "min": 14.620001077651978,
+            "max": 34.06734085083008
+          },
+          "missed_arrivals": 0,
+          "premature_unlock": 0,
+          "false_unlocks_away": 0,
+          "false_locks": 0,
+          "false_locks_per_h": 0.0,
+          "seated_h": 0.722441933353742,
+          "variant": {
+            "name": "grace 7",
+            "use_ema": true,
+            "alpha": 0.3,
+            "use_kalman": true,
+            "q": 1.0,
+            "r": 5.0,
+            "authorize": -75.0,
+            "deauthorize": -82.0,
+            "grace": 7,
+            "timeout": 5.0
+          }
+        }
+      ],
+      "n_departures": 20,
+      "n_arrivals": 20,
+      "seated_hours": 0.722441933353742,
+      "horizon_s": 60.0,
+      "status": "ok"
+    },
+    "e4_security": {
+      "attacks": {
+        "A1_unsigned_request|baseline": {
+          "KEYS_RELEASED": 20,
+          "denied": 0,
+          "rejected": 0
+        },
+        "A1_unsigned_request|pakl": {
+          "KEYS_RELEASED": 0,
+          "denied": 0,
+          "rejected": 20
+        },
+        "A2a_signed_no_token|baseline": {
+          "KEYS_RELEASED": 20,
+          "denied": 0,
+          "rejected": 0
+        },
+        "A2a_signed_no_token|pakl": {
+          "KEYS_RELEASED": 0,
+          "denied": 20,
+          "rejected": 0
+        },
+        "A2b_signed_forged_token|baseline": {
+          "KEYS_RELEASED": 20,
+          "denied": 0,
+          "rejected": 0
+        },
+        "A2b_signed_forged_token|pakl": {
+          "KEYS_RELEASED": 0,
+          "denied": 20,
+          "rejected": 0
+        },
+        "A2c_signed_replayed_token|baseline": {
+          "KEYS_RELEASED": 20,
+          "denied": 0,
+          "rejected": 0
+        },
+        "A2c_signed_replayed_token|pakl": {
+          "KEYS_RELEASED": 0,
+          "denied": 20,
+          "rejected": 0
+        }
+      },
+      "revocation": {
+        "latency_s": {
+          "n": 10,
+          "mean": 5.28303,
+          "sd": 0.8291793842240786,
+          "median": 5.469799999999999,
+          "p25": 4.4986250000000005,
+          "p75": 6.021075,
+          "p95": 6.284034999999999,
+          "min": 4.2094,
+          "max": 6.31
+        },
+        "reps": 10,
+        "not_locked": 0,
+        "lock_procedure_s": {
+          "n": 10,
+          "mean": 3.5809394121170044,
+          "sd": 0.8114563854448545,
+          "median": 3.4584953784942627,
+          "p25": 2.8871108293533325,
+          "p75": 3.9676966667175293,
+          "p95": 4.774985480308532,
+          "min": 2.855330228805542,
+          "max": 5.216309070587158
+        },
+        "revoke_to_denied_s": {
+          "n": 10,
+          "mean": 1.7018655061721801,
+          "sd": 0.9569852959381261,
+          "median": 1.932133674621582,
+          "p25": 1.073438048362732,
+          "p75": 2.530868172645569,
+          "p95": 2.6613611102104184,
+          "min": 0.2465958595275879,
+          "max": 2.705664873123169
+        }
+      },
+      "revocation_v2": {
+        "latency_s": {
+          "n": 10,
+          "mean": 2.18091,
+          "sd": 1.1421752662257127,
+          "median": 2.0924500000000004,
+          "p25": 1.099,
+          "p75": 3.2093,
+          "p95": 3.4926699999999995,
+          "min": 0.6962999999999999,
+          "max": 3.6841
+        },
+        "reps": 10,
+        "not_locked": 0,
+        "lock_procedure_s": {
+          "n": 10,
+          "mean": 0.5865116834640502,
+          "sd": 0.007441695964422791,
+          "median": 0.5877559185028076,
+          "p25": 0.5805157423019409,
+          "p75": 0.590600848197937,
+          "p95": 0.5967106699943543,
+          "min": 0.5760300159454346,
+          "max": 0.5982608795166016
+        },
+        "revoke_to_denied_s": {
+          "n": 10,
+          "mean": 1.594161581993103,
+          "sd": 1.1405541773937051,
+          "median": 1.5087599754333496,
+          "p25": 0.5083974599838257,
+          "p75": 2.6226754188537598,
+          "p95": 2.8980471253395077,
+          "min": 0.11648297309875488,
+          "max": 3.085581064224243
+        }
+      },
+      "outage": {
+        "latency_s": {
+          "n": 5,
+          "mean": 9.9361,
+          "sd": 1.2367453476767152,
+          "median": 9.8379,
+          "p25": 9.501299999999999,
+          "p75": 10.900799999999998,
+          "p95": 11.207999999999998,
+          "min": 8.1557,
+          "max": 11.284799999999999
+        },
+        "reps": 5,
+        "not_locked": 0,
+        "last_renewal_to_lock_start_s": {
+          "n": 5,
+          "mean": 10.87529296875,
+          "sd": 0.006977919235963415,
+          "median": 10.871652841567993,
+          "p25": 10.871635913848877,
+          "p75": 10.873960018157959,
+          "p95": 10.884906482696532,
+          "min": 10.871572971343994,
+          "max": 10.887643098831177
+        }
+      },
+      "outage_v2": {
+        "latency_s": {
+          "n": 5,
+          "mean": 8.54346,
+          "sd": 0.9497622981567547,
+          "median": 8.7551,
+          "p25": 7.6761,
+          "p75": 8.8626,
+          "p95": 9.66324,
+          "min": 7.5601,
+          "max": 9.8634
+        },
+        "reps": 5,
+        "not_locked": 0,
+        "last_renewal_to_lock_start_s": {
+          "n": 5,
+          "mean": 10.053146028518677,
+          "sd": 0.0006101457194702363,
+          "median": 10.053366899490356,
+          "p25": 10.052703142166138,
+          "p75": 10.053462028503418,
+          "p95": 10.053775596618653,
+          "min": 10.05234408378601,
+          "max": 10.053853988647461
+        }
+      },
+      "manual": [
+        {
+          "t": 1791649942.090957,
+          "test": "config",
+          "outcome": "pakl+cr+guardian",
+          "details": ""
+        },
+        {
+          "t": 1791729931.865999,
+          "test": "screenshot",
+          "outcome": "blocked",
+          "details": "5 screenshots, each deleted after 75-990 ms"
+        },
+        {
+          "t": 1791730194.176253,
+          "test": "usb",
+          "outcome": "blocked",
+          "details": "3 plug-ins, unmounted and powered off within 0.75-1.6 s each time; a second hub device was also blocked"
+        },
+        {
+          "t": 1791730621.404116,
+          "test": "print",
+          "outcome": "not_blocked",
+          "details": "LibreOffice Print to File created a readable PDF in another folder; no guard reacted; LibreOffice kept running"
+        },
+        {
+          "t": 1791730671.809299,
+          "test": "libreoffice_edit",
+          "outcome": "works",
+          "details": "opened, edited, saved and closed normally"
+        },
+        {
+          "t": 1791733308.501264,
+          "test": "print_after_fix_v1",
+          "outcome": "not_blocked",
+          "details": "mount mark did not cover snap LibreOffice's mount namespace; saves went through"
+        },
+        {
+          "t": 1791733308.523842,
+          "test": "print_after_fix",
+          "outcome": "blocked",
+          "details": "Print to File PDF quarantined on write (2 attempts)"
+        },
+        {
+          "t": 1791733308.546174,
+          "test": "saveas_after_fix",
+          "outcome": "blocked",
+          "details": "Save As temp file quarantined; demo_copy.odt never created"
+        },
+        {
+          "t": 1791824037.152084,
+          "test": "relay_e2e",
+          "outcome": "denied",
+          "details": "cr_rtt_exceeded shown in agent log"
+        },
+        {
+          "t": 1791824359.890922,
+          "test": "ota_replay",
+          "outcome": "stayed_locked",
+          "details": "phone broadcast old token, vault stayed locked"
+        },
+        {
+          "t": 1791824798.257918,
+          "test": "ota_replay_v31",
+          "outcome": "stayed_locked",
+          "details": "anchor v3.1: phone (nRF Connect) broadcast old token 22:28-22:29 with badge unplugged; 2 unlock attempts denied (missing_presence_token, agent drops older counter; CR connect to phone failed). After phone off + badge back: CR connect failed for 16 attempts over 2 min (cr_missing) until anchor reset - phone had taken over the anchor's CR target and left the BLE client stuck. Fixed in anchor v3.2."
+        },
+        {
+          "t": 1791825165.23707,
+          "test": "ota_replay_badge_present",
+          "outcome": "stayed_unlocked",
+          "details": "anchor v3.2: phone broadcast old token next to anchor, renewals continued"
+        },
+        {
+          "t": 1791825165.259432,
+          "test": "ota_replay",
+          "outcome": "stayed_locked",
+          "details": "anchor v3.2: badge unplugged, phone broadcast old token 60 s, vault stayed locked"
+        },
+        {
+          "t": 1791825165.282006,
+          "test": "ota_replay_recovery",
+          "outcome": "unlocked",
+          "details": "anchor v3.2: badge back after replay, unlocked without restart"
+        }
+      ],
+      "status": "ok"
+    },
+    "e5_dlp": {
+      "guardian|clipboard": {
+        "config": "guardian",
+        "test": "clipboard",
+        "reps": 10,
+        "blocked": 10,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 10,
+          "mean": 400.84000000000003,
+          "sd": 202.57551239530954,
+          "median": 506.6,
+          "p25": 389.32500000000005,
+          "p75": 511.025,
+          "p95": 530.52,
+          "min": 29.1,
+          "max": 530.7
+        }
+      },
+      "guardian|copy": {
+        "config": "guardian",
+        "test": "copy",
+        "reps": 10,
+        "blocked": 10,
+        "open_denied": 10,
+        "latency_ms": {
+          "n": 10,
+          "mean": 0.0,
+          "sd": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "guardian|copy_hidden": {
+        "config": "guardian",
+        "test": "copy_hidden",
+        "reps": 3,
+        "blocked": 3,
+        "open_denied": 3,
+        "latency_ms": {
+          "n": 3,
+          "mean": 0.0,
+          "sd": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "guardian|copy_rename": {
+        "config": "guardian",
+        "test": "copy_rename",
+        "reps": 3,
+        "blocked": 3,
+        "open_denied": 3,
+        "latency_ms": {
+          "n": 3,
+          "mean": 0.0,
+          "sd": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "guardian|upload_curl": {
+        "config": "guardian",
+        "test": "upload_curl",
+        "reps": 10,
+        "blocked": 10,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 10,
+          "mean": 9.26,
+          "sd": 4.652884410055051,
+          "median": 7.8,
+          "p25": 7.725,
+          "p75": 7.8,
+          "p95": 15.974999999999984,
+          "min": 7.7,
+          "max": 22.5
+        },
+        "bytes_sent": {
+          "n": 10,
+          "mean": 0.0,
+          "sd": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "file_bytes": 1048576.0
+      },
+      "guardian|upload_pipe": {
+        "config": "guardian",
+        "test": "upload_pipe",
+        "reps": 3,
+        "blocked": 3,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 3,
+          "mean": 1019.6,
+          "sd": 1.0392304845413,
+          "median": 1019.0,
+          "p25": 1019.0,
+          "p75": 1019.9,
+          "p95": 1020.62,
+          "min": 1019.0,
+          "max": 1020.8
+        },
+        "bytes_sent": {
+          "n": 3,
+          "mean": 0.0,
+          "sd": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "file_bytes": 1048576.0
+      },
+      "guardian|upload_python": {
+        "config": "guardian",
+        "test": "upload_python",
+        "reps": 3,
+        "blocked": 3,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 3,
+          "mean": 64.39999999999999,
+          "sd": 0.3464101615137722,
+          "median": 64.2,
+          "p25": 64.2,
+          "p75": 64.5,
+          "p95": 64.74,
+          "min": 64.2,
+          "max": 64.8
+        },
+        "bytes_sent": {
+          "n": 3,
+          "mean": 0.0,
+          "sd": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "file_bytes": 1048576.0
+      },
+      "userspace|clipboard": {
+        "config": "userspace",
+        "test": "clipboard",
+        "reps": 10,
+        "blocked": 10,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 10,
+          "mean": 384.89,
+          "sd": 213.33310130195713,
+          "median": 508.04999999999995,
+          "p25": 268.375,
+          "p75": 510.8,
+          "p95": 529.4499999999999,
+          "min": 29.1,
+          "max": 530.8
+        }
+      },
+      "userspace|copy": {
+        "config": "userspace",
+        "test": "copy",
+        "reps": 10,
+        "blocked": 10,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 10,
+          "mean": 980.8500000000001,
+          "sd": 241.5436157991623,
+          "median": 1058.25,
+          "p25": 1044.375,
+          "p75": 1063.55,
+          "p95": 1079.785,
+          "min": 295.1,
+          "max": 1088.2
+        }
+      },
+      "userspace|copy_hidden": {
+        "config": "userspace",
+        "test": "copy_hidden",
+        "reps": 3,
+        "blocked": 0,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 0
+        }
+      },
+      "userspace|copy_rename": {
+        "config": "userspace",
+        "test": "copy_rename",
+        "reps": 3,
+        "blocked": 0,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 0
+        }
+      },
+      "userspace|upload_curl": {
+        "config": "userspace",
+        "test": "upload_curl",
+        "reps": 10,
+        "blocked": 10,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 10,
+          "mean": 42.01,
+          "sd": 15.320969653096736,
+          "median": 32.2,
+          "p25": 32.125,
+          "p75": 56.8,
+          "p95": 64.255,
+          "min": 31.7,
+          "max": 64.3
+        },
+        "bytes_sent": {
+          "n": 10,
+          "mean": 65536.0,
+          "sd": 0.0,
+          "median": 65536.0,
+          "p25": 65536.0,
+          "p75": 65536.0,
+          "p95": 65536.0,
+          "min": 65536.0,
+          "max": 65536.0
+        },
+        "file_bytes": 1048576.0
+      },
+      "userspace|upload_pipe": {
+        "config": "userspace",
+        "test": "upload_pipe",
+        "reps": 3,
+        "blocked": 0,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 0
+        },
+        "bytes_sent": {
+          "n": 3,
+          "mean": 1048576.0,
+          "sd": 0.0,
+          "median": 1048576.0,
+          "p25": 1048576.0,
+          "p75": 1048576.0,
+          "p95": 1048576.0,
+          "min": 1048576.0,
+          "max": 1048576.0
+        },
+        "file_bytes": 1048576.0
+      },
+      "userspace|upload_python": {
+        "config": "userspace",
+        "test": "upload_python",
+        "reps": 3,
+        "blocked": 0,
+        "open_denied": 0,
+        "latency_ms": {
+          "n": 0
+        },
+        "bytes_sent": {
+          "n": 3,
+          "mean": 1048576.0,
+          "sd": 0.0,
+          "median": 1048576.0,
+          "p25": 1048576.0,
+          "p75": 1048576.0,
+          "p95": 1048576.0,
+          "min": 1048576.0,
+          "max": 1048576.0
+        },
+        "file_bytes": 1048576.0
+      },
+      "screenshot_file_lifetime_ms": {
+        "n": 5,
+        "mean": 617.1200000000001,
+        "sd": 385.49660439490253,
+        "median": 646.1,
+        "p25": 413.1,
+        "p75": 962.2,
+        "p95": 984.04,
+        "min": 74.7,
+        "max": 989.5
+      },
+      "status": "ok"
+    },
+    "e6_overhead": {
+      "crypto": [
+        {
+          "op": "aesgcm_encrypt",
+          "size_bytes": 4096.0,
+          "reps": 200,
+          "median_us": 1.6,
+          "p95_us": 3.1,
+          "throughput_MBps": 2523.7,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "aesgcm_decrypt",
+          "size_bytes": 4096.0,
+          "reps": 200,
+          "median_us": 1.6,
+          "p95_us": 1.7,
+          "throughput_MBps": 2587.5,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "aesgcm_encrypt",
+          "size_bytes": 65536.0,
+          "reps": 200,
+          "median_us": 14.7,
+          "p95_us": 15.3,
+          "throughput_MBps": 4468.0,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "aesgcm_decrypt",
+          "size_bytes": 65536.0,
+          "reps": 200,
+          "median_us": 14.7,
+          "p95_us": 14.8,
+          "throughput_MBps": 4461.9,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "aesgcm_encrypt",
+          "size_bytes": 1048576.0,
+          "reps": 200,
+          "median_us": 245.7,
+          "p95_us": 299.9,
+          "throughput_MBps": 4267.0,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "aesgcm_decrypt",
+          "size_bytes": 1048576.0,
+          "reps": 200,
+          "median_us": 238.3,
+          "p95_us": 252.8,
+          "throughput_MBps": 4401.2,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "aesgcm_encrypt",
+          "size_bytes": 10485760.0,
+          "reps": 20,
+          "median_us": 2359.4,
+          "p95_us": 6841.2,
+          "throughput_MBps": 4444.2,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "aesgcm_decrypt",
+          "size_bytes": 10485760.0,
+          "reps": 20,
+          "median_us": 2373.6,
+          "p95_us": 2679.3,
+          "throughput_MBps": 4417.6,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "aesgcm_encrypt",
+          "size_bytes": 104857600.0,
+          "reps": 5,
+          "median_us": 82805.4,
+          "p95_us": 85694.3,
+          "throughput_MBps": 1266.3,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "aesgcm_decrypt",
+          "size_bytes": 104857600.0,
+          "reps": 5,
+          "median_us": 79461.8,
+          "p95_us": 79686.7,
+          "throughput_MBps": 1319.6,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "token_parse_verify",
+          "size_bytes": NaN,
+          "reps": 20000,
+          "median_us": 4.96,
+          "p95_us": 5.19,
+          "throughput_MBps": NaN,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "token_verify_tag",
+          "size_bytes": NaN,
+          "reps": 20000,
+          "median_us": 1.75,
+          "p95_us": 1.83,
+          "throughput_MBps": NaN,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "freshness_check",
+          "size_bytes": NaN,
+          "reps": 20000,
+          "median_us": 0.63,
+          "p95_us": 0.68,
+          "throughput_MBps": NaN,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "request_sig_verify",
+          "size_bytes": NaN,
+          "reps": 20000,
+          "median_us": 2.66,
+          "p95_us": 2.75,
+          "throughput_MBps": NaN,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "fek_wrap",
+          "size_bytes": NaN,
+          "reps": 20000,
+          "median_us": 3.15,
+          "p95_us": 3.28,
+          "throughput_MBps": NaN,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        },
+        {
+          "op": "fek_unwrap",
+          "size_bytes": NaN,
+          "reps": 20000,
+          "median_us": 2.32,
+          "p95_us": 2.44,
+          "throughput_MBps": NaN,
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics"
+        }
+      ],
+      "resources": {
+        "pakl_locked": {
+          "cpu_pct": {
+            "n": 300,
+            "mean": 0.13,
+            "sd": 0.3466514446533687,
+            "median": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 1.0,
+            "min": 0.0,
+            "max": 2.0
+          },
+          "rss_mb": {
+            "n": 300,
+            "mean": 55.8,
+            "sd": 0.0,
+            "median": 55.8,
+            "p25": 55.8,
+            "p75": 55.8,
+            "p95": 55.8,
+            "min": 55.8,
+            "max": 55.8
+          }
+        },
+        "pakl_unlocked": {
+          "cpu_pct": {
+            "n": 600,
+            "mean": 5.89435,
+            "sd": 5.13805273302174,
+            "median": 5.0,
+            "p25": 5.0,
+            "p75": 6.0,
+            "p95": 7.99,
+            "min": 2.0,
+            "max": 95.85
+          },
+          "rss_mb": {
+            "n": 600,
+            "mean": 55.556333333333335,
+            "sd": 0.049638649741263634,
+            "median": 55.6,
+            "p25": 55.5,
+            "p75": 55.6,
+            "p95": 55.6,
+            "min": 55.5,
+            "max": 55.6
+          }
+        }
+      },
+      "status": "ok"
+    },
+    "e7_guardian": {
+      "guardian": {
+        "reps": 5,
+        "wipe_ms": {
+          "n": 5,
+          "mean": 77.03999999999999,
+          "sd": 4.915587452177,
+          "median": 77.0,
+          "p25": 73.9,
+          "p75": 81.0,
+          "p95": 82.28,
+          "min": 70.7,
+          "max": 82.6
+        },
+        "readable_after_3s": 0,
+        "still_mounted": 0
+      },
+      "no_guardian": {
+        "reps": 2,
+        "wipe_ms": {
+          "n": 0
+        },
+        "readable_after_3s": 2,
+        "still_mounted": 2
+      },
+      "open_denied_events": 65,
+      "denied_executables": [
+        "/usr/bin/cat",
+        "/usr/bin/curl",
+        "/usr/bin/nautilus",
+        "/usr/bin/python3.12"
+      ],
+      "status": "ok"
+    },
+    "e8_relay": {
+      "runs": {
+        "1": {
+          "sent": 800,
+          "answered": 800,
+          "invalid": 0,
+          "legit_rtt_ms": {
+            "n": 300,
+            "mean": 16.437549999999998,
+            "sd": 2.6279488614178597,
+            "median": 17.445,
+            "p25": 12.471499999999999,
+            "p75": 17.958,
+            "p95": 17.974,
+            "min": 11.924,
+            "max": 25.459
+          },
+          "legit_single_exchange_ms": {
+            "n": 300,
+            "mean": 16.437549999999998,
+            "sd": 2.6279488614178597,
+            "median": 17.445,
+            "p25": 12.471499999999999,
+            "p75": 17.958,
+            "p95": 17.974,
+            "min": 11.924,
+            "max": 25.459
+          },
+          "p_single_above_bound": 0.0,
+          "bound_ms": 26.0,
+          "per_delay": {
+            "0": {
+              "n": 300,
+              "rtt_ms": {
+                "n": 300,
+                "mean": 16.437549999999998,
+                "sd": 2.6279488614178597,
+                "median": 17.445,
+                "p25": 12.471499999999999,
+                "p75": 17.958,
+                "p95": 17.974,
+                "min": 11.924,
+                "max": 25.459
+              },
+              "rejected": 0.0
+            },
+            "2": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 16.347899999999996,
+                "sd": 2.918213399401155,
+                "median": 17.444,
+                "p25": 12.466,
+                "p75": 17.95625,
+                "p95": 17.973,
+                "min": 11.948,
+                "max": 25.456
+              },
+              "rejected": 0.0
+            },
+            "5": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 23.757840000000005,
+                "sd": 2.8432870532309447,
+                "median": 24.9495,
+                "p25": 19.966749999999998,
+                "p75": 25.453,
+                "p95": 25.45705,
+                "min": 19.418,
+                "max": 32.972
+              },
+              "rejected": 0.02
+            },
+            "10": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 24.512320000000003,
+                "sd": 2.893178682083885,
+                "median": 24.923,
+                "p25": 24.918,
+                "p75": 25.43,
+                "p95": 27.68254999999999,
+                "min": 19.389,
+                "max": 32.945
+              },
+              "rejected": 0.06
+            },
+            "20": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 38.51171999999999,
+                "sd": 2.5544196837653907,
+                "median": 39.920500000000004,
+                "p25": 34.946,
+                "p75": 40.428,
+                "p95": 40.433,
+                "min": 34.404,
+                "max": 40.442
+              },
+              "rejected": 1.0
+            },
+            "50": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 68.69299,
+                "sd": 2.4808126214055863,
+                "median": 69.92099999999999,
+                "p25": 64.94775,
+                "p75": 70.42975,
+                "p95": 70.433,
+                "min": 64.396,
+                "max": 70.437
+              },
+              "rejected": 1.0
+            }
+          }
+        },
+        "3": {
+          "sent": 800,
+          "answered": 800,
+          "invalid": 0,
+          "legit_rtt_ms": {
+            "n": 300,
+            "mean": 14.403103333333332,
+            "sd": 0.26114281768088105,
+            "median": 14.651,
+            "p25": 14.164,
+            "p75": 14.652,
+            "p95": 14.654,
+            "min": 13.17,
+            "max": 14.677
+          },
+          "legit_single_exchange_ms": {
+            "n": 900,
+            "mean": 14.767837777777778,
+            "sd": 0.7204217204533409,
+            "median": 14.674,
+            "p25": 14.187,
+            "p75": 15.134,
+            "p95": 15.607,
+            "min": 13.17,
+            "max": 23.115
+          },
+          "p_single_above_bound": 0.005555555555555556,
+          "bound_ms": 16.0,
+          "per_delay": {
+            "0": {
+              "n": 300,
+              "rtt_ms": {
+                "n": 300,
+                "mean": 14.403103333333332,
+                "sd": 0.26114281768088105,
+                "median": 14.651,
+                "p25": 14.164,
+                "p75": 14.652,
+                "p95": 14.654,
+                "min": 13.17,
+                "max": 14.677
+              },
+              "rejected": 0.0
+            },
+            "2": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 14.438449999999998,
+                "sd": 0.25352386674650784,
+                "median": 14.6525,
+                "p25": 14.166,
+                "p75": 14.653,
+                "p95": 14.654,
+                "min": 13.66,
+                "max": 14.663
+              },
+              "rejected": 0.0
+            },
+            "5": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 21.678889999999996,
+                "sd": 0.07129833395137945,
+                "median": 21.679,
+                "p25": 21.656,
+                "p75": 21.68,
+                "p95": 21.681,
+                "min": 21.655,
+                "max": 22.181
+              },
+              "rejected": 1.0
+            },
+            "10": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 21.825799999999994,
+                "sd": 0.5675136450991621,
+                "median": 21.679,
+                "p25": 21.656,
+                "p75": 21.68025,
+                "p95": 23.088,
+                "min": 19.141,
+                "max": 23.097
+              },
+              "rejected": 1.0
+            },
+            "20": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 36.63067999999999,
+                "sd": 0.19741490328849043,
+                "median": 36.658,
+                "p25": 36.65575,
+                "p75": 36.68,
+                "p95": 36.681,
+                "min": 35.639,
+                "max": 37.181
+              },
+              "rejected": 1.0
+            },
+            "50": {
+              "n": 100,
+              "rtt_ms": {
+                "n": 100,
+                "mean": 66.63839000000002,
+                "sd": 0.161689245221202,
+                "median": 66.6785,
+                "p25": 66.656,
+                "p75": 66.68,
+                "p95": 66.681,
+                "min": 65.64,
+                "max": 66.682
+              },
+              "rejected": 1.0
+            }
+          }
+        }
+      },
+      "deployed_repeats": 3,
+      "bound_ms": 16.0,
+      "status": "ok (bound from fastest of 3)"
+    }
+  }
+}

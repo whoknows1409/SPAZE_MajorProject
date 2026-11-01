@@ -57,6 +57,7 @@ build/
 # Markdown (keep only root README)
 *.md
 !/README.md
+!/evaluation/README.md
 docs/diagrams/
 docs/ppt/
 docs/Major Project- ESE - Template -Report

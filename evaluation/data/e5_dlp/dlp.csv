@@ -1,0 +1,85 @@
+t0,config,test,rep,outcome,latency_ms,detail,bytes
+1791729576.970535,guardian,clipboard,1,blocked,351.1,,
+1791729578.321830,guardian,clipboard,2,blocked,507.1,,
+1791729579.829119,guardian,clipboard,3,blocked,29.1,,
+1791729580.858399,guardian,clipboard,4,blocked,504.0,,
+1791729582.362577,guardian,clipboard,5,blocked,29.3,,
+1791729583.392004,guardian,clipboard,6,blocked,509.0,,
+1791729584.901174,guardian,clipboard,7,blocked,530.7,,
+1791729586.431999,guardian,clipboard,8,blocked,506.1,,
+1791729587.938249,guardian,clipboard,9,blocked,530.3,,
+1791729589.468660,guardian,clipboard,10,blocked,511.7,,
+1791729590.980595,guardian,copy,1,blocked,0.0,open_denied,
+1791729591.480892,guardian,copy,2,blocked,0.0,open_denied,
+1791729591.981283,guardian,copy,3,blocked,0.0,open_denied,
+1791729592.482029,guardian,copy,4,blocked,0.0,open_denied,
+1791729592.982861,guardian,copy,5,blocked,0.0,open_denied,
+1791729593.483665,guardian,copy,6,blocked,0.0,open_denied,
+1791729593.984538,guardian,copy,7,blocked,0.0,open_denied,
+1791729594.485066,guardian,copy,8,blocked,0.0,open_denied,
+1791729594.985491,guardian,copy,9,blocked,0.0,open_denied,
+1791729595.486221,guardian,copy,10,blocked,0.0,open_denied,
+1791729595.987068,guardian,copy_rename,1,blocked,0.0,open_denied,
+1791729596.487859,guardian,copy_rename,2,blocked,0.0,open_denied,
+1791729596.988743,guardian,copy_rename,3,blocked,0.0,open_denied,
+1791729597.489577,guardian,copy_hidden,1,blocked,0.0,open_denied,
+1791729597.990329,guardian,copy_hidden,2,blocked,0.0,open_denied,
+1791729598.491209,guardian,copy_hidden,3,blocked,0.0,open_denied,
+1791729598.992029,guardian,upload_curl,1,blocked,22.5,rc=26 killed=False,0/1048576
+1791729600.814857,guardian,upload_curl,2,blocked,7.8,rc=26 killed=False,0/1048576
+1791729602.622978,guardian,upload_curl,3,blocked,7.8,rc=26 killed=False,0/1048576
+1791729604.431168,guardian,upload_curl,4,blocked,7.7,rc=26 killed=False,0/1048576
+1791729606.239541,guardian,upload_curl,5,blocked,7.8,rc=26 killed=False,0/1048576
+1791729608.047900,guardian,upload_curl,6,blocked,7.8,rc=26 killed=False,0/1048576
+1791729609.856532,guardian,upload_curl,7,blocked,8.0,rc=26 killed=False,0/1048576
+1791729611.664872,guardian,upload_curl,8,blocked,7.8,rc=26 killed=False,0/1048576
+1791729613.473275,guardian,upload_curl,9,blocked,7.7,rc=26 killed=False,0/1048576
+1791729615.281474,guardian,upload_curl,10,blocked,7.7,rc=26 killed=False,0/1048576
+1791729617.090003,guardian,upload_python,1,blocked,64.8,rc=1 killed=False,0/1048576
+1791729618.955346,guardian,upload_python,2,blocked,64.2,rc=1 killed=False,0/1048576
+1791729620.820483,guardian,upload_python,3,blocked,64.2,rc=1 killed=False,0/1048576
+1791729622.685653,guardian,upload_pipe,1,blocked,1020.8,rc=0 killed=False,0/1048576
+1791729625.507083,guardian,upload_pipe,2,blocked,1019.0,rc=0 killed=False,0/1048576
+1791729628.326778,guardian,upload_pipe,3,blocked,1019.0,rc=0 killed=False,0/1048576
+1791825529.042078,userspace,clipboard,1,blocked,189.2,,
+1791825530.231447,userspace,clipboard,2,blocked,527.8,,
+1791825531.759460,userspace,clipboard,3,blocked,505.9,,
+1791825533.265540,userspace,clipboard,4,blocked,509.2,,
+1791825534.774893,userspace,clipboard,5,blocked,29.1,,
+1791825535.804098,userspace,clipboard,6,blocked,511.2,,
+1791825537.315426,userspace,clipboard,7,blocked,530.8,,
+1791825538.846442,userspace,clipboard,8,blocked,509.6,,
+1791825540.356225,userspace,clipboard,9,blocked,506.9,,
+1791825541.863528,userspace,clipboard,10,blocked,29.2,,
+1791825542.892965,userspace,copy,1,blocked,295.1,/home/user/Documents/test_1M.bin,
+1791825544.188584,userspace,copy,2,blocked,1058.4,/home/user/Documents/test_1M.bin,
+1791825546.247411,userspace,copy,3,blocked,1059.8,/home/user/Documents/test_1M.bin,
+1791825548.307647,userspace,copy,4,blocked,1064.8,/home/user/Documents/test_1M.bin,
+1791825550.372785,userspace,copy,5,blocked,1043.3,/home/user/Documents/test_1M.bin,
+1791825552.416326,userspace,copy,6,blocked,1023.7,/home/user/Documents/test_1M.bin,
+1791825554.440205,userspace,copy,7,blocked,1047.6,/home/user/Documents/test_1M.bin,
+1791825556.488050,userspace,copy,8,blocked,1069.5,/home/user/Documents/test_1M.bin,
+1791825558.557696,userspace,copy,9,blocked,1058.1,/home/user/Documents/test_1M.bin,
+1791825560.616045,userspace,copy,10,blocked,1088.2,/home/user/Documents/test_1M.bin,
+1791825562.704997,userspace,copy_rename,1,not_blocked,,/home/user/Documents/renamed_38a54333.bin,
+1791825569.714901,userspace,copy_rename,2,not_blocked,,/home/user/Documents/renamed_18ed06e7.bin,
+1791825576.721881,userspace,copy_rename,3,not_blocked,,/home/user/Documents/renamed_dec30692.bin,
+1791825583.731174,userspace,copy_hidden,1,not_blocked,,/home/user/.cache/renamed_7e11b70a.bin,
+1791825590.736765,userspace,copy_hidden,2,not_blocked,,/home/user/.cache/renamed_c9839158.bin,
+1791825597.742813,userspace,copy_hidden,3,not_blocked,,/home/user/.cache/renamed_af120e16.bin,
+1791825604.748776,userspace,upload_curl,1,blocked,35.2,rc=-9 killed=True,65536/1048576
+1791825606.584486,userspace,upload_curl,2,blocked,32.2,rc=-9 killed=True,65536/1048576
+1791825608.417297,userspace,upload_curl,3,blocked,64.0,rc=-9 killed=True,65536/1048576
+1791825610.281820,userspace,upload_curl,4,blocked,64.2,rc=-9 killed=True,65536/1048576
+1791825612.146686,userspace,upload_curl,5,blocked,32.1,rc=-9 killed=True,65536/1048576
+1791825613.979140,userspace,upload_curl,6,blocked,32.0,rc=-9 killed=True,65536/1048576
+1791825615.812031,userspace,upload_curl,7,blocked,64.3,rc=-9 killed=True,65536/1048576
+1791825617.677186,userspace,upload_curl,8,blocked,32.2,rc=-9 killed=True,65536/1048576
+1791825619.509642,userspace,upload_curl,9,blocked,31.7,rc=-9 killed=True,65536/1048576
+1791825621.342056,userspace,upload_curl,10,blocked,32.2,rc=-9 killed=True,65536/1048576
+1791825623.175051,userspace,upload_python,1,not_blocked,64.3,rc=0 killed=False,1048576/1048576
+1791825625.039868,userspace,upload_python,2,not_blocked,64.0,rc=0 killed=False,1048576/1048576
+1791825626.904752,userspace,upload_python,3,not_blocked,64.2,rc=0 killed=False,1048576/1048576
+1791825628.769887,userspace,upload_pipe,1,not_blocked,1020.5,rc=0 killed=False,1048576/1048576
+1791825631.590612,userspace,upload_pipe,2,not_blocked,1017.8,rc=0 killed=False,1048576/1048576
+1791825634.408937,userspace,upload_pipe,3,not_blocked,1020.2,rc=0 killed=False,1048576/1048576

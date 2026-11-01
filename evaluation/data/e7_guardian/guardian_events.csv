@@ -1,0 +1,541 @@
+t,event,detail
+1791647971.355561,guardian_start,mount=/home/user/spaze enforce=True strict=True
+1791649015.262228,agent_connected,pid=37477
+1791649165.185360,agent_disconnected,pid=37477
+1791649396.146045,agent_connected,pid=38102
+1791649404.921969,enforce_on,agent_pid=38102
+1791649404.922058,session_unlocked,pid=38102
+1791649524.772675,open_denied,pid=38617 exe=/usr/bin/cat path=/home/user/spaze/test_1M.bin
+1791649647.729699,enforce_off,"{""allow"": 30, ""deny"": 1}"
+1791649647.729791,session_locked,pid=38102
+1791649647.760587,agent_disconnected,pid=38102
+1791649861.510681,agent_connected,pid=40417
+1791649870.211643,enforce_on,agent_pid=40417
+1791649870.211742,session_unlocked,pid=40417
+1791649881.576418,open_denied,pid=40476 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791649881.576670,open_denied,pid=40476 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791649881.576850,open_denied,pid=40476 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791649889.078072,open_denied,pid=40476 exe=/usr/bin/nautilus path=/home/user/spaze/.~lock.demo.odt#
+1791649980.686436,enforce_off,"{""allow"": 60, ""deny"": 11}"
+1791649980.686528,session_locked,pid=40417
+1791649980.714711,agent_disconnected,pid=40417
+1791699588.225096,guardian_start,mount=/home/user/spaze enforce=True strict=True
+1791746840.746984,guardian_start,mount=/home/user/spaze enforce=True strict=True
+1791728091.653941,agent_connected,pid=12284
+1791728100.598112,enforce_on,agent_pid=12284
+1791728100.598212,session_unlocked,pid=12284
+1791728143.703660,enforce_off,"{""allow"": 30, ""deny"": 0}"
+1791728143.703769,session_locked,pid=12284
+1791728148.816419,enforce_on,agent_pid=12284
+1791728148.816521,session_unlocked,pid=12284
+1791728588.355576,enforce_off,"{""allow"": 60, ""deny"": 0}"
+1791728588.355670,session_locked,pid=12284
+1791728594.830587,enforce_on,agent_pid=12284
+1791728594.830681,session_unlocked,pid=12284
+1791728599.512741,enforce_off,"{""allow"": 90, ""deny"": 0}"
+1791728599.512822,session_locked,pid=12284
+1791728604.904845,enforce_on,agent_pid=12284
+1791728604.904926,session_unlocked,pid=12284
+1791729065.663661,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791729065.663904,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791729065.664069,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791729219.642500,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/.~lock.demo.odt#
+1791729226.534847,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/.~lock.demo.odt#
+1791729590.980763,open_denied,pid=18687 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729591.981613,open_denied,pid=18687 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729592.983197,open_denied,pid=18687 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729593.984873,open_denied,pid=18687 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729594.985747,open_denied,pid=18687 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729595.987338,open_denied,pid=18687 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729596.989092,open_denied,pid=18687 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729597.990705,open_denied,pid=18687 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729599.013729,open_denied,pid=18978 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729600.820114,open_denied,pid=18985 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729602.627901,open_denied,pid=18992 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729604.436224,open_denied,pid=18997 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729606.244663,open_denied,pid=19003 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729608.052798,open_denied,pid=19008 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729609.862459,open_denied,pid=19014 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729611.670188,open_denied,pid=19020 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729613.478621,open_denied,pid=19024 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729615.286414,open_denied,pid=19030 exe=/usr/bin/curl path=/home/user/spaze/test_1M.bin
+1791729617.124338,open_denied,pid=19035 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729618.989161,open_denied,pid=19041 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729620.855595,open_denied,pid=19047 exe=/usr/bin/python3.12 path=/home/user/spaze/test_1M.bin
+1791729622.687987,open_denied,pid=19053 exe=/usr/bin/cat path=/home/user/spaze/test_1M.bin
+1791729625.508957,open_denied,pid=19064 exe=/usr/bin/cat path=/home/user/spaze/test_1M.bin
+1791729628.329062,open_denied,pid=19084 exe=/usr/bin/cat path=/home/user/spaze/test_1M.bin
+1791729782.261106,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/.~lock.demo.odt#
+1791730067.566575,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791730067.571345,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791730067.571510,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791730067.571763,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/.~lock.demo.odt#
+1791731569.544346,enforce_off,"{""allow"": 151, ""deny"": 58}"
+1791731569.544433,session_locked,pid=12284
+1791731904.310904,enforce_on,agent_pid=12284
+1791731904.310985,session_unlocked,pid=12284
+1791732031.833654,enforce_off,"{""allow"": 184, ""deny"": 58}"
+1791732031.833743,session_locked,pid=12284
+1791732032.371703,agent_disconnected,pid=12284
+1791732047.959266,guardian_start,mount=/home/user/spaze enforce=True strict=True
+1791732073.508740,agent_connected,pid=30149
+1791732082.251731,enforce_on,agent_pid=30149
+1791732082.251952,writedown_on,home=/home/user
+1791732082.251998,session_unlocked,pid=30149
+1791732134.097476,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791732134.097731,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791732134.097918,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791732145.139868,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/.~lock.demo.odt#
+1791732869.943067,enforce_off,"{""allow"": 33, ""deny"": 10}"
+1791732869.943244,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791732869.943291,session_locked,pid=30149
+1791732875.396738,enforce_on,agent_pid=30149
+1791732875.396922,writedown_on,home=/home/user
+1791732875.396967,session_unlocked,pid=30149
+1791732890.189941,enforce_off,"{""allow"": 66, ""deny"": 10}"
+1791732890.190111,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791732890.190155,session_locked,pid=30149
+1791732895.625965,enforce_on,agent_pid=30149
+1791732895.626203,writedown_on,home=/home/user
+1791732895.626278,session_unlocked,pid=30149
+1791732914.440716,enforce_off,"{""allow"": 99, ""deny"": 10}"
+1791732914.440940,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791732914.440996,session_locked,pid=30149
+1791732914.472824,agent_disconnected,pid=30149
+1791732923.587201,guardian_start,mount=/home/user/spaze enforce=True strict=True
+1791732931.937219,agent_connected,pid=35204
+1791732940.790073,enforce_on,agent_pid=35204
+1791732940.790292,writedown_on,home=/home/user
+1791732940.790336,session_unlocked,pid=35204
+1791732960.559422,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791732960.559682,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791732960.559870,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791732967.283772,tainted,pid=35515 exe=/snap/libreoffice/377/lib/libreoffice/program/soffice.bin
+1791732967.584752,open_denied,pid=16819 exe=/usr/bin/nautilus path=/home/user/spaze/.~lock.demo.odt#
+1791732978.602166,enforce_off,"{""allow"": 37, ""deny"": 10}"
+1791732978.602373,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791732978.602428,session_locked,pid=35204
+1791732984.554765,enforce_on,agent_pid=35204
+1791732984.554962,writedown_on,home=/home/user
+1791732984.555007,session_unlocked,pid=35204
+1791732992.484350,open_denied,pid=35677 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791732992.484630,open_denied,pid=35677 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791732992.484784,open_denied,pid=35677 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791733008.314149,enforce_off,"{""allow"": 70, ""deny"": 16}"
+1791733008.314517,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791733008.314575,session_locked,pid=35204
+1791733014.802673,enforce_on,agent_pid=35204
+1791733014.802852,writedown_on,home=/home/user
+1791733014.802898,session_unlocked,pid=35204
+1791733021.521236,enforce_off,"{""allow"": 103, ""deny"": 16}"
+1791733021.522499,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791733021.522565,session_locked,pid=35204
+1791733021.561221,agent_disconnected,pid=35204
+1791733028.268933,guardian_start,mount=/home/user/spaze enforce=True strict=True
+1791733036.406740,agent_connected,pid=35983
+1791733045.264641,enforce_on,agent_pid=35983
+1791733045.264847,writedown_on,home=/home/user
+1791733045.264895,session_unlocked,pid=35983
+1791733049.364152,open_denied,pid=36027 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791733049.364434,open_denied,pid=36027 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791733049.364620,open_denied,pid=36027 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791733062.846907,tainted,pid=36148 exe=/snap/libreoffice/377/lib/libreoffice/program/soffice.bin
+1791733063.138085,open_denied,pid=36027 exe=/usr/bin/nautilus path=/home/user/spaze/.~lock.demo.odt#
+1791733102.347177,write_out_quarantined,pid=36148 exe=/snap/libreoffice/377/lib/libreoffice/program/soffice.bin path=/home/user/Documents/demo.pdf
+1791733123.381460,enforce_off,"{""allow"": 45, ""deny"": 10}"
+1791733123.386565,writedown_off,"{""quarantined"": 1, ""overflow"": 0}"
+1791733123.386678,session_locked,pid=35983
+1791733129.589911,enforce_on,agent_pid=35983
+1791733129.590147,writedown_on,home=/home/user
+1791733129.590217,session_unlocked,pid=35983
+1791733142.567970,open_denied,pid=36523 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791733142.568191,open_denied,pid=36523 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791733142.568335,open_denied,pid=36523 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791733153.585109,tainted,pid=36671 exe=/snap/libreoffice/377/lib/libreoffice/program/soffice.bin
+1791733153.878482,open_denied,pid=36523 exe=/usr/bin/nautilus path=/home/user/spaze/.~lock.demo.odt#
+1791733164.855257,write_out_quarantined,pid=36671 exe=/snap/libreoffice/377/lib/libreoffice/program/soffice.bin path=/home/user/Documents/lu366713n5w0.tmp
+1791733164.855855,write_out_quarantined,pid=36671 exe=/snap/libreoffice/377/lib/libreoffice/program/soffice.bin path=/home/user/Documents/.~lock.demo_copy.odt#
+1791733190.798177,write_out_quarantined,pid=36671 exe=/snap/libreoffice/377/lib/libreoffice/program/soffice.bin path=/home/user/Documents/demo.pdf
+1791733446.323881,enforce_off,"{""allow"": 99, ""deny"": 20}"
+1791733446.324089,writedown_off,"{""quarantined"": 3, ""overflow"": 0}"
+1791733446.324138,session_locked,pid=35983
+1791733446.866714,agent_disconnected,pid=35983
+1791841400.653850,guardian_start,mount=/home/user/spaze enforce=True strict=True
+1791821995.712898,agent_connected,pid=11195
+1791822006.376306,enforce_on,agent_pid=11195
+1791822006.376537,writedown_on,home=/home/user
+1791822006.376589,session_unlocked,pid=11195
+1791822142.862763,tainted,pid=13010 exe=/usr/bin/gnome-text-editor
+1791822256.413984,write_out_quarantined,pid=13010 exe=/usr/bin/gnome-text-editor path=/home/user/Documents/SecureZone_Artifacts/Commands/Start SPAZE Full System.md
+1791822256.414446,write_out_quarantined,pid=13010 exe=/usr/bin/gnome-text-editor path=/home/user/Documents/SecureZone_Artifacts/Commands/Start SPAZE Full System.md
+1791822309.162019,enforce_off,"{""allow"": 35, ""deny"": 0}"
+1791822309.164681,writedown_off,"{""quarantined"": 2, ""overflow"": 0}"
+1791822309.164787,session_locked,pid=11195
+1791822315.080072,enforce_on,agent_pid=11195
+1791822315.080282,writedown_on,home=/home/user
+1791822315.080341,session_unlocked,pid=11195
+1791822325.805147,enforce_off,"{""allow"": 68, ""deny"": 0}"
+1791822325.805364,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822325.805419,session_locked,pid=11195
+1791822331.875269,enforce_on,agent_pid=11195
+1791822331.875467,writedown_on,home=/home/user
+1791822331.875536,session_unlocked,pid=11195
+1791822340.595474,enforce_off,"{""allow"": 101, ""deny"": 0}"
+1791822340.597645,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822340.597713,session_locked,pid=11195
+1791822346.395342,enforce_on,agent_pid=11195
+1791822346.395565,writedown_on,home=/home/user
+1791822346.395635,session_unlocked,pid=11195
+1791822357.149868,enforce_off,"{""allow"": 134, ""deny"": 0}"
+1791822357.150071,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822357.150123,session_locked,pid=11195
+1791822363.177287,enforce_on,agent_pid=11195
+1791822363.177516,writedown_on,home=/home/user
+1791822363.177578,session_unlocked,pid=11195
+1791822373.985767,enforce_off,"{""allow"": 167, ""deny"": 0}"
+1791822373.986649,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822373.986708,session_locked,pid=11195
+1791822379.952270,enforce_on,agent_pid=11195
+1791822379.952498,writedown_on,home=/home/user
+1791822379.952575,session_unlocked,pid=11195
+1791822390.678130,enforce_off,"{""allow"": 200, ""deny"": 0}"
+1791822390.678328,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822390.678385,session_locked,pid=11195
+1791822396.724832,enforce_on,agent_pid=11195
+1791822396.725003,writedown_on,home=/home/user
+1791822396.725047,session_unlocked,pid=11195
+1791822407.457287,enforce_off,"{""allow"": 233, ""deny"": 0}"
+1791822407.457662,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822407.457729,session_locked,pid=11195
+1791822413.515257,enforce_on,agent_pid=11195
+1791822413.515473,writedown_on,home=/home/user
+1791822413.515538,session_unlocked,pid=11195
+1791822424.248544,enforce_off,"{""allow"": 266, ""deny"": 0}"
+1791822424.248740,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822424.248793,session_locked,pid=11195
+1791822429.195320,enforce_on,agent_pid=11195
+1791822429.195518,writedown_on,home=/home/user
+1791822429.195565,session_unlocked,pid=11195
+1791822439.921661,enforce_off,"{""allow"": 299, ""deny"": 0}"
+1791822439.922542,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822439.922603,session_locked,pid=11195
+1791822445.989488,enforce_on,agent_pid=11195
+1791822445.989724,writedown_on,home=/home/user
+1791822445.989779,session_unlocked,pid=11195
+1791822456.718563,enforce_off,"{""allow"": 332, ""deny"": 0}"
+1791822456.718863,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822456.718916,session_locked,pid=11195
+1791822462.764925,enforce_on,agent_pid=11195
+1791822462.765158,writedown_on,home=/home/user
+1791822462.765211,session_unlocked,pid=11195
+1791822918.334285,enforce_off,"{""allow"": 365, ""deny"": 0}"
+1791822918.334474,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791822918.334538,session_locked,pid=11195
+1791822918.869541,agent_disconnected,pid=11195
+1791822923.994937,agent_connected,pid=17983
+1791822932.852348,enforce_on,agent_pid=17983
+1791822932.852521,writedown_on,home=/home/user
+1791822932.852565,session_unlocked,pid=17983
+1791823035.676641,enforce_off,"{""allow"": 398, ""deny"": 0}"
+1791823035.676841,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823035.676889,session_locked,pid=17983
+1791823042.904166,enforce_on,agent_pid=17983
+1791823042.904416,writedown_on,home=/home/user
+1791823042.904475,session_unlocked,pid=17983
+1791823051.363270,enforce_off,"{""allow"": 431, ""deny"": 0}"
+1791823051.363504,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823051.363557,session_locked,pid=17983
+1791823056.388042,enforce_on,agent_pid=17983
+1791823056.388250,writedown_on,home=/home/user
+1791823056.388318,session_unlocked,pid=17983
+1791823061.470100,enforce_off,"{""allow"": 464, ""deny"": 0}"
+1791823061.470299,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823061.470364,session_locked,pid=17983
+1791823067.604352,enforce_on,agent_pid=17983
+1791823067.604566,writedown_on,home=/home/user
+1791823067.604631,session_unlocked,pid=17983
+1791823076.058581,enforce_off,"{""allow"": 497, ""deny"": 0}"
+1791823076.058791,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823076.058843,session_locked,pid=17983
+1791823082.189085,enforce_on,agent_pid=17983
+1791823082.189273,writedown_on,home=/home/user
+1791823082.189337,session_unlocked,pid=17983
+1791823090.627784,enforce_off,"{""allow"": 530, ""deny"": 0}"
+1791823090.627958,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823090.628006,session_locked,pid=17983
+1791823096.775886,enforce_on,agent_pid=17983
+1791823096.776108,writedown_on,home=/home/user
+1791823096.776182,session_unlocked,pid=17983
+1791823101.858062,enforce_off,"{""allow"": 563, ""deny"": 0}"
+1791823101.858290,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823101.858383,session_locked,pid=17983
+1791823109.081173,enforce_on,agent_pid=17983
+1791823109.081387,writedown_on,home=/home/user
+1791823109.081433,session_unlocked,pid=17983
+1791823117.535142,enforce_off,"{""allow"": 596, ""deny"": 0}"
+1791823117.535327,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823117.535374,session_locked,pid=17983
+1791823123.665052,enforce_on,agent_pid=17983
+1791823123.665274,writedown_on,home=/home/user
+1791823123.665331,session_unlocked,pid=17983
+1791823132.100679,enforce_off,"{""allow"": 629, ""deny"": 0}"
+1791823132.100884,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823132.100949,session_locked,pid=17983
+1791823137.143040,enforce_on,agent_pid=17983
+1791823137.143262,writedown_on,home=/home/user
+1791823137.143309,session_unlocked,pid=17983
+1791823142.210161,enforce_off,"{""allow"": 662, ""deny"": 0}"
+1791823142.210360,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823142.210420,session_locked,pid=17983
+1791823148.365714,enforce_on,agent_pid=17983
+1791823148.365947,writedown_on,home=/home/user
+1791823148.366008,session_unlocked,pid=17983
+1791823156.829248,enforce_off,"{""allow"": 695, ""deny"": 0}"
+1791823156.829443,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823156.829491,session_locked,pid=17983
+1791823162.962782,enforce_on,agent_pid=17983
+1791823162.963072,writedown_on,home=/home/user
+1791823162.963154,session_unlocked,pid=17983
+1791823259.813726,enforce_off,"{""allow"": 728, ""deny"": 0}"
+1791823259.814574,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823259.814638,session_locked,pid=17983
+1791823267.268187,enforce_on,agent_pid=17983
+1791823267.268414,writedown_on,home=/home/user
+1791823267.268487,session_unlocked,pid=17983
+1791823283.244455,enforce_off,"{""allow"": 761, ""deny"": 0}"
+1791823283.244697,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823283.244751,session_locked,pid=17983
+1791823289.591789,enforce_on,agent_pid=17983
+1791823289.592053,writedown_on,home=/home/user
+1791823289.592110,session_unlocked,pid=17983
+1791823302.189982,enforce_off,"{""allow"": 794, ""deny"": 0}"
+1791823302.190176,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823302.190223,session_locked,pid=17983
+1791823308.533903,enforce_on,agent_pid=17983
+1791823308.534070,writedown_on,home=/home/user
+1791823308.534116,session_unlocked,pid=17983
+1791823324.489234,enforce_off,"{""allow"": 827, ""deny"": 0}"
+1791823324.489436,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823324.489489,session_locked,pid=17983
+1791823330.839029,enforce_on,agent_pid=17983
+1791823330.839237,writedown_on,home=/home/user
+1791823330.839297,session_unlocked,pid=17983
+1791823346.802055,enforce_off,"{""allow"": 860, ""deny"": 0}"
+1791823346.802252,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823346.802311,session_locked,pid=17983
+1791823353.143809,enforce_on,agent_pid=17983
+1791823353.144008,writedown_on,home=/home/user
+1791823353.144056,session_unlocked,pid=17983
+1791823462.711342,enforce_off,"{""allow"": 893, ""deny"": 0}"
+1791823462.711516,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823462.711560,session_locked,pid=17983
+1791823464.450202,agent_disconnected,pid=17983
+1791823469.048242,agent_connected,pid=20918
+1791823477.756631,enforce_on,agent_pid=20918
+1791823477.756828,writedown_on,home=/home/user
+1791823477.756892,session_unlocked,pid=20918
+1791823499.641472,enforce_off,"{""allow"": 926, ""deny"": 0}"
+1791823499.641660,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823499.641706,session_locked,pid=20918
+1791823505.701564,enforce_on,agent_pid=20918
+1791823505.701797,writedown_on,home=/home/user
+1791823505.701868,session_unlocked,pid=20918
+1791823520.828869,enforce_off,"{""allow"": 959, ""deny"": 0}"
+1791823520.829098,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823520.829174,session_locked,pid=20918
+1791823528.001090,enforce_on,agent_pid=20918
+1791823528.001346,writedown_on,home=/home/user
+1791823528.001435,session_unlocked,pid=20918
+1791823539.761092,enforce_off,"{""allow"": 992, ""deny"": 0}"
+1791823539.763654,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823539.763726,session_locked,pid=20918
+1791823545.833391,enforce_on,agent_pid=20918
+1791823545.833685,writedown_on,home=/home/user
+1791823545.833764,session_unlocked,pid=20918
+1791823560.949358,enforce_off,"{""allow"": 1025, ""deny"": 0}"
+1791823560.949555,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823560.949632,session_locked,pid=20918
+1791823568.144997,enforce_on,agent_pid=20918
+1791823568.145196,writedown_on,home=/home/user
+1791823568.145244,session_unlocked,pid=20918
+1791823583.264195,enforce_off,"{""allow"": 1058, ""deny"": 0}"
+1791823583.265176,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823583.265245,session_locked,pid=20918
+1791823590.436102,enforce_on,agent_pid=20918
+1791823590.436300,writedown_on,home=/home/user
+1791823590.436359,session_unlocked,pid=20918
+1791823615.755103,enforce_off,"{""allow"": 1091, ""deny"": 0}"
+1791823615.755286,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823615.755338,session_locked,pid=20918
+1791823622.985915,enforce_on,agent_pid=20918
+1791823622.986154,writedown_on,home=/home/user
+1791823622.986215,session_unlocked,pid=20918
+1791823707.401741,tainted,pid=13010 exe=/usr/bin/gnome-text-editor
+1791823710.475831,open_denied,pid=21839 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791823710.476138,open_denied,pid=21839 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791823710.476385,open_denied,pid=21839 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791823718.757401,tainted,pid=21989 exe=/snap/libreoffice/377/lib/libreoffice/program/soffice.bin
+1791823754.114002,wipe_start,agent_lost(pid=20918)
+1791823754.180975,enforce_off,"{""allow"": 1119, ""deny"": 6}"
+1791823754.183654,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823754.189905,wipe_done,reason=agent_lost(pid=20918) killed=1 files=12 ms=75.9
+1791823754.189990,agent_disconnected,pid=20918
+1791823805.140449,agent_connected,pid=22323
+1791823813.838159,enforce_on,agent_pid=22323
+1791823813.838348,writedown_on,home=/home/user
+1791823813.838394,session_unlocked,pid=22323
+1791823822.876970,wipe_start,agent_lost(pid=22323)
+1791823822.939448,enforce_off,"{""allow"": 1141, ""deny"": 6}"
+1791823822.945658,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823822.949704,wipe_done,reason=agent_lost(pid=22323) killed=0 files=11 ms=72.7
+1791823822.949777,agent_disconnected,pid=22323
+1791823836.486868,agent_connected,pid=22489
+1791823845.311003,enforce_on,agent_pid=22489
+1791823845.311175,writedown_on,home=/home/user
+1791823845.311218,session_unlocked,pid=22489
+1791823853.107011,wipe_start,agent_lost(pid=22489)
+1791823853.167651,enforce_off,"{""allow"": 1163, ""deny"": 6}"
+1791823853.171666,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823853.175855,wipe_done,reason=agent_lost(pid=22489) killed=0 files=11 ms=68.8
+1791823853.175924,agent_disconnected,pid=22489
+1791823867.035845,agent_connected,pid=22657
+1791823875.916951,enforce_on,agent_pid=22657
+1791823875.917133,writedown_on,home=/home/user
+1791823875.917182,session_unlocked,pid=22657
+1791823883.125961,wipe_start,agent_lost(pid=22657)
+1791823883.186658,enforce_off,"{""allow"": 1185, ""deny"": 6}"
+1791823883.186869,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823883.190747,wipe_done,reason=agent_lost(pid=22657) killed=0 files=11 ms=64.8
+1791823883.190829,agent_disconnected,pid=22657
+1791823894.548017,agent_connected,pid=22796
+1791823903.184743,enforce_on,agent_pid=22796
+1791823903.184941,writedown_on,home=/home/user
+1791823903.184993,session_unlocked,pid=22796
+1791823913.006392,wipe_start,agent_lost(pid=22796)
+1791823913.064731,enforce_off,"{""allow"": 1207, ""deny"": 6}"
+1791823913.068649,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791823913.072735,wipe_done,reason=agent_lost(pid=22796) killed=0 files=11 ms=66.3
+1791823913.072824,agent_disconnected,pid=22796
+1791823998.508610,agent_connected,pid=23115
+1791824048.398107,agent_disconnected,pid=23115
+1791824059.008101,agent_connected,pid=23150
+1791824067.719654,enforce_on,agent_pid=23150
+1791824067.719857,writedown_on,home=/home/user
+1791824067.719905,session_unlocked,pid=23150
+1791824166.707474,enforce_off,"{""allow"": 1240, ""deny"": 6}"
+1791824166.707928,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791824166.707994,session_locked,pid=23150
+1791824531.008804,agent_disconnected,pid=23150
+1791824535.882370,agent_connected,pid=24487
+1791824555.615419,enforce_on,agent_pid=24487
+1791824555.615644,writedown_on,home=/home/user
+1791824555.615705,session_unlocked,pid=24487
+1791824597.867246,enforce_off,"{""allow"": 1273, ""deny"": 6}"
+1791824597.867492,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791824597.867540,session_locked,pid=24487
+1791824603.973804,enforce_on,agent_pid=24487
+1791824603.973991,writedown_on,home=/home/user
+1791824603.974034,session_unlocked,pid=24487
+1791824849.833436,enforce_off,"{""allow"": 1306, ""deny"": 6}"
+1791824849.834645,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791824849.834713,session_locked,pid=24487
+1791824850.469237,agent_disconnected,pid=24487
+1791824923.378212,agent_connected,pid=26676
+1791824932.471657,enforce_on,agent_pid=26676
+1791824932.471856,writedown_on,home=/home/user
+1791824932.471911,session_unlocked,pid=26676
+1791824935.875567,open_denied,pid=26725 exe=/usr/bin/nautilus path=/home/user/spaze/test_100K.bin
+1791824935.875883,open_denied,pid=26725 exe=/usr/bin/nautilus path=/home/user/spaze/test_10M.bin
+1791824935.876102,open_denied,pid=26725 exe=/usr/bin/nautilus path=/home/user/spaze/test_1M.bin
+1791824991.440566,enforce_off,"{""allow"": 1339, ""deny"": 12}"
+1791824991.444674,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791824991.444774,session_locked,pid=26676
+1791824996.446740,enforce_on,agent_pid=26676
+1791824996.446949,writedown_on,home=/home/user
+1791824996.447010,session_unlocked,pid=26676
+1791825069.867638,enforce_off,"{""allow"": 1372, ""deny"": 12}"
+1791825069.868042,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791825069.868120,session_locked,pid=26676
+1791825122.809272,enforce_on,agent_pid=26676
+1791825122.809448,writedown_on,home=/home/user
+1791825122.809492,session_unlocked,pid=26676
+1791825124.562131,enforce_off,"{""allow"": 1405, ""deny"": 12}"
+1791825124.562544,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791825124.562606,session_locked,pid=26676
+1791825130.677051,enforce_on,agent_pid=26676
+1791825130.677231,writedown_on,home=/home/user
+1791825130.677274,session_unlocked,pid=26676
+1791825267.280653,enforce_off,"{""allow"": 1438, ""deny"": 12}"
+1791825267.280842,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791825267.280889,session_locked,pid=26676
+1791825273.393763,enforce_on,agent_pid=26676
+1791825273.393960,writedown_on,home=/home/user
+1791825273.394014,session_unlocked,pid=26676
+1791833105.971575,guardian_start,mount=/home/user/spaze enforce=True strict=True
+1791833121.975458,wipe_start,mounted_without_session
+1791833122.046753,wipe_done,reason=mounted_without_session killed=0 files=11 ms=71.3
+1791833151.345148,agent_connected,pid=47299
+1791833160.159159,enforce_on,agent_pid=47299
+1791833160.159420,writedown_on,home=/home/user
+1791833160.159481,session_unlocked,pid=47299
+1791833171.683937,open_denied,pid=47385 exe=/usr/bin/cat path=/home/user/spaze/test_1M.bin
+1791833311.471661,enforce_off,"{""allow"": 33, ""deny"": 1}"
+1791833311.477683,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791833311.477790,session_locked,pid=47299
+1791833358.167642,enforce_on,agent_pid=47299
+1791833358.167854,writedown_on,home=/home/user
+1791833358.167919,session_unlocked,pid=47299
+1791833392.597645,enforce_off,"{""allow"": 66, ""deny"": 1}"
+1791833392.603658,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791833392.603750,session_locked,pid=47299
+1791833435.047047,enforce_on,agent_pid=47299
+1791833435.047236,writedown_on,home=/home/user
+1791833435.047284,session_unlocked,pid=47299
+1791833470.724686,enforce_off,"{""allow"": 99, ""deny"": 1}"
+1791833470.728661,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791833470.728746,session_locked,pid=47299
+1791833515.214181,enforce_on,agent_pid=47299
+1791833515.214407,writedown_on,home=/home/user
+1791833515.214481,session_unlocked,pid=47299
+1791833543.522949,enforce_off,"{""allow"": 132, ""deny"": 1}"
+1791833543.523148,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791833543.523200,session_locked,pid=47299
+1791833587.516476,enforce_on,agent_pid=47299
+1791833587.516689,writedown_on,home=/home/user
+1791833587.516748,session_unlocked,pid=47299
+1791833617.475048,enforce_off,"{""allow"": 165, ""deny"": 1}"
+1791833617.478665,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791833617.478767,session_locked,pid=47299
+1791833665.340696,enforce_on,agent_pid=47299
+1791833665.340921,writedown_on,home=/home/user
+1791833665.340979,session_unlocked,pid=47299
+1791833696.867652,enforce_off,"{""allow"": 198, ""deny"": 1}"
+1791833696.867919,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791833696.867965,session_locked,pid=47299
+1791833744.346718,enforce_on,agent_pid=47299
+1791833744.346907,writedown_on,home=/home/user
+1791833744.346957,session_unlocked,pid=47299
+1791833771.555985,enforce_off,"{""allow"": 231, ""deny"": 1}"
+1791833771.557670,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791833771.557752,session_locked,pid=47299
+1791833822.109703,enforce_on,agent_pid=47299
+1791833822.109891,writedown_on,home=/home/user
+1791833822.109934,session_unlocked,pid=47299
+1791833852.078807,enforce_off,"{""allow"": 264, ""deny"": 1}"
+1791833852.078994,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791833852.079037,session_locked,pid=47299
+1791833899.928110,enforce_on,agent_pid=47299
+1791833899.928387,writedown_on,home=/home/user
+1791833899.928460,session_unlocked,pid=47299
+1791833929.896762,enforce_off,"{""allow"": 297, ""deny"": 1}"
+1791833929.896987,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791833929.897050,session_locked,pid=47299
+1791833974.457393,enforce_on,agent_pid=47299
+1791833974.457586,writedown_on,home=/home/user
+1791833974.457671,session_unlocked,pid=47299
+1791834000.394047,enforce_off,"{""allow"": 330, ""deny"": 1}"
+1791834000.395627,writedown_off,"{""quarantined"": 0, ""overflow"": 0}"
+1791834000.395695,session_locked,pid=47299
+1791834046.694540,enforce_on,agent_pid=47299
+1791834046.694718,writedown_on,home=/home/user
+1791834046.694763,session_unlocked,pid=47299

@@ -9,12 +9,16 @@
 #
 # Usage:
 #   chmod +x tests/test_edge_cases.sh
-#   ./tests/test_edge_cases.sh
+#   ADMIN_EMAIL=... ADMIN_PASSWORD=... BADGE_MAC=... ./tests/test_edge_cases.sh
 # ============================================================
 
 set -e
 
 BASE_URL="http://localhost:8000"
+ADMIN_EMAIL="${ADMIN_EMAIL:?set ADMIN_EMAIL to the seeded admin account}"
+ADMIN_PASSWORD="${ADMIN_PASSWORD:?set ADMIN_PASSWORD}"
+BADGE_MAC="${BADGE_MAC:?set BADGE_MAC to the registered badge address}"
+DEVICE_HOSTNAME="${DEVICE_HOSTNAME:-$(hostname)}"
 PASS=0
 FAIL=0
 TOTAL=0
@@ -119,7 +123,7 @@ echo ""
 echo -e "${YELLOW}▸ 1. Authentication Edge Cases${NC}"
 
 # Login as admin to get a valid token
-STATUS=$(http_post "/api/auth/login" "" '{"email":"spazeadmin@gmail.com","password":"role1@123"}')
+STATUS=$(http_post "/api/auth/login" "" "{\"email\":\"$ADMIN_EMAIL\",\"password\":\"$ADMIN_PASSWORD\"}")
 ADMIN_TOKEN=$(cat /tmp/spaze_test_body | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])" 2>/dev/null)
 
 if [ -z "$ADMIN_TOKEN" ]; then
@@ -129,7 +133,7 @@ fi
 echo -e "  ${GREEN}Admin token acquired.${NC}"
 
 # 1.1 Login with wrong password
-STATUS=$(http_post "/api/auth/login" "" '{"email":"spazeadmin@gmail.com","password":"wrongpassword"}')
+STATUS=$(http_post "/api/auth/login" "" "{\"email\":\"$ADMIN_EMAIL\",\"password\":\"wrongpassword\"}")
 assert_status "Login with wrong password → 401" 401 "$STATUS"
 
 # 1.2 Login with non-existent email
@@ -213,40 +217,40 @@ echo ""
 echo -e "${YELLOW}▸ 3. Key Distribution Edge Cases${NC}"
 
 # 3.1 Unregistered badge
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"FF:FF:FF:FF:FF:FF","device_hostname":"IMMORTAL"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"FF:FF:FF:FF:FF:FF","device_hostname":"'"$DEVICE_HOSTNAME"'"}')
 BODY=$(get_body)
 assert_status "Unregistered badge → 200" 200 "$STATUS"
 assert_json_contains "Unregistered badge → authorized=false" "authorized" "false" "$BODY"
 assert_json_contains "Unregistered badge → 'not registered'" "message" "not registered" "$BODY"
 
 # 3.2 Unregistered device
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"NONEXISTENT-PC"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"NONEXISTENT-PC"}')
 BODY=$(get_body)
 assert_status "Unregistered device → 200" 200 "$STATUS"
 assert_json_contains "Unregistered device → authorized=false" "authorized" "false" "$BODY"
 assert_json_contains "Unregistered device → 'not registered'" "message" "not registered" "$BODY"
 
 # 3.3 Valid badge + valid device (should work)
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'"}')
 BODY=$(get_body)
 assert_status "Valid badge+device → 200" 200 "$STATUS"
 assert_json_contains "Valid badge+device → authorized=true" "authorized" "true" "$BODY"
 
 # 3.4 Store a test key
-STATUS=$(http_post "/api/keys/store" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL","file_path":"edge_test.enc","encrypted_fek":"ZWRnZXRlc3Q="}')
+STATUS=$(http_post "/api/keys/store" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'","file_path":"edge_test.enc","encrypted_fek":"ZWRnZXRlc3Q="}')
 assert_status "Store key → 200" 200 "$STATUS"
 
 # 3.5 Verify key is returned
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'"}')
 BODY=$(get_body)
 assert_json_contains "Key returned after store" "authorized" "true" "$BODY"
 
 # 3.6 Delete the test key
-STATUS=$(http_post "/api/keys/delete" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL","file_path":"edge_test.enc"}')
+STATUS=$(http_post "/api/keys/delete" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'","file_path":"edge_test.enc"}')
 assert_status "Delete key → 200" 200 "$STATUS"
 
 # 3.7 Empty badge_mac
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"","device_hostname":"IMMORTAL"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"","device_hostname":"'"$DEVICE_HOSTNAME"'"}')
 BODY=$(get_body)
 assert_status "Empty badge_mac → 200" 200 "$STATUS"
 assert_json_contains "Empty badge_mac → denied" "authorized" "false" "$BODY"
@@ -270,7 +274,7 @@ http_patch "/api/admin/badges/1" "$ADMIN_TOKEN" '{"status":"active"}' > /dev/nul
 STATUS=$(http_patch "/api/admin/badges/1" "$ADMIN_TOKEN" '{"status":"lost"}')
 assert_status "Mark badge lost → 200" 200 "$STATUS"
 
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'"}')
 BODY=$(get_body)
 assert_json_contains "Lost badge → denied" "authorized" "false" "$BODY"
 assert_json_contains "Lost badge → message" "message" "lost" "$BODY"
@@ -279,7 +283,7 @@ assert_json_contains "Lost badge → message" "message" "lost" "$BODY"
 STATUS=$(http_patch "/api/admin/badges/1" "$ADMIN_TOKEN" '{"status":"revoked"}')
 assert_status "Revoke badge → 200" 200 "$STATUS"
 
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'"}')
 BODY=$(get_body)
 assert_json_contains "Revoked badge → denied" "authorized" "false" "$BODY"
 
@@ -287,7 +291,7 @@ assert_json_contains "Revoked badge → denied" "authorized" "false" "$BODY"
 STATUS=$(http_patch "/api/admin/badges/1" "$ADMIN_TOKEN" '{"status":"active"}')
 assert_status "Re-activate badge → 200" 200 "$STATUS"
 
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'"}')
 BODY=$(get_body)
 assert_json_contains "Re-activated badge → authorized" "authorized" "true" "$BODY"
 
@@ -313,7 +317,7 @@ done
 # 5.1 Verify: no policy → key request denied
 redis-cli FLUSHDB > /dev/null 2>&1
 
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'"}')
 BODY=$(get_body)
 assert_json_contains "Revoked policy → denied" "authorized" "false" "$BODY"
 assert_json_contains "Revoked policy → 'No access'" "message" "No access" "$BODY"
@@ -322,7 +326,7 @@ assert_json_contains "Revoked policy → 'No access'" "message" "No access" "$BO
 STATUS=$(http_post "/api/admin/policies/" "$ADMIN_TOKEN" '{"badge_id":1,"device_id":1}')
 assert_status "Re-create policy → 200" 200 "$STATUS"
 
-STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL"}')
+STATUS=$(http_post "/api/keys/request" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'"}')
 BODY=$(get_body)
 assert_json_contains "New policy → authorized" "authorized" "true" "$BODY"
 
@@ -343,11 +347,11 @@ echo ""
 echo -e "${YELLOW}▸ 6. Duplicate & Validation Edge Cases${NC}"
 
 # 6.1 Duplicate badge MAC
-STATUS=$(http_post "/api/admin/badges/" "$ADMIN_TOKEN" '{"mac_address":"5c:01:3b:4b:e3:2a","badge_name":"Duplicate"}')
+STATUS=$(http_post "/api/admin/badges/" "$ADMIN_TOKEN" '{"mac_address":"'"$BADGE_MAC"'","badge_name":"Duplicate"}')
 assert_status "Duplicate badge MAC → 400" 400 "$STATUS"
 
 # 6.2 Duplicate user email
-STATUS=$(http_post "/api/admin/users/" "$ADMIN_TOKEN" '{"name":"Dup","email":"spazeadmin@gmail.com","password":"test","role":"employee"}')
+STATUS=$(http_post "/api/admin/users/" "$ADMIN_TOKEN" '{"name":"Dup","email":"'"$ADMIN_EMAIL"'","password":"test","role":"employee"}')
 assert_status "Duplicate user email → 400" 400 "$STATUS"
 
 # 6.3 Invalid role
@@ -379,11 +383,11 @@ echo ""
 echo -e "${YELLOW}▸ 7. Audit Edge Cases${NC}"
 
 # 7.1 Log an event
-STATUS=$(http_post "/api/audit/log" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","device_hostname":"IMMORTAL","action":"test_event","details":"Edge case test"}')
+STATUS=$(http_post "/api/audit/log" "" '{"badge_mac":"'"$BADGE_MAC"'","device_hostname":"'"$DEVICE_HOSTNAME"'","action":"test_event","details":"Edge case test"}')
 assert_status "Log audit event → 200" 200 "$STATUS"
 
 # 7.2 Log geofence event
-STATUS=$(http_post "/api/audit/geofence" "" '{"badge_mac":"5c:01:3b:4b:e3:2a","anchor_id":"ANCHOR_WS_01","event_type":"enter","rssi_value":-65}')
+STATUS=$(http_post "/api/audit/geofence" "" '{"badge_mac":"'"$BADGE_MAC"'","anchor_id":"ANCHOR_WS_01","event_type":"enter","rssi_value":-65}')
 assert_status "Log geofence event → 200" 200 "$STATUS"
 
 # 7.3 Audit logs accessible by admin

@@ -1,0 +1,17 @@
+op,size_bytes,reps,median_us,p95_us,throughput_MBps,cpu
+aesgcm_encrypt,4096,200,1.6,3.1,2523.7,AMD Ryzen 5 5600H with Radeon Graphics
+aesgcm_decrypt,4096,200,1.6,1.7,2587.5,AMD Ryzen 5 5600H with Radeon Graphics
+aesgcm_encrypt,65536,200,14.7,15.3,4468.0,AMD Ryzen 5 5600H with Radeon Graphics
+aesgcm_decrypt,65536,200,14.7,14.8,4461.9,AMD Ryzen 5 5600H with Radeon Graphics
+aesgcm_encrypt,1048576,200,245.7,299.9,4267.0,AMD Ryzen 5 5600H with Radeon Graphics
+aesgcm_decrypt,1048576,200,238.3,252.8,4401.2,AMD Ryzen 5 5600H with Radeon Graphics
+aesgcm_encrypt,10485760,20,2359.4,6841.2,4444.2,AMD Ryzen 5 5600H with Radeon Graphics
+aesgcm_decrypt,10485760,20,2373.6,2679.3,4417.6,AMD Ryzen 5 5600H with Radeon Graphics
+aesgcm_encrypt,104857600,5,82805.4,85694.3,1266.3,AMD Ryzen 5 5600H with Radeon Graphics
+aesgcm_decrypt,104857600,5,79461.8,79686.7,1319.6,AMD Ryzen 5 5600H with Radeon Graphics
+token_parse_verify,,20000,4.96,5.19,,AMD Ryzen 5 5600H with Radeon Graphics
+token_verify_tag,,20000,1.75,1.83,,AMD Ryzen 5 5600H with Radeon Graphics
+freshness_check,,20000,0.63,0.68,,AMD Ryzen 5 5600H with Radeon Graphics
+request_sig_verify,,20000,2.66,2.75,,AMD Ryzen 5 5600H with Radeon Graphics
+fek_wrap,,20000,3.15,3.28,,AMD Ryzen 5 5600H with Radeon Graphics
+fek_unwrap,,20000,2.32,2.44,,AMD Ryzen 5 5600H with Radeon Graphics

@@ -533,7 +533,7 @@ def main():
     )
     parser.add_argument(
         "--badge-mac", type=str, default=None,
-        help="Badge MAC address for server authentication (e.g. 5c:01:3b:4b:e3:2a)",
+        help="Badge MAC address for server authentication (e.g. AA:BB:CC:DD:EE:FF)",
     )
     parser.add_argument(
         "--list-ports", action="store_true",

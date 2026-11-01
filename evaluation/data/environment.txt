@@ -1,0 +1,6 @@
+Room: Drawing room, about 3 m (wide) x 9 m (long), concrete walls
+Anchor: on the desk next to the laptop, about 76 cm above the floor, clear line of sight
+Badge: worn on a lanyard at chest height (ESP32 on a USB power bank)
+Nearby: Mobile phone
+People present during experiments: 1
+Other: Nothing

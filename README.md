@@ -188,9 +188,10 @@ SPAZE/
 │   ├── badge/                          # BLE advertiser (wearable badge)
 │   └── anchor/                         # BLE scanner (workstation anchor)
 │
-├── scripts/                            # Utility scripts
+├── guardian/                           # Root vault guardian: dead-man wipe, fanotify access gate
+├── scripts/                            # Utility scripts (database, sudoers, PAKL provisioning)
 ├── tests/                              # Test suite
-├── docs/                               # Research documentation
+├── evaluation/                         # Experiment scripts, measurement data and analysis
 └── config/                             # Environment configs
 ```
 
@@ -262,6 +263,33 @@ python -m agent.main \
 # Start Redis (if not running as service)
 redis-server
 ```
+
+### 6. Presence-attested key leasing, relay detection and vault guardian
+
+The steps above run the original protocol. To run the hardened version (PAKL with
+anchor-attested challenge–response and the vault guardian):
+
+```bash
+# Master key, device key, TLS certificate and badge/anchor keys; wraps stored keys
+python scripts/provision_pakl.py --badge-mac AA:BB:CC:DD:EE:FF --wrap-existing
+# Re-flash firmware/badge and firmware/anchor (they now include the generated *_secrets.h)
+
+# Vault guardian (root systemd service)
+sudo bash guardian/install.sh
+
+# Server: PAKL with challenge-response (16 ms bound, calibrated in evaluation/)
+set -a; source secrets/pakl.env; set +a
+SECURITY_MODE=pakl CR_REQUIRED=true CR_MAX_RTT_US=16000 \
+  uvicorn server.main:app --host 0.0.0.0 --port 8443 \
+  --ssl-keyfile secrets/tls/server.key --ssl-certfile secrets/tls/server.crt
+
+# Agent
+python -m agent.main --port /dev/ttyACM0 --server https://localhost:8443 \
+  --ca-cert secrets/tls/server.crt --badge-mac AA:BB:CC:DD:EE:FF --badge-id 1 \
+  --security pakl --device-key-file secrets/device.key --challenge-response --guardian
+```
+
+Experiment scripts, measurement data and the analysis are in [`evaluation/`](evaluation/README.md).
 
 ---
 

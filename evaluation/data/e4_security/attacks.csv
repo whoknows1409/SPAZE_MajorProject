@@ -1,0 +1,161 @@
+t,server_mode,attack,rep,outcome,message,n_keys
+1791822081.397074,pakl,A1_unsigned_request,1,rejected,HTTP 401,0
+1791822081.398264,pakl,A1_unsigned_request,2,rejected,HTTP 401,0
+1791822081.399360,pakl,A1_unsigned_request,3,rejected,HTTP 401,0
+1791822081.400346,pakl,A1_unsigned_request,4,rejected,HTTP 401,0
+1791822081.401363,pakl,A1_unsigned_request,5,rejected,HTTP 401,0
+1791822081.402390,pakl,A1_unsigned_request,6,rejected,HTTP 401,0
+1791822081.403353,pakl,A1_unsigned_request,7,rejected,HTTP 401,0
+1791822081.404276,pakl,A1_unsigned_request,8,rejected,HTTP 401,0
+1791822081.405184,pakl,A1_unsigned_request,9,rejected,HTTP 401,0
+1791822081.406058,pakl,A1_unsigned_request,10,rejected,HTTP 401,0
+1791822081.406939,pakl,A1_unsigned_request,11,rejected,HTTP 401,0
+1791822081.407873,pakl,A1_unsigned_request,12,rejected,HTTP 401,0
+1791822081.408810,pakl,A1_unsigned_request,13,rejected,HTTP 401,0
+1791822081.409741,pakl,A1_unsigned_request,14,rejected,HTTP 401,0
+1791822081.410645,pakl,A1_unsigned_request,15,rejected,HTTP 401,0
+1791822081.411589,pakl,A1_unsigned_request,16,rejected,HTTP 401,0
+1791822081.412458,pakl,A1_unsigned_request,17,rejected,HTTP 401,0
+1791822081.413325,pakl,A1_unsigned_request,18,rejected,HTTP 401,0
+1791822081.414196,pakl,A1_unsigned_request,19,rejected,HTTP 401,0
+1791822081.415118,pakl,A1_unsigned_request,20,rejected,HTTP 401,0
+1791822081.418949,pakl,A2a_signed_no_token,1,denied,Presence check failed: missing_presence_token,0
+1791822081.422526,pakl,A2a_signed_no_token,2,denied,Presence check failed: missing_presence_token,0
+1791822081.456189,pakl,A2a_signed_no_token,3,denied,Presence check failed: missing_presence_token,0
+1791822081.460271,pakl,A2a_signed_no_token,4,denied,Presence check failed: missing_presence_token,0
+1791822081.464138,pakl,A2a_signed_no_token,5,denied,Presence check failed: missing_presence_token,0
+1791822081.467798,pakl,A2a_signed_no_token,6,denied,Presence check failed: missing_presence_token,0
+1791822081.471668,pakl,A2a_signed_no_token,7,denied,Presence check failed: missing_presence_token,0
+1791822081.505714,pakl,A2a_signed_no_token,8,denied,Presence check failed: missing_presence_token,0
+1791822081.509825,pakl,A2a_signed_no_token,9,denied,Presence check failed: missing_presence_token,0
+1791822081.513506,pakl,A2a_signed_no_token,10,denied,Presence check failed: missing_presence_token,0
+1791822081.518251,pakl,A2a_signed_no_token,11,denied,Presence check failed: missing_presence_token,0
+1791822081.522349,pakl,A2a_signed_no_token,12,denied,Presence check failed: missing_presence_token,0
+1791822081.526079,pakl,A2a_signed_no_token,13,denied,Presence check failed: missing_presence_token,0
+1791822081.529941,pakl,A2a_signed_no_token,14,denied,Presence check failed: missing_presence_token,0
+1791822081.533499,pakl,A2a_signed_no_token,15,denied,Presence check failed: missing_presence_token,0
+1791822081.537082,pakl,A2a_signed_no_token,16,denied,Presence check failed: missing_presence_token,0
+1791822081.540820,pakl,A2a_signed_no_token,17,denied,Presence check failed: missing_presence_token,0
+1791822081.544439,pakl,A2a_signed_no_token,18,denied,Presence check failed: missing_presence_token,0
+1791822081.547938,pakl,A2a_signed_no_token,19,denied,Presence check failed: missing_presence_token,0
+1791822081.551556,pakl,A2a_signed_no_token,20,denied,Presence check failed: missing_presence_token,0
+1791822081.555168,pakl,A2b_signed_forged_token,1,denied,Presence check failed: bad_token_tag,0
+1791822081.558594,pakl,A2b_signed_forged_token,2,denied,Presence check failed: bad_token_tag,0
+1791822081.562194,pakl,A2b_signed_forged_token,3,denied,Presence check failed: bad_token_tag,0
+1791822081.566116,pakl,A2b_signed_forged_token,4,denied,Presence check failed: bad_token_tag,0
+1791822081.569748,pakl,A2b_signed_forged_token,5,denied,Presence check failed: bad_token_tag,0
+1791822081.573122,pakl,A2b_signed_forged_token,6,denied,Presence check failed: bad_token_tag,0
+1791822081.576586,pakl,A2b_signed_forged_token,7,denied,Presence check failed: bad_token_tag,0
+1791822081.579975,pakl,A2b_signed_forged_token,8,denied,Presence check failed: bad_token_tag,0
+1791822081.583568,pakl,A2b_signed_forged_token,9,denied,Presence check failed: bad_token_tag,0
+1791822081.586880,pakl,A2b_signed_forged_token,10,denied,Presence check failed: bad_token_tag,0
+1791822081.590294,pakl,A2b_signed_forged_token,11,denied,Presence check failed: bad_token_tag,0
+1791822081.630372,pakl,A2b_signed_forged_token,12,denied,Presence check failed: bad_token_tag,0
+1791822081.634680,pakl,A2b_signed_forged_token,13,denied,Presence check failed: bad_token_tag,0
+1791822081.638014,pakl,A2b_signed_forged_token,14,denied,Presence check failed: bad_token_tag,0
+1791822081.641209,pakl,A2b_signed_forged_token,15,denied,Presence check failed: bad_token_tag,0
+1791822081.675861,pakl,A2b_signed_forged_token,16,denied,Presence check failed: bad_token_tag,0
+1791822081.680088,pakl,A2b_signed_forged_token,17,denied,Presence check failed: bad_token_tag,0
+1791822081.684199,pakl,A2b_signed_forged_token,18,denied,Presence check failed: bad_token_tag,0
+1791822081.687751,pakl,A2b_signed_forged_token,19,denied,Presence check failed: bad_token_tag,0
+1791822081.691301,pakl,A2b_signed_forged_token,20,denied,Presence check failed: bad_token_tag,0
+1791822081.695381,pakl,A2c_signed_replayed_token,1,denied,Presence check failed: counter_regressed,0
+1791822081.699011,pakl,A2c_signed_replayed_token,2,denied,Presence check failed: counter_regressed,0
+1791822081.702782,pakl,A2c_signed_replayed_token,3,denied,Presence check failed: counter_regressed,0
+1791822081.706519,pakl,A2c_signed_replayed_token,4,denied,Presence check failed: counter_regressed,0
+1791822081.710045,pakl,A2c_signed_replayed_token,5,denied,Presence check failed: counter_regressed,0
+1791822081.713789,pakl,A2c_signed_replayed_token,6,denied,Presence check failed: counter_regressed,0
+1791822081.717399,pakl,A2c_signed_replayed_token,7,denied,Presence check failed: counter_regressed,0
+1791822081.721173,pakl,A2c_signed_replayed_token,8,denied,Presence check failed: counter_regressed,0
+1791822081.725020,pakl,A2c_signed_replayed_token,9,denied,Presence check failed: counter_regressed,0
+1791822081.728573,pakl,A2c_signed_replayed_token,10,denied,Presence check failed: counter_regressed,0
+1791822081.732332,pakl,A2c_signed_replayed_token,11,denied,Presence check failed: counter_regressed,0
+1791822081.736009,pakl,A2c_signed_replayed_token,12,denied,Presence check failed: counter_regressed,0
+1791822081.739574,pakl,A2c_signed_replayed_token,13,denied,Presence check failed: counter_regressed,0
+1791822081.743022,pakl,A2c_signed_replayed_token,14,denied,Presence check failed: counter_regressed,0
+1791822081.746406,pakl,A2c_signed_replayed_token,15,denied,Presence check failed: counter_regressed,0
+1791822081.749981,pakl,A2c_signed_replayed_token,16,denied,Presence check failed: counter_regressed,0
+1791822081.753486,pakl,A2c_signed_replayed_token,17,denied,Presence check failed: counter_regressed,0
+1791822081.757083,pakl,A2c_signed_replayed_token,18,denied,Presence check failed: counter_regressed,0
+1791822081.760426,pakl,A2c_signed_replayed_token,19,denied,Presence check failed: counter_regressed,0
+1791822081.763951,pakl,A2c_signed_replayed_token,20,denied,Presence check failed: counter_regressed,0
+1791825769.798784,baseline,A1_unsigned_request,1,KEYS_RELEASED,Keys from cache,11
+1791825769.802531,baseline,A1_unsigned_request,2,KEYS_RELEASED,Keys from cache,11
+1791825769.805549,baseline,A1_unsigned_request,3,KEYS_RELEASED,Keys from cache,11
+1791825769.838726,baseline,A1_unsigned_request,4,KEYS_RELEASED,Keys from cache,11
+1791825769.842450,baseline,A1_unsigned_request,5,KEYS_RELEASED,Keys from cache,11
+1791825769.845849,baseline,A1_unsigned_request,6,KEYS_RELEASED,Keys from cache,11
+1791825769.849203,baseline,A1_unsigned_request,7,KEYS_RELEASED,Keys from cache,11
+1791825769.852475,baseline,A1_unsigned_request,8,KEYS_RELEASED,Keys from cache,11
+1791825769.855373,baseline,A1_unsigned_request,9,KEYS_RELEASED,Keys from cache,11
+1791825769.858494,baseline,A1_unsigned_request,10,KEYS_RELEASED,Keys from cache,11
+1791825769.861799,baseline,A1_unsigned_request,11,KEYS_RELEASED,Keys from cache,11
+1791825769.864813,baseline,A1_unsigned_request,12,KEYS_RELEASED,Keys from cache,11
+1791825769.868050,baseline,A1_unsigned_request,13,KEYS_RELEASED,Keys from cache,11
+1791825769.871116,baseline,A1_unsigned_request,14,KEYS_RELEASED,Keys from cache,11
+1791825769.874206,baseline,A1_unsigned_request,15,KEYS_RELEASED,Keys from cache,11
+1791825769.877291,baseline,A1_unsigned_request,16,KEYS_RELEASED,Keys from cache,11
+1791825769.880257,baseline,A1_unsigned_request,17,KEYS_RELEASED,Keys from cache,11
+1791825769.883114,baseline,A1_unsigned_request,18,KEYS_RELEASED,Keys from cache,11
+1791825769.886386,baseline,A1_unsigned_request,19,KEYS_RELEASED,Keys from cache,11
+1791825769.889522,baseline,A1_unsigned_request,20,KEYS_RELEASED,Keys from cache,11
+1791825769.892684,baseline,A2a_signed_no_token,1,KEYS_RELEASED,Keys from cache,11
+1791825769.895937,baseline,A2a_signed_no_token,2,KEYS_RELEASED,Keys from cache,11
+1791825769.898982,baseline,A2a_signed_no_token,3,KEYS_RELEASED,Keys from cache,11
+1791825769.902175,baseline,A2a_signed_no_token,4,KEYS_RELEASED,Keys from cache,11
+1791825769.905128,baseline,A2a_signed_no_token,5,KEYS_RELEASED,Keys from cache,11
+1791825769.908219,baseline,A2a_signed_no_token,6,KEYS_RELEASED,Keys from cache,11
+1791825769.911226,baseline,A2a_signed_no_token,7,KEYS_RELEASED,Keys from cache,11
+1791825769.914256,baseline,A2a_signed_no_token,8,KEYS_RELEASED,Keys from cache,11
+1791825769.917525,baseline,A2a_signed_no_token,9,KEYS_RELEASED,Keys from cache,11
+1791825769.920696,baseline,A2a_signed_no_token,10,KEYS_RELEASED,Keys from cache,11
+1791825769.923981,baseline,A2a_signed_no_token,11,KEYS_RELEASED,Keys from cache,11
+1791825769.927158,baseline,A2a_signed_no_token,12,KEYS_RELEASED,Keys from cache,11
+1791825769.930849,baseline,A2a_signed_no_token,13,KEYS_RELEASED,Keys from cache,11
+1791825769.933755,baseline,A2a_signed_no_token,14,KEYS_RELEASED,Keys from cache,11
+1791825769.937066,baseline,A2a_signed_no_token,15,KEYS_RELEASED,Keys from cache,11
+1791825769.939928,baseline,A2a_signed_no_token,16,KEYS_RELEASED,Keys from cache,11
+1791825769.942893,baseline,A2a_signed_no_token,17,KEYS_RELEASED,Keys from cache,11
+1791825769.945750,baseline,A2a_signed_no_token,18,KEYS_RELEASED,Keys from cache,11
+1791825769.948804,baseline,A2a_signed_no_token,19,KEYS_RELEASED,Keys from cache,11
+1791825769.951859,baseline,A2a_signed_no_token,20,KEYS_RELEASED,Keys from cache,11
+1791825769.954856,baseline,A2b_signed_forged_token,1,KEYS_RELEASED,Keys from cache,11
+1791825769.957965,baseline,A2b_signed_forged_token,2,KEYS_RELEASED,Keys from cache,11
+1791825769.960819,baseline,A2b_signed_forged_token,3,KEYS_RELEASED,Keys from cache,11
+1791825769.964044,baseline,A2b_signed_forged_token,4,KEYS_RELEASED,Keys from cache,11
+1791825769.967034,baseline,A2b_signed_forged_token,5,KEYS_RELEASED,Keys from cache,11
+1791825769.969989,baseline,A2b_signed_forged_token,6,KEYS_RELEASED,Keys from cache,11
+1791825769.972974,baseline,A2b_signed_forged_token,7,KEYS_RELEASED,Keys from cache,11
+1791825769.975937,baseline,A2b_signed_forged_token,8,KEYS_RELEASED,Keys from cache,11
+1791825769.979179,baseline,A2b_signed_forged_token,9,KEYS_RELEASED,Keys from cache,11
+1791825769.982071,baseline,A2b_signed_forged_token,10,KEYS_RELEASED,Keys from cache,11
+1791825769.985293,baseline,A2b_signed_forged_token,11,KEYS_RELEASED,Keys from cache,11
+1791825769.988326,baseline,A2b_signed_forged_token,12,KEYS_RELEASED,Keys from cache,11
+1791825769.991312,baseline,A2b_signed_forged_token,13,KEYS_RELEASED,Keys from cache,11
+1791825769.994191,baseline,A2b_signed_forged_token,14,KEYS_RELEASED,Keys from cache,11
+1791825769.997171,baseline,A2b_signed_forged_token,15,KEYS_RELEASED,Keys from cache,11
+1791825770.000354,baseline,A2b_signed_forged_token,16,KEYS_RELEASED,Keys from cache,11
+1791825770.003239,baseline,A2b_signed_forged_token,17,KEYS_RELEASED,Keys from cache,11
+1791825770.006424,baseline,A2b_signed_forged_token,18,KEYS_RELEASED,Keys from cache,11
+1791825770.009262,baseline,A2b_signed_forged_token,19,KEYS_RELEASED,Keys from cache,11
+1791825770.012245,baseline,A2b_signed_forged_token,20,KEYS_RELEASED,Keys from cache,11
+1791825770.015309,baseline,A2c_signed_replayed_token,1,KEYS_RELEASED,Keys from cache,11
+1791825770.018392,baseline,A2c_signed_replayed_token,2,KEYS_RELEASED,Keys from cache,11
+1791825770.021440,baseline,A2c_signed_replayed_token,3,KEYS_RELEASED,Keys from cache,11
+1791825770.024418,baseline,A2c_signed_replayed_token,4,KEYS_RELEASED,Keys from cache,11
+1791825770.027610,baseline,A2c_signed_replayed_token,5,KEYS_RELEASED,Keys from cache,11
+1791825770.030447,baseline,A2c_signed_replayed_token,6,KEYS_RELEASED,Keys from cache,11
+1791825770.033488,baseline,A2c_signed_replayed_token,7,KEYS_RELEASED,Keys from cache,11
+1791825770.036399,baseline,A2c_signed_replayed_token,8,KEYS_RELEASED,Keys from cache,11
+1791825770.039340,baseline,A2c_signed_replayed_token,9,KEYS_RELEASED,Keys from cache,11
+1791825770.042296,baseline,A2c_signed_replayed_token,10,KEYS_RELEASED,Keys from cache,11
+1791825770.045222,baseline,A2c_signed_replayed_token,11,KEYS_RELEASED,Keys from cache,11
+1791825770.048521,baseline,A2c_signed_replayed_token,12,KEYS_RELEASED,Keys from cache,11
+1791825770.051478,baseline,A2c_signed_replayed_token,13,KEYS_RELEASED,Keys from cache,11
+1791825770.054576,baseline,A2c_signed_replayed_token,14,KEYS_RELEASED,Keys from cache,11
+1791825770.057401,baseline,A2c_signed_replayed_token,15,KEYS_RELEASED,Keys from cache,11
+1791825770.060370,baseline,A2c_signed_replayed_token,16,KEYS_RELEASED,Keys from cache,11
+1791825770.063286,baseline,A2c_signed_replayed_token,17,KEYS_RELEASED,Keys from cache,11
+1791825770.066444,baseline,A2c_signed_replayed_token,18,KEYS_RELEASED,Keys from cache,11
+1791825770.069542,baseline,A2c_signed_replayed_token,19,KEYS_RELEASED,Keys from cache,11
+1791825770.072445,baseline,A2c_signed_replayed_token,20,KEYS_RELEASED,Keys from cache,11

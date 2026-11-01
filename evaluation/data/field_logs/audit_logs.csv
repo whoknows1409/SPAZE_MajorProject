@@ -1,0 +1,473 @@
+id,timestamp_utc,action,badge,device,rssi_value,details
+1,2026-04-25T12:53:57.220025,keys_delivered,badge_1,device_1,,0 keys from database
+2,2026-04-25T14:06:44.800459,keys_delivered,badge_1,device_1,,0 keys from database
+3,2026-04-25T14:06:44.837100,vault_unlock,badge_1,device_1,-60,"Vault unlocked, 0 files decrypted"
+4,2026-04-25T14:09:42.827319,vault_lock,badge_1,device_1,,Vault locked on <host>
+5,2026-04-25T14:19:28.272438,keys_delivered,badge_1,device_1,,0 keys from database
+6,2026-04-25T14:19:28.325427,vault_unlock,badge_1,device_1,-72,"Vault unlocked, 0 files decrypted"
+7,2026-04-25T14:21:41.010573,vault_lock,badge_1,device_1,,Vault locked on <host>
+8,2026-04-25T14:22:15.360807,keys_delivered,badge_1,device_1,,1 keys from database
+9,2026-04-25T14:22:15.412523,vault_unlock,badge_1,device_1,-65,"Vault unlocked, 1 files decrypted"
+10,2026-04-25T14:22:31.850651,vault_lock,badge_1,device_1,,Vault locked on <host>
+11,2026-04-25T14:23:23.413086,keys_delivered,badge_1,device_1,,1 keys from cache
+12,2026-04-25T14:23:23.450279,vault_unlock,badge_1,device_1,-65,"Vault unlocked, 0 files decrypted"
+13,2026-04-25T14:24:01.018082,vault_lock,badge_1,device_1,,Vault locked on <host>
+14,2026-04-25T14:34:06.299131,keys_delivered,badge_1,device_1,,1 keys from database
+15,2026-04-25T14:34:06.348058,vault_unlock,badge_1,device_1,-67,"Vault unlocked, 1 files decrypted"
+16,2026-04-25T14:34:18.146806,vault_lock,badge_1,device_1,,Vault locked on <host>
+17,2026-04-25T14:40:26.408276,keys_delivered,badge_1,device_1,,1 keys from database
+18,2026-04-25T14:40:26.454858,vault_unlock,badge_1,device_1,-66,"Vault unlocked, 1 files decrypted"
+19,2026-04-25T14:40:34.071352,vault_lock,badge_1,device_1,,Vault locked on <host>
+20,2026-04-25T14:45:11.274968,keys_delivered,badge_1,device_1,,1 keys from cache
+21,2026-04-25T14:45:11.330718,keys_delivered,badge_1,device_1,,1 keys from cache
+22,2026-04-25T14:45:11.451224,keys_delivered,badge_1,device_1,,1 keys from cache
+23,2026-04-25T14:45:11.671661,keys_delivered,badge_1,device_1,,1 keys from cache
+24,2026-04-25T14:45:11.750504,keys_delivered,badge_1,device_1,,1 keys from cache
+25,2026-04-25T14:45:11.889941,test_event,badge_1,device_1,,Edge case test
+26,2026-04-25T14:46:17.107876,keys_delivered,badge_1,device_1,,1 keys from database
+27,2026-04-25T14:46:17.158743,keys_delivered,badge_1,device_1,,1 keys from cache
+28,2026-04-25T14:46:17.257121,keys_delivered,badge_1,device_1,,1 keys from cache
+29,2026-04-25T14:46:17.377353,keys_delivered,badge_1,device_1,,1 keys from cache
+30,2026-04-25T14:46:17.425234,keys_delivered,badge_1,device_1,,1 keys from cache
+31,2026-04-25T14:46:17.499884,keys_delivered,badge_1,device_1,,1 keys from cache
+32,2026-04-25T14:46:17.637065,test_event,badge_1,device_1,,Edge case test
+33,2026-04-25T14:48:23.026489,keys_delivered,badge_1,device_1,,1 keys from cache
+34,2026-04-25T14:48:23.072080,keys_delivered,badge_1,device_1,,1 keys from cache
+35,2026-04-25T14:48:23.180962,keys_delivered,badge_1,device_1,,1 keys from cache
+36,2026-04-25T14:48:23.251647,keys_delivered,badge_1,device_1,,1 keys from cache
+37,2026-04-25T14:48:23.297633,keys_delivered,badge_1,device_1,,1 keys from cache
+38,2026-04-25T14:48:23.380867,keys_delivered,badge_1,device_1,,1 keys from cache
+39,2026-04-25T14:48:23.450616,keys_delivered,badge_1,device_1,,1 keys from cache
+40,2026-04-25T14:48:23.578005,test_event,badge_1,device_1,,Edge case test
+41,2026-04-25T14:49:57.430631,keys_delivered,badge_1,device_1,,1 keys from database
+42,2026-04-25T14:49:57.474334,keys_delivered,badge_1,device_1,,1 keys from cache
+43,2026-04-25T14:49:57.687879,keys_delivered,badge_1,device_1,,1 keys from cache
+44,2026-04-25T14:49:57.767850,keys_delivered,badge_1,device_1,,1 keys from cache
+45,2026-04-25T14:49:57.838488,keys_delivered,badge_1,device_1,,1 keys from cache
+46,2026-04-25T14:49:57.963465,test_event,badge_1,device_1,,Edge case test
+47,2026-04-25T14:50:58.885327,keys_delivered,badge_1,device_1,,1 keys from cache
+48,2026-04-25T14:50:58.933977,keys_delivered,badge_1,device_1,,1 keys from cache
+49,2026-04-25T14:50:59.158792,keys_delivered,badge_1,device_1,,1 keys from cache
+50,2026-04-25T14:50:59.282976,keys_delivered,badge_1,device_1,,1 keys from database
+51,2026-04-25T14:50:59.356303,keys_delivered,badge_1,device_1,,1 keys from cache
+52,2026-04-25T14:50:59.490001,test_event,badge_1,device_1,,Edge case test
+53,2026-04-25T14:51:11.489824,keys_delivered,badge_1,device_1,,1 keys from database
+54,2026-04-25T14:51:54.995011,keys_delivered,badge_1,device_1,,1 keys from cache
+55,2026-04-25T14:51:55.043356,keys_delivered,badge_1,device_1,,1 keys from cache
+56,2026-04-25T14:51:55.267296,keys_delivered,badge_1,device_1,,1 keys from cache
+57,2026-04-25T14:51:55.357587,key_request_denied,badge_1,device_1,,No active policy for badge <mac> on device <host>
+58,2026-04-25T14:51:55.429993,keys_delivered,badge_1,device_1,,1 keys from database
+59,2026-04-25T14:51:55.562388,test_event,badge_1,device_1,,Edge case test
+60,2026-04-26T04:58:28.968217,keys_delivered,badge_1,device_1,,1 keys from database
+61,2026-04-26T04:58:29.039187,vault_unlock,badge_1,device_1,-67,"Vault unlocked, 1 files decrypted"
+62,2026-04-26T04:59:34.143274,vault_lock,badge_1,device_1,,Vault locked on <host>
+63,2026-04-26T05:01:18.744191,keys_delivered,badge_1,device_1,,1 keys from cache
+64,2026-04-26T05:01:18.785414,vault_unlock,badge_1,device_1,-73,"Vault unlocked, 1 files decrypted"
+65,2026-04-26T05:01:35.251011,vault_lock,badge_1,device_1,,Vault locked on <host>
+66,2026-04-26T05:08:27.501117,keys_delivered,badge_1,device_1,,2 keys from database
+67,2026-04-26T05:08:27.554429,vault_unlock,badge_1,device_1,-67,"Vault unlocked, 2 files decrypted"
+68,2026-04-26T05:09:02.880575,vault_lock,badge_1,device_1,,Vault locked on <host>
+69,2026-04-26T05:09:43.887662,keys_delivered,badge_1,device_1,,2 keys from cache
+70,2026-04-26T05:09:43.934666,vault_unlock,badge_1,device_1,-65,"Vault unlocked, 2 files decrypted"
+71,2026-04-26T05:10:04.832531,vault_lock,badge_1,device_1,,Vault locked on <host>
+72,2026-04-26T05:10:37.928928,keys_delivered,badge_1,device_1,,2 keys from cache
+73,2026-04-26T05:10:37.972745,vault_unlock,badge_1,device_1,-70,"Vault unlocked, 2 files decrypted"
+74,2026-04-26T05:11:02.326665,vault_lock,badge_1,device_1,,Vault locked on <host>
+75,2026-04-26T05:11:17.716362,keys_delivered,badge_1,device_1,,2 keys from cache
+76,2026-04-26T05:11:17.758710,vault_unlock,badge_1,device_1,-69,"Vault unlocked, 2 files decrypted"
+77,2026-04-26T05:11:57.472667,vault_lock,badge_1,device_1,,Vault locked on <host>
+78,2026-04-26T05:12:29.929566,keys_delivered,badge_1,device_1,,2 keys from cache
+79,2026-04-26T05:12:29.977524,vault_unlock,badge_1,device_1,-71,"Vault unlocked, 2 files decrypted"
+80,2026-04-26T05:16:33.361930,vault_lock,badge_1,device_1,,Vault locked on <host>
+81,2026-04-26T05:17:09.162948,keys_delivered,badge_1,device_1,,4 keys from database
+82,2026-04-26T05:17:09.213179,vault_unlock,badge_1,device_1,-71,"Vault unlocked, 4 files decrypted"
+83,2026-04-26T05:17:46.714312,vault_lock,badge_1,device_1,,Vault locked on <host>
+84,2026-04-26T05:18:04.837671,keys_delivered,badge_1,device_1,,5 keys from database
+85,2026-04-26T05:18:04.886228,vault_unlock,badge_1,device_1,-71,"Vault unlocked, 5 files decrypted"
+86,2026-04-26T05:18:20.241967,vault_lock,badge_1,device_1,,Vault locked on <host>
+87,2026-04-26T05:20:33.902981,keys_delivered,badge_1,device_1,,5 keys from cache
+88,2026-04-26T05:20:33.956982,vault_unlock,badge_1,device_1,-71,"Vault unlocked, 5 files decrypted"
+89,2026-04-26T05:22:41.249061,vault_lock,badge_1,device_1,,Vault locked on <host>
+90,2026-04-26T05:26:25.816673,keys_delivered,badge_1,device_1,,4 keys from database
+91,2026-04-26T05:26:25.868118,vault_unlock,badge_1,device_1,-72,"Vault unlocked, 4 files decrypted"
+92,2026-04-26T05:27:09.698064,vault_lock,badge_1,device_1,,Vault locked on <host>
+93,2026-04-26T05:30:02.661682,keys_delivered,badge_1,device_1,,4 keys from cache
+94,2026-04-26T05:30:02.705234,vault_unlock,badge_1,device_1,-66,"Vault unlocked, 4 files decrypted"
+95,2026-04-26T05:30:23.480659,vault_lock,badge_1,device_1,,Vault locked on <host>
+96,2026-04-26T05:33:38.598272,keys_delivered,badge_1,device_1,,4 keys from database
+97,2026-04-26T05:33:38.638877,vault_unlock,badge_1,device_1,-64,"Vault unlocked, 4 files decrypted"
+98,2026-04-26T05:36:28.605329,keys_delivered,badge_1,device_1,,4 keys from cache
+99,2026-04-26T05:36:28.628860,vault_unlock,badge_1,device_1,-61,"Vault unlocked, 4 files decrypted"
+100,2026-04-26T05:36:58.182132,vault_lock,badge_1,device_1,,Vault locked on <host>
+101,2026-04-26T05:37:09.508586,keys_delivered,badge_1,device_1,,4 keys from cache
+102,2026-04-26T05:37:09.527767,vault_unlock,badge_1,device_1,-67,"Vault unlocked, 4 files decrypted"
+103,2026-04-26T05:37:32.189578,vault_lock,badge_1,device_1,,Vault locked on <host>
+104,2026-04-26T05:38:05.872621,keys_delivered,badge_1,device_1,,4 keys from cache
+105,2026-04-26T05:38:05.892262,vault_unlock,badge_1,device_1,-69,"Vault unlocked, 4 files decrypted"
+106,2026-04-26T05:38:57.712772,vault_lock,badge_1,device_1,,Vault locked on <host>
+107,2026-04-26T05:39:10.056481,keys_delivered,badge_1,device_1,,5 keys from database
+108,2026-04-26T05:39:10.078345,vault_unlock,badge_1,device_1,-66,"Vault unlocked, 5 files decrypted"
+109,2026-04-26T05:39:35.644860,vault_lock,badge_1,device_1,,Vault locked on <host>
+110,2026-04-26T05:40:45.140840,keys_delivered,badge_1,device_1,,5 keys from cache
+111,2026-04-26T05:40:45.192080,vault_unlock,badge_1,device_1,-52,"Vault unlocked, 5 files decrypted"
+112,2026-04-26T05:43:52.355580,vault_lock,badge_1,device_1,,Vault locked on <host>
+113,2026-04-26T05:44:06.507159,keys_delivered,badge_1,device_1,,5 keys from cache
+114,2026-04-26T05:44:06.527002,vault_unlock,badge_1,device_1,-70,"Vault unlocked, 5 files decrypted"
+115,2026-04-26T05:44:13.350084,vault_lock,badge_1,device_1,,Vault locked on <host>
+116,2026-04-26T05:49:31.342517,keys_delivered,badge_1,device_1,,5 keys from database
+117,2026-04-26T05:49:31.394966,vault_unlock,badge_1,device_1,-63,"Vault unlocked, 5 files decrypted"
+118,2026-04-26T05:49:40.365742,vault_lock,badge_1,device_1,,Vault locked on <host>
+119,2026-05-02T14:45:10.802297,keys_delivered,badge_1,device_1,,5 keys from database
+120,2026-05-02T14:45:10.872159,vault_unlock,badge_1,device_1,-54,"Vault unlocked, 5 files decrypted"
+121,2026-05-02T14:46:11.487124,vault_lock,badge_1,device_1,,Vault locked on <host>
+122,2026-05-02T14:46:30.446308,keys_delivered,badge_1,device_1,,5 keys from database
+123,2026-05-02T14:46:30.498009,vault_unlock,badge_1,device_1,-46,"Vault unlocked, 5 files decrypted"
+124,2026-05-02T14:47:20.043332,vault_lock,badge_1,device_1,,Vault locked on <host>
+125,2026-05-02T14:47:33.555207,keys_delivered,badge_1,device_1,,5 keys from cache
+126,2026-05-02T14:47:33.594890,vault_unlock,badge_1,device_1,-43,"Vault unlocked, 5 files decrypted"
+127,2026-05-02T14:48:27.580000,vault_lock,badge_1,device_1,,Vault locked on <host>
+128,2026-05-02T14:48:42.173563,keys_delivered,badge_1,device_1,,5 keys from database
+129,2026-05-02T14:48:42.214942,vault_unlock,badge_1,device_1,-42,"Vault unlocked, 5 files decrypted"
+130,2026-05-02T14:49:40.704279,vault_lock,badge_1,device_1,,Vault locked on <host>
+131,2026-05-02T15:20:33.932108,keys_delivered,badge_1,device_1,,5 keys from database
+132,2026-05-02T15:20:33.979944,vault_unlock,badge_1,device_1,-43,"Vault unlocked, 5 files decrypted"
+133,2026-05-02T15:20:47.925010,vault_lock,badge_1,device_1,,Vault locked on <host>
+134,2026-05-02T17:52:40.672060,keys_delivered,badge_1,device_1,,5 keys from database
+135,2026-05-02T17:52:40.738576,vault_unlock,badge_1,device_1,-60,"Vault unlocked, 5 files decrypted"
+136,2026-05-02T17:52:53.163967,vault_lock,badge_1,device_1,,Vault locked on <host>
+137,2026-05-02T17:53:42.890292,keys_delivered,badge_1,device_1,,5 keys from cache
+138,2026-05-02T17:53:42.930086,vault_unlock,badge_1,device_1,-50,"Vault unlocked, 5 files decrypted"
+139,2026-05-02T17:54:59.025997,exfiltration_blocked,badge_1,device_1,,File 'TEST3.txt' copied to ~/Documents/TEST3.txt — DELETED
+140,2026-05-02T17:55:55.488937,vault_lock,badge_1,device_1,,Vault locked on <host>
+141,2026-05-02T17:55:58.995466,keys_delivered,badge_1,device_1,,5 keys from cache
+142,2026-05-02T17:55:59.045024,vault_unlock,badge_1,device_1,-52,"Vault unlocked, 5 files decrypted"
+143,2026-05-02T17:55:59.053072,exfiltration_blocked,badge_1,device_1,,File 'TEST3.txt' copied to ~/Documents/TEST3.txt — DELETED
+144,2026-05-02T17:57:19.182675,exfiltration_blocked,badge_1,device_1,,File 'TEST2.txt' copied to ~/Documents/TEST2.txt — DELETED
+145,2026-05-02T17:58:11.254520,exfiltration_blocked,badge_1,device_1,,File 'TESTnew.txt' copied to ~/Documents/TESTnew.txt — DELETED
+146,2026-05-02T17:59:09.718386,vault_lock,badge_1,device_1,,Vault locked on <host>
+147,2026-05-02T18:03:40.467824,keys_delivered,badge_1,device_1,,5 keys from database
+148,2026-05-02T18:03:40.517183,vault_unlock,badge_1,device_1,-50,"Vault unlocked, 5 files decrypted"
+149,2026-05-02T18:03:40.559014,exfiltration_blocked,badge_1,device_1,,File 'TEST3.txt' copied to ~/Documents/TEST3.txt — DELETED
+150,2026-05-02T18:03:40.572924,exfiltration_blocked,badge_1,device_1,,File 'TEST2.txt' copied to ~/Documents/TEST2.txt — DELETED
+151,2026-05-02T18:03:40.597672,exfiltration_blocked,badge_1,device_1,,File 'TESTnew.txt' copied to ~/Documents/TESTnew.txt — DELETED
+152,2026-05-02T18:04:02.644620,exfiltration_blocked,badge_1,device_1,,File 'TESTnew.txt' copied to ~/Documents/TESTnew.txt — DELETED
+153,2026-05-02T18:04:06.658704,exfiltration_blocked,badge_1,device_1,,File 'TESTnew.txt' copied to ~/Documents/TESTnew.txt — DELETED
+154,2026-05-02T18:04:08.693676,exfiltration_blocked,badge_1,device_1,,File 'TEST2.txt' copied to ~/Documents/TEST2.txt — DELETED
+155,2026-05-02T18:04:14.719050,exfiltration_blocked,badge_1,device_1,,File 'TEST3.txt' copied to ~/Documents/TEST3.txt — DELETED
+156,2026-05-02T18:04:18.739730,exfiltration_blocked,badge_1,device_1,,File 'TEST2.txt' copied to ~/Documents/TEST2.txt — DELETED
+157,2026-05-02T18:05:01.200621,vault_lock,badge_1,device_1,,Vault locked on <host>
+158,2026-05-02T18:08:55.701571,keys_delivered,badge_1,device_1,,5 keys from database
+159,2026-05-02T18:08:55.747260,vault_unlock,badge_1,device_1,-53,"Vault unlocked, 5 files decrypted"
+160,2026-05-02T18:09:03.763379,exfiltration_blocked,badge_1,device_1,,File 'TEST2.txt' copied to ~/Documents/TEST2.txt — DELETED
+161,2026-05-02T18:09:07.776575,exfiltration_blocked,badge_1,device_1,,File 'TEST3.txt' copied to ~/Documents/TEST3.txt — DELETED
+162,2026-05-02T18:09:36.239649,vault_lock,badge_1,device_1,,Vault locked on <host>
+163,2026-05-02T18:11:15.053087,keys_delivered,badge_1,device_1,,5 keys from cache
+164,2026-05-02T18:11:15.093319,vault_unlock,badge_1,device_1,-54,"Vault unlocked, 5 files decrypted"
+165,2026-05-02T18:11:45.560325,vault_lock,badge_1,device_1,,Vault locked on <host>
+166,2026-05-02T18:12:01.512274,keys_delivered,badge_1,device_1,,5 keys from cache
+167,2026-05-02T18:12:01.560055,vault_unlock,badge_1,device_1,-61,"Vault unlocked, 5 files decrypted"
+168,2026-05-02T18:13:02.066829,vault_lock,badge_1,device_1,,Vault locked on <host>
+200,2026-05-06T05:27:21.253820,keys_delivered,badge_1,device_1,,5 keys from database
+201,2026-05-06T05:27:21.390845,vault_unlock,badge_1,device_1,-65,"Vault unlocked, 5 files decrypted"
+202,2026-05-06T05:28:35.457564,vault_lock,badge_1,device_1,,Vault locked on <host>
+203,2026-05-06T05:29:16.293901,keys_delivered,badge_1,device_1,,5 keys from cache
+204,2026-05-06T05:29:16.384629,vault_unlock,badge_1,device_1,-62,"Vault unlocked, 5 files decrypted"
+205,2026-05-06T05:30:31.751570,vault_lock,badge_1,device_1,,Vault locked on <host>
+206,2026-05-06T05:31:16.966989,keys_delivered,badge_1,device_1,,5 keys from database
+207,2026-05-06T05:31:17.072206,vault_unlock,badge_1,device_1,-73,"Vault unlocked, 5 files decrypted"
+208,2026-05-06T05:31:37.134365,exfiltration_blocked,badge_1,device_1,,File 'TEST2.txt' copied to ~/Desktop/TEST2.txt — DELETED
+209,2026-05-06T05:46:24.361483,vault_lock,badge_1,device_1,,Vault locked on <host>
+210,2026-05-07T10:07:03.053626,keys_delivered,badge_1,device_1,,5 keys from database
+211,2026-05-07T10:07:03.282391,vault_unlock,badge_1,device_1,-71,"Vault unlocked, 5 files decrypted"
+212,2026-05-07T10:08:21.038802,vault_lock,badge_1,device_1,,Vault locked on <host>
+213,2026-05-07T10:08:40.408425,keys_delivered,badge_1,device_1,,5 keys from cache
+214,2026-05-07T10:08:40.509103,vault_unlock,badge_1,device_1,-44,"Vault unlocked, 5 files decrypted"
+215,2026-05-07T10:08:56.821531,exfiltration_blocked,badge_1,device_1,,File 'TEST2.txt' copied to ~/Desktop/TEST2.txt — DELETED
+216,2026-05-07T10:10:17.791961,vault_lock,badge_1,device_1,,Vault locked on <host>
+217,2026-05-07T10:11:06.575574,keys_delivered,badge_1,device_1,,5 keys from cache
+218,2026-05-07T10:11:06.662113,vault_unlock,badge_1,device_1,-49,"Vault unlocked, 5 files decrypted"
+219,2026-05-07T10:11:51.497699,vault_lock,badge_1,device_1,,Vault locked on <host>
+220,2026-05-08T06:26:07.597812,keys_delivered,badge_1,device_1,,5 keys from database
+221,2026-05-08T06:26:07.721106,vault_unlock,badge_1,device_1,-71,"Vault unlocked, 5 files decrypted"
+222,2026-05-08T06:26:07.735106,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 166 chars wiped
+223,2026-05-08T06:26:21.797386,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+224,2026-05-08T06:26:35.860577,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+225,2026-05-08T06:26:43.905747,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+226,2026-05-08T06:26:51.948883,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+227,2026-05-08T06:27:01.997405,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+228,2026-05-08T06:27:08.032336,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+229,2026-05-08T06:27:56.212709,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+230,2026-05-08T06:29:30.701756,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 17 chars wiped
+231,2026-05-08T06:29:32.729035,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 36 chars wiped
+232,2026-05-08T06:29:46.810027,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 36 chars wiped
+233,2026-05-08T06:29:48.836707,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 36 chars wiped
+234,2026-05-08T06:29:52.867318,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+235,2026-05-08T06:29:59.021729,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+236,2026-05-08T06:30:05.057042,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+237,2026-05-08T06:30:09.092877,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+238,2026-05-08T06:30:34.407784,exfiltration_blocked,badge_1,device_1,,File 'TEST 2.txt' copied to ~/Desktop/TEST 2.txt — DELETED
+239,2026-05-08T06:30:58.485564,exfiltration_blocked,badge_1,device_1,,File 'TEST 2.txt' copied to ~/Desktop/TEST 2.txt — DELETED
+240,2026-05-08T06:31:10.528487,exfiltration_blocked,badge_1,device_1,,File 'TEST 2.txt' copied to ~/Desktop/TEST 2.txt — DELETED
+241,2026-05-08T06:31:45.429752,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 36 chars wiped
+242,2026-05-08T06:31:55.487414,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 36 chars wiped
+243,2026-05-08T06:31:57.515121,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 36 chars wiped
+244,2026-05-08T06:32:03.554815,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 36 chars wiped
+245,2026-05-08T06:34:27.712891,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 9328) — attempted to access 'TEST3doc.odt' via upload/transfer
+246,2026-05-08T06:35:26.392474,vault_lock,badge_1,device_1,,Vault locked on <host>
+247,2026-05-08T06:36:46.753964,keys_delivered,badge_1,device_1,,5 keys from database
+248,2026-05-08T06:36:46.842008,vault_unlock,badge_1,device_1,-65,"Vault unlocked, 5 files decrypted"
+249,2026-05-08T06:38:51.453540,vault_lock,badge_1,device_1,,Vault locked on <host>
+250,2026-05-10T08:47:01.996229,keys_delivered,badge_1,device_1,,5 keys from database
+251,2026-05-10T08:47:02.053440,vault_unlock,badge_1,device_1,-41,"Vault unlocked, 5 files decrypted"
+252,2026-05-10T08:47:02.059950,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 138 chars wiped
+253,2026-05-10T08:48:08.217997,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+254,2026-05-10T08:48:14.238625,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 6 chars wiped
+255,2026-05-10T08:48:18.256619,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 5 chars wiped
+256,2026-05-10T08:48:26.283532,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 23 chars wiped
+257,2026-05-10T08:48:30.301462,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 2 chars wiped
+258,2026-05-10T08:48:36.323054,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 23 chars wiped
+259,2026-05-10T08:48:40.345486,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 23 chars wiped
+260,2026-05-10T08:49:02.135323,usb_blocked,badge_1,device_1,,USB storage device /dev/sdb blocked and unmounted
+261,2026-05-10T08:50:12.578392,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+262,2026-05-10T08:50:22.616492,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 36 chars wiped
+263,2026-05-10T08:50:32.650505,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 35 chars wiped
+264,2026-05-10T08:50:42.688830,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+265,2026-05-10T08:50:48.711624,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+266,2026-05-10T08:50:56.740429,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 37 chars wiped
+267,2026-05-10T08:51:18.483275,exfiltration_blocked,badge_1,device_1,,File 'TEST3doc.odt' copied to ~/Desktop/TEST3doc.odt — DELETED
+268,2026-05-10T08:51:18.814236,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 37 chars wiped
+269,2026-05-10T08:51:28.510477,exfiltration_blocked,badge_1,device_1,,File 'TEST3.txt' copied to ~/Desktop/TEST3.txt — DELETED
+270,2026-05-10T08:51:28.848282,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+271,2026-05-10T08:51:34.530459,exfiltration_blocked,badge_1,device_1,,File 'TESTnew.txt' copied to ~/Desktop/TESTnew.txt — DELETED
+272,2026-05-10T08:51:34.871452,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 36 chars wiped
+273,2026-05-10T08:51:46.905681,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 13 chars wiped
+274,2026-05-10T08:51:52.928635,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 13 chars wiped
+275,2026-05-10T08:54:59.866332,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 10750) — attempted to access 'TESTnew.txt' via upload/transfer
+276,2026-05-10T08:56:13.889860,vault_lock,badge_1,device_1,,Vault locked on <host>
+277,2026-05-10T08:56:46.429544,keys_delivered,badge_1,device_1,,5 keys from database
+278,2026-05-10T08:56:46.483534,vault_unlock,badge_1,device_1,-40,"Vault unlocked, 5 files decrypted"
+279,2026-05-10T08:56:59.068163,vault_lock,badge_1,device_1,,Vault locked on <host>
+280,2026-05-10T09:06:15.846213,keys_delivered,badge_1,device_1,,5 keys from database
+281,2026-05-10T09:06:15.896920,vault_unlock,badge_1,device_1,-37,"Vault unlocked, 5 files decrypted"
+282,2026-05-10T09:06:15.934617,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 113 chars wiped
+283,2026-05-10T09:06:33.597136,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+284,2026-05-10T09:06:36.126399,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+285,2026-05-10T09:06:39.161247,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+286,2026-05-10T09:06:44.214020,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+287,2026-05-10T09:06:53.976251,exfiltration_blocked,badge_1,device_1,,File 'TEST2.txt' copied to ~/Desktop/TEST2.txt — DELETED
+288,2026-05-10T09:07:16.517525,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 26 chars wiped
+289,2026-05-10T09:07:26.622230,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 26 chars wiped
+290,2026-05-10T09:07:37.723333,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 816 chars wiped
+291,2026-05-10T09:07:54.876903,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 154 chars wiped
+292,2026-05-10T09:08:02.450095,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 11 chars wiped
+293,2026-05-10T09:08:38.293875,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 154 chars wiped
+294,2026-05-10T09:16:18.619630,vault_lock,badge_1,device_1,,Vault locked on <host>
+295,2026-05-10T09:17:34.831922,keys_delivered,badge_1,device_1,,5 keys from database
+296,2026-05-10T09:17:34.897845,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 114 chars wiped
+297,2026-05-10T09:17:34.900898,vault_unlock,badge_1,device_1,-38,"Vault unlocked, 5 files decrypted"
+298,2026-05-10T09:17:44.992630,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 12 chars wiped
+299,2026-05-10T09:17:49.036178,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 7 chars wiped
+300,2026-05-10T09:19:39.294757,screenshot_blocked,badge_1,device_1,,Killed 'gnome-shell-screenshot' (PID 0) — screenshot/recording blocked
+301,2026-05-10T09:19:57.636038,screenshot_blocked,badge_1,device_1,,Killed 'gnome-shell-screenshot' (PID 0) — screenshot/recording blocked
+302,2026-05-10T09:21:00.406139,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 17129) — attempted to access 'TEST3doc.odt.enc' via upload/transfer
+303,2026-05-10T09:24:49.013325,vault_lock,badge_1,device_1,,Vault locked on <host>
+304,2026-05-10T09:25:01.226918,keys_delivered,badge_1,device_1,,5 keys from database
+305,2026-05-10T09:25:01.295172,vault_unlock,badge_1,device_1,-39,"Vault unlocked, 5 files decrypted"
+306,2026-05-10T09:25:13.913347,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 23 chars wiped
+307,2026-05-10T09:25:17.957598,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 33 chars wiped
+308,2026-05-10T09:25:21.497656,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+309,2026-05-10T09:26:27.675668,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 18932) — attempted to access 'TEST3.txt' via upload/transfer
+310,2026-05-10T09:28:51.731558,vault_lock,badge_1,device_1,,Vault locked on <host>
+311,2026-05-10T09:32:23.370511,keys_delivered,badge_1,device_1,,5 keys from database
+312,2026-05-10T09:32:23.422743,vault_unlock,badge_1,device_1,-38,"Vault unlocked, 5 files decrypted"
+313,2026-05-10T09:33:47.638232,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 22046) — attempted to access 'TEST3doc.odt' via upload/transfer
+314,2026-05-10T09:36:36.752864,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 19 chars wiped
+315,2026-05-10T09:36:48.192147,vault_lock,badge_1,device_1,,Vault locked on <host>
+316,2026-05-10T09:44:58.815597,keys_delivered,badge_1,device_1,,5 keys from database
+317,2026-05-10T09:44:58.881547,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 159 chars wiped
+318,2026-05-10T09:44:58.923872,vault_unlock,badge_1,device_1,-38,"Vault unlocked, 5 files decrypted"
+319,2026-05-10T09:47:05.031797,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 25452) — attempted to access 'TESTnew.txt' via upload/transfer
+320,2026-05-10T09:47:05.075767,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 25471) — attempted to access 'TESTnew.txt' via upload/transfer
+321,2026-05-10T09:47:25.911755,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 26782) — attempted to access 'TEST3doc.odt' via upload/transfer
+322,2026-05-10T09:47:25.938799,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 26782) — attempted to access 'TEST3doc.odt' via upload/transfer
+323,2026-05-10T09:47:25.977298,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 26782) — attempted to access 'TEST3doc.odt' via upload/transfer
+324,2026-05-10T09:50:54.482493,vault_lock,badge_1,device_1,,Vault locked on <host>
+325,2026-05-10T09:51:10.361676,keys_delivered,badge_1,device_1,,5 keys from database
+326,2026-05-10T09:51:10.417045,vault_unlock,badge_1,device_1,-41,"Vault unlocked, 5 files decrypted"
+327,2026-05-10T09:51:30.117912,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 23 chars wiped
+328,2026-05-10T09:51:33.658242,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 2358 chars wiped
+329,2026-05-10T09:51:37.700685,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 35 chars wiped
+330,2026-05-10T09:52:48.356160,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 28457) — attempted to access 'TEST3.txt' via upload/transfer
+331,2026-05-10T09:52:48.439195,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 28663) — attempted to access 'TEST3.txt' via upload/transfer
+332,2026-05-10T09:52:48.491618,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 28663) — attempted to access 'TEST3.txt' via upload/transfer
+333,2026-05-10T09:53:26.137180,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 29856) — attempted to access 'TEST3.txt' via upload/transfer
+334,2026-05-10T09:53:26.222610,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 30264) — attempted to access 'TEST3.txt' via upload/transfer
+335,2026-05-10T09:53:26.282303,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 30350) — attempted to access 'TEST3.txt' via upload/transfer
+336,2026-05-10T09:55:11.079075,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 23 chars wiped
+337,2026-05-10T09:55:21.500817,screenshot_blocked,badge_1,device_1,,Killed 'gnome-shell-screenshot' (PID 0) — screenshot/recording blocked
+338,2026-05-10T09:55:48.918090,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 37 chars wiped
+339,2026-05-10T09:55:53.973218,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 37 chars wiped
+340,2026-05-10T09:55:58.014865,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 37 chars wiped
+341,2026-05-10T09:57:00.052502,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 31511) — attempted to access 'TEST3doc.odt' via upload/transfer
+342,2026-05-10T09:57:00.116493,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 31530) — attempted to access 'TEST3doc.odt' via upload/transfer
+343,2026-05-10T09:57:00.171267,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 31720) — attempted to access 'TEST3doc.odt' via upload/transfer
+344,2026-05-10T09:57:00.227156,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 31720) — attempted to access 'TEST3doc.odt' via upload/transfer
+345,2026-05-10T10:01:55.606663,vault_lock,badge_1,device_1,,Vault locked on <host>
+346,2026-05-10T10:02:23.854797,keys_delivered,badge_1,device_1,,5 keys from database
+347,2026-05-10T10:02:23.918250,vault_unlock,badge_1,device_1,-39,"Vault unlocked, 5 files decrypted"
+348,2026-05-10T10:02:56.664576,vault_lock,badge_1,device_1,,Vault locked on <host>
+349,2026-05-10T10:03:18.855427,keys_delivered,badge_1,device_1,,5 keys from cache
+350,2026-05-10T10:03:18.916824,vault_unlock,badge_1,device_1,-37,"Vault unlocked, 5 files decrypted"
+351,2026-05-10T10:03:25.874116,upload_blocked,badge_1,device_1,,Killed 'xdg-document-portal' (PID 5610) — attempted to access 'TEST3doc.odt' via upload/transfer
+352,2026-05-10T10:03:47.603769,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 33920) — attempted to access 'TEST3.txt' via upload/transfer
+353,2026-05-10T10:03:47.655938,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 33920) — attempted to access 'TEST3.txt' via upload/transfer
+354,2026-05-10T10:04:06.367140,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 23 chars wiped
+355,2026-05-10T10:04:48.123710,vault_lock,badge_1,device_1,,Vault locked on <host>
+356,2026-05-10T10:05:20.560888,keys_delivered,badge_1,device_1,,6 keys from database
+357,2026-05-10T10:05:20.621770,vault_unlock,badge_1,device_1,-55,"Vault unlocked, 6 files decrypted"
+358,2026-05-10T10:06:20.426569,vault_lock,badge_1,device_1,,Vault locked on <host>
+359,2026-05-10T10:09:53.090702,keys_delivered,badge_1,device_1,,6 keys from cache
+360,2026-05-10T10:09:53.144063,vault_unlock,badge_1,device_1,-50,"Vault unlocked, 6 files decrypted"
+361,2026-05-10T10:14:50.183912,vault_lock,badge_1,device_1,,Vault locked on <host>
+362,2026-05-10T10:18:05.570377,keys_delivered,badge_1,device_1,,6 keys from database
+363,2026-05-10T10:18:05.635166,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 475 chars wiped
+364,2026-05-10T10:18:05.676075,vault_unlock,badge_1,device_1,-38,"Vault unlocked, 6 files decrypted"
+365,2026-05-10T10:18:15.855252,usb_blocked,badge_1,device_1,,USB storage device /dev/sdb blocked and unmounted
+366,2026-05-10T10:19:30.771843,vault_lock,badge_1,device_1,,Vault locked on <host>
+367,2026-05-11T11:36:08.435533,keys_delivered,badge_1,device_1,,6 keys from database
+368,2026-05-11T11:36:08.522955,vault_unlock,badge_1,device_1,-53,"Vault unlocked, 6 files decrypted"
+369,2026-05-11T11:36:08.526968,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 138 chars wiped
+370,2026-05-11T11:36:22.154593,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+371,2026-05-11T11:36:42.351862,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+372,2026-05-11T11:36:47.406682,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 13 chars wiped
+373,2026-05-11T11:36:51.954247,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 43 chars wiped
+374,2026-05-11T11:36:58.515642,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 13 chars wiped
+375,2026-05-11T11:37:02.558403,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 129 chars wiped
+376,2026-05-11T11:37:09.117690,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 79 chars wiped
+377,2026-05-11T11:37:13.660852,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 79 chars wiped
+378,2026-05-11T11:39:21.476926,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 11488) — attempted to access 'TEST3doc.odt' via upload/transfer
+379,2026-05-11T11:39:21.532707,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 11488) — attempted to access 'TEST3doc.odt' via upload/transfer
+380,2026-05-12T15:33:30.096503,keys_delivered,badge_1,device_1,,6 keys from database
+381,2026-05-12T15:33:30.171085,vault_unlock,badge_1,device_1,-50,"Vault unlocked, 6 files decrypted"
+382,2026-05-12T15:33:30.204067,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 113 chars wiped
+383,2026-05-12T15:33:38.324713,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 6590) — attempted to access 'TEST2.txt' via upload/transfer
+384,2026-05-12T15:33:38.365221,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 6608) — attempted to access 'TEST2.txt' via upload/transfer
+385,2026-05-12T15:34:07.754482,vault_lock,badge_1,device_1,,Vault locked on <host>
+386,2026-05-12T15:36:03.381347,keys_delivered,badge_1,device_1,,6 keys from cache
+387,2026-05-12T15:36:03.437112,vault_unlock,badge_1,device_1,-57,"Vault unlocked, 6 files decrypted"
+388,2026-05-12T15:37:01.187769,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 10984) — attempted to access 'TEST3doc.odt' via upload/transfer
+389,2026-05-12T15:37:01.237854,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 11002) — attempted to access 'TEST3doc.odt' via upload/transfer
+390,2026-05-12T15:41:33.876306,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 45 chars wiped
+391,2026-05-12T15:41:35.397636,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 45 chars wiped
+392,2026-05-12T15:42:44.988182,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 45 chars wiped
+393,2026-05-12T15:43:17.808604,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 11580) — attempted to access 'TEST 2.txt' via upload/transfer
+394,2026-05-12T15:43:17.843460,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 11598) — attempted to access 'TEST 2.txt' via upload/transfer
+395,2026-05-12T15:43:18.171922,exfiltration_blocked,badge_1,device_1,,File 'TEST 2.txt' copied to ~/Desktop/TEST 2.txt — DELETED
+396,2026-05-12T15:43:52.307937,vault_lock,badge_1,device_1,,Vault locked on <host>
+397,2026-05-12T15:44:09.228921,keys_delivered,badge_1,device_1,,4 keys from database
+398,2026-05-12T15:44:09.291404,vault_unlock,badge_1,device_1,-57,"Vault unlocked, 4 files decrypted"
+399,2026-05-12T15:48:22.690528,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 14199) — attempted to access 'TESTnew.txt' via upload/transfer
+400,2026-05-12T15:48:22.693341,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 14199) — attempted to access 'TESTnew.txt' via upload/transfer
+401,2026-05-12T15:48:22.746072,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 14199) — attempted to access 'TESTnew.txt' via upload/transfer
+402,2026-05-12T15:49:10.412087,vault_lock,badge_1,device_1,,Vault locked on <host>
+403,2026-05-12T15:52:52.642313,keys_delivered,badge_1,device_1,,4 keys from database
+404,2026-05-12T15:52:52.708770,vault_unlock,badge_1,device_1,-62,"Vault unlocked, 4 files decrypted"
+405,2026-05-12T15:53:08.377446,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 16191) — attempted to access 'TEST3.txt' via upload/transfer
+406,2026-05-12T15:53:08.424997,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 16238) — attempted to access 'TEST3.txt' via upload/transfer
+407,2026-05-12T15:54:46.973355,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 18442) — attempted to access 'NEW FILE DEMO.txt' via upload/transfer
+408,2026-05-12T15:54:46.979685,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 18442) — attempted to access 'NEW FILE DEMO.txt' via upload/transfer
+409,2026-05-12T15:54:47.039924,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 18442) — attempted to access 'NEW FILE DEMO.txt' via upload/transfer
+410,2026-05-12T15:55:31.383088,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 20575) — attempted to access 'NEW FILE DEMO.txt' via upload/transfer
+411,2026-05-12T15:55:31.457659,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 20593) — attempted to access 'NEW FILE DEMO.txt' via upload/transfer
+412,2026-05-12T15:56:24.010236,vault_lock,badge_1,device_1,,Vault locked on <host>
+413,2026-05-12T15:56:49.371907,keys_delivered,badge_1,device_1,,5 keys from database
+414,2026-05-12T15:56:49.426575,vault_unlock,badge_1,device_1,-62,"Vault unlocked, 5 files decrypted"
+415,2026-05-12T15:57:43.654501,screenshot_blocked,badge_1,device_1,,Killed 'gnome-shell-screenshot' (PID 0) — screenshot/recording blocked
+416,2026-05-12T15:58:04.109474,screenshot_blocked,badge_1,device_1,,Killed 'gnome-shell-screenshot' (PID 0) — screenshot/recording blocked
+417,2026-05-12T16:04:04.690340,vault_lock,badge_1,device_1,,Vault locked on <host>
+418,2026-05-13T08:09:03.291828,keys_delivered,badge_1,device_1,,5 keys from database
+419,2026-05-13T08:09:03.411134,vault_unlock,badge_1,device_1,-62,"Vault unlocked, 5 files decrypted"
+420,2026-05-13T08:09:03.412899,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 138 chars wiped
+421,2026-05-13T08:09:10.118601,vault_lock,badge_1,device_1,,Vault locked on <host>
+422,2026-05-13T08:09:28.879656,keys_delivered,badge_1,device_1,,5 keys from cache
+423,2026-05-13T08:09:28.979577,vault_unlock,badge_1,device_1,-50,"Vault unlocked, 5 files decrypted"
+424,2026-05-13T08:11:55.597132,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 35 chars wiped
+425,2026-05-13T08:12:10.325668,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 52 chars wiped
+426,2026-05-13T08:13:16.444902,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 10578) — attempted to access 'TEST3.txt' via upload/transfer
+427,2026-05-13T08:13:16.490075,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 10597) — attempted to access 'TEST3.txt' via upload/transfer
+428,2026-05-13T08:13:18.287280,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 26 chars wiped
+429,2026-05-13T08:13:53.409787,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 8 chars wiped
+430,2026-05-13T08:14:33.285223,usb_blocked,badge_1,device_1,,USB storage device /dev/sdb blocked and unmounted
+431,2026-05-13T08:16:45.442934,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 12584) — attempted to access '.~lock.demo.odt#' via upload/transfer
+432,2026-05-13T08:16:45.519811,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 12584) — attempted to access '.~lock.demo.odt#' via upload/transfer
+433,2026-05-13T08:18:42.562902,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 722 chars wiped
+434,2026-05-13T08:19:20.078598,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 722 chars wiped
+435,2026-05-13T08:19:20.606966,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 722 chars wiped
+436,2026-05-13T08:19:21.133732,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 722 chars wiped
+437,2026-05-13T08:19:31.367992,vault_lock,badge_1,device_1,,Vault locked on <host>
+438,2026-05-13T08:23:47.363779,keys_delivered,badge_1,device_1,,6 keys from database
+439,2026-05-13T08:23:47.458999,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 19 chars wiped
+440,2026-05-13T08:23:47.467026,vault_unlock,badge_1,device_1,-42,"Vault unlocked, 6 files decrypted"
+441,2026-05-13T08:23:52.661703,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 15210) — attempted to access 'demo.odt' via upload/transfer
+442,2026-05-13T08:23:52.734593,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 15210) — attempted to access 'demo.odt' via upload/transfer
+443,2026-05-13T08:24:29.548224,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 19 chars wiped
+444,2026-05-13T08:26:57.046399,vault_lock,badge_1,device_1,,Vault locked on <host>
+445,2026-05-13T09:51:20.189530,keys_delivered,badge_1,device_1,,6 keys from database
+446,2026-05-13T09:51:20.284542,vault_unlock,badge_1,device_1,-61,"Vault unlocked, 6 files decrypted"
+447,2026-05-13T09:51:28.993783,vault_lock,badge_1,device_1,,Vault locked on <host>
+448,2026-05-13T09:53:08.497353,keys_delivered,badge_1,device_1,,6 keys from cache
+449,2026-05-13T09:53:08.599006,vault_unlock,badge_1,device_1,-60,"Vault unlocked, 6 files decrypted"
+450,2026-05-13T09:53:32.474811,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 19178) — attempted to access 'NEW FILE DEMO.txt' via upload/transfer
+451,2026-05-13T09:53:32.570133,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 19178) — attempted to access 'NEW FILE DEMO.txt' via upload/transfer
+452,2026-05-13T09:53:54.491028,vault_lock,badge_1,device_1,,Vault locked on <host>
+453,2026-05-13T09:54:20.441239,keys_delivered,badge_1,device_1,,6 keys from cache
+454,2026-05-13T09:54:20.527475,vault_unlock,badge_1,device_1,-61,"Vault unlocked, 6 files decrypted"
+455,2026-05-13T09:55:21.143368,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 32 chars wiped
+456,2026-05-13T09:55:33.320992,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 32 chars wiped
+457,2026-05-13T09:56:02.764633,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+458,2026-05-13T09:56:04.812259,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+459,2026-05-13T09:56:07.365190,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+460,2026-05-13T10:03:50.871277,vault_lock,badge_1,device_1,,Vault locked on <host>
+461,2026-05-14T10:06:50.080571,keys_delivered,badge_1,device_1,,6 keys from database
+462,2026-05-14T10:06:50.200621,vault_unlock,badge_1,device_1,-66,"Vault unlocked, 6 files decrypted"
+463,2026-05-14T10:07:02.233890,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 30458) — attempted to access 'NEW FILE DEMO.txt' via upload/transfer
+464,2026-05-14T10:07:02.355279,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 30477) — attempted to access 'NEW FILE DEMO.txt' via upload/transfer
+465,2026-05-14T10:07:13.226050,screenshot_blocked,badge_1,device_1,,Killed 'gnome-shell-screenshot' (PID 0) — screenshot/recording blocked
+466,2026-05-14T10:08:49.266552,vault_lock,badge_1,device_1,,Vault locked on <host>
+467,2026-05-14T10:09:29.560120,keys_delivered,badge_1,device_1,,6 keys from cache
+468,2026-05-14T10:09:29.657391,vault_unlock,badge_1,device_1,-46,"Vault unlocked, 6 files decrypted"
+469,2026-05-14T10:11:39.585542,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 38499) — attempted to access 'TESTnew.txt' via upload/transfer
+470,2026-05-14T10:11:39.666229,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 38499) — attempted to access 'TESTnew.txt' via upload/transfer
+471,2026-05-14T10:11:51.773321,vault_lock,badge_1,device_1,,Vault locked on <host>
+472,2026-05-14T11:29:45.483988,keys_delivered,badge_1,device_1,,6 keys from database
+473,2026-05-14T11:29:45.583689,vault_unlock,badge_1,device_1,-67,"Vault unlocked, 6 files decrypted"
+474,2026-05-14T11:30:23.655404,vault_lock,badge_1,device_1,,Vault locked on <host>
+475,2026-05-14T11:30:40.859587,keys_delivered,badge_1,device_1,,6 keys from cache
+476,2026-05-14T11:30:40.953711,vault_unlock,badge_1,device_1,-60,"Vault unlocked, 6 files decrypted"
+477,2026-05-14T11:32:53.003788,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 34 chars wiped
+478,2026-05-14T11:36:27.863218,upload_blocked,badge_1,device_1,,Killed 'xdg-document-portal' (PID 4753) — attempted to access 'TESTnew.txt' via upload/transfer
+479,2026-05-14T11:37:39.534234,upload_blocked,badge_1,device_1,,Killed 'xdg-desktop-portal' (PID 6090) — attempted to access 'TEST3.txt' via upload/transfer
+480,2026-05-14T11:37:39.592852,upload_blocked,badge_1,device_1,,Killed 'xdg-document-portal' (PID 45310) — attempted to access 'TEST3.txt' via upload/transfer
+481,2026-05-14T11:38:06.786361,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 43685) — attempted to access 'TESTnew.txt' via upload/transfer
+482,2026-05-14T11:38:06.855450,upload_blocked,badge_1,device_1,,Killed 'firefox' (PID 44135) — attempted to access 'TESTnew.txt' via upload/transfer
+483,2026-05-14T11:38:41.886233,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 45811) — attempted to access 'TEST3.txt' via upload/transfer
+484,2026-05-14T11:38:44.259879,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 24 chars wiped
+485,2026-05-14T11:38:45.289341,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 24 chars wiped
+486,2026-05-14T11:38:56.104083,screenshot_blocked,badge_1,device_1,,Killed 'gnome-shell-screenshot' (PID 0) — screenshot/recording blocked
+487,2026-05-14T11:40:53.844777,vault_lock,badge_1,device_1,,Vault locked on <host>
+488,2026-09-03T18:34:57.050405,keys_delivered,badge_1,device_1,,6 keys from database
+489,2026-09-03T18:34:57.122067,vault_unlock,badge_1,device_1,-58,"Vault unlocked, 6 files decrypted"
+490,2026-09-03T18:34:57.122857,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 113 chars wiped
+491,2026-09-03T18:35:11.616655,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 6526) — attempted to access 'TEST 4.txt' via upload/transfer
+492,2026-09-03T18:35:11.650814,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 6551) — attempted to access 'TEST 4.txt' via upload/transfer
+493,2026-09-03T18:35:11.689953,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 6551) — attempted to access 'TEST 4.txt' via upload/transfer
+494,2026-09-03T18:35:11.720601,upload_blocked,badge_1,device_1,,Killed 'chrome' (PID 6551) — attempted to access 'TEST 4.txt' via upload/transfer
+495,2026-09-03T18:37:58.708812,vault_lock,badge_1,device_1,,Vault locked on <host>
+496,2026-09-03T18:39:09.781225,keys_delivered,badge_1,device_1,,7 keys from database
+497,2026-09-03T18:39:09.844286,vault_unlock,badge_1,device_1,-47,"Vault unlocked, 7 files decrypted"
+498,2026-09-03T18:39:28.971014,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 14 chars wiped
+499,2026-09-03T18:39:57.168932,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 48 chars wiped
+500,2026-09-08T03:38:30.232310,keys_delivered,badge_1,device_1,,7 keys from database
+501,2026-09-08T03:38:30.316173,clipboard_cleared,badge_1,device_1,,Clipboard cleared — 49 chars wiped
+502,2026-09-08T03:38:30.354222,vault_unlock,badge_1,device_1,-52,"Vault unlocked, 7 files decrypted"
+503,2026-09-08T03:39:37.171032,vault_lock,badge_1,device_1,,Vault locked on <host>

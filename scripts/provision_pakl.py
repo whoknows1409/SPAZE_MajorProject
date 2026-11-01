@@ -11,7 +11,7 @@ Creates the secrets needed for SECURITY_MODE=pakl:
 and stores the badge/device/anchor keys in the database, wrapped under MASTER_KEY.
 
 Run from the project root with the venv active:
-  python scripts/provision_pakl.py --badge-mac 5c:01:3b:4b:e3:2a --wrap-existing
+  python scripts/provision_pakl.py --badge-mac AA:BB:CC:DD:EE:FF --wrap-existing
 
 Re-running is safe: existing secrets are kept unless --rotate is given.
 """
